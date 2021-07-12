@@ -1,3 +1,5 @@
+import "./styles/globals.css";
+import Square from "./components/Square";
 
 function App() {
   return (
@@ -7,8 +9,11 @@ function App() {
           <img src="hst-logo.svg" width="30" className="app-logo" alt="PatchNPlay" />
         </header>
         <div id="main">
-          Squares App here
-    </div>
+          <div class="container">
+            <Square />
+          </div>
+        </div>
+
         <footer></footer>
       </div>
 

@@ -1,0 +1,54 @@
+@import url('spectre.css');
+@import url('variables.css');
+
+/* Square */
+
+.square {
+  width: 50px;
+  height: 50px;
+  display: block;
+  position: relative;
+}
+.square.covered {
+  /* background-image: linear-gradient(135deg, #ffffff 36.36%, #666666 36.36%, #666666 50%, #ffffff 50%, #ffffff 86.36%, #666666 86.36%, #666666 100%);
+  background-size: 15.56px 15.56px; */
+  background-color: transparent;
+}
+.square.covered .rect,
+.square.covered .hstdown,
+.square.covered .hstup {
+  display: none;
+}
+.square.sashing .rect {
+  stroke: transparent !important;
+}
+.square.sashing.sashing-crossed .rect {
+  stroke: #ddd !important;
+}
+.square.rect .hstdown,
+.square.rect .hstup {
+  display: none;
+}
+.square.hstdown .rect,
+.square.hstdown .hstup {
+  display: none;
+}
+.square.hstup .rect,
+.square.hstup .hstdown {
+  display: none;
+}
+.slider ul {
+  display: flex;
+}
+.slider li {
+  justify-content: center;
+  list-style: none;
+}
+.slider img {
+  width: 100px;
+  height: 100px;
+}
+.bigblock {
+  position: absolute;
+  z-index: 10;
+}
