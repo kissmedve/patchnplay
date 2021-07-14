@@ -1,6 +1,13 @@
 @import url('spectre.css');
 @import url('variables.css');
 
+html {
+  font-family: "Roboto", sans-serif;
+}
+body {
+
+}
+
 /* Square */
 
 .square {
@@ -52,3 +59,69 @@
   position: absolute;
   z-index: 10;
 }
+
+/* SquareStyler 
+  ================= */
+.styling-dropdown {
+  position: absolute;
+  top: 60%;
+  left: 60%;
+  z-index: 100;
+  border-radius: 8px;
+}
+.popup {
+  padding: 0.85rem;
+  background: rgba(240, 240, 240, 0.8); 
+}
+.styling-dropdown .card {
+  position: relative;
+}
+.styling-dropdown .btn.btn-clear {
+  position: absolute;
+  top: 0.2rem;
+  right: 0.3rem;
+}
+.styling-dropdown .card {
+  padding-top: 0.7rem;
+}
+.styling-dropdown span {
+ white-space: nowrap;
+ font-size: var(--font_14px);
+ margin-left: 2px;
+}
+.styling-dropdown input,
+.styling-dropdown input:focus,
+.styling-dropdown input:checked {
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+.form-radio input:checked + .form-icon::before  {
+  content: none;
+}
+.styling-dropdown .form-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 20%;
+  border: 5px solid transparent;
+}
+.styling-dropdown .form-radio input:checked + .form-icon, 
+.styling-dropdown .form-radio input:focus + .form-icon {
+  border-color: hsla(91, 99%, 42%, 0.6);
+}
+.styling-dropdown .form-radio.rect .form-icon,
+.styling-dropdown .form-radio.rect input:focus + .form-icon,
+.styling-dropdown .form-radio.rect input:checked + .form-icon {
+  background: hsl(0, 0%, 60%) url(img/hst-squ.svg) no-repeat center center;
+}
+.styling-dropdown .form-radio.hst-down .form-icon,
+.styling-dropdown .form-radio.hst-down input:focus + .form-icon,
+.styling-dropdown .form-radio.hst-down input:checked + .form-icon {
+  background: hsl(0, 0%, 60%)url(img/hst-down.svg) no-repeat center center;
+}
+.styling-dropdown .form-radio.hst-up .form-icon,
+.styling-dropdown .form-radio.hst-up input:focus + .form-icon,
+.styling-dropdown .form-radio.hst-up input:checked + .form-icon {
+  background: hsl(0, 0%, 60%) url(img/hst-up.svg) no-repeat center center;
+}
+

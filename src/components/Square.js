@@ -1,4 +1,5 @@
 import React from 'react';
+import SquareStyler from "./SquareStyler";
 
 const Square = () => {
 
@@ -19,7 +20,7 @@ const Square = () => {
           </svg>
 
         </div>
-
+        <SquareStyler />
       </div>
     </>
   )

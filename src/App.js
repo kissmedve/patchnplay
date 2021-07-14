@@ -9,7 +9,7 @@ function App() {
           <img src="hst-logo.svg" width="30" className="app-logo" alt="PatchNPlay" />
         </header>
         <div id="main">
-          <div class="container">
+          <div className="container">
             <Square />
           </div>
         </div>
