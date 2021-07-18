@@ -5,7 +5,6 @@ const Modal = ({ closeModal, modalIsOpen, children }) => {
 
   return ReactDom.createPortal(
     <>
-      <div className="overlay"></div>
       <div className={`modal ${modalIsOpen === true ? "active" : ""}`}>
         <div className="modal-container">
           <div className="modal-header">

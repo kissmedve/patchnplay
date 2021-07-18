@@ -1,7 +1,7 @@
 import React, { createContext, useReducer } from "react";
 
 const initialState = {
-  colors: []
+  paletteColors: ['']
 };
 
 export const ColorsContext = createContext(initialState);
@@ -9,24 +9,24 @@ export const ColorsContext = createContext(initialState);
 export const ColorsReducer = (state, action) => {
   if (action.type === "ADD_COLOR") {
     const addedColor = action.payload;
-    const expandedColors = [...state.colors, addedColor];
+    const expandedColors = [...state.paletteColors, addedColor];
     return {
       ...state,
-      colors: expandedColors
+      paletteColors: expandedColors
     };
   }
   if (action.type === "DELETE_COLOR") {
     const deletedColor = action.payload;
-    const remainingColors = state.colors.filter(color => color !== action.payload);
+    const remainingColors = state.paletteColors.filter(color => color !== action.payload);
     return {
       ...state,
-      colors: remainingColors
+      paletteColors: remainingColors
     };
   };
   if (action.type === "UPDATE_COLORS") {
     return {
       ...state,
-      colors: action.payload
+      paletteColors: action.payload
     };
   }
 };
@@ -57,7 +57,7 @@ export const ColorsProvider = ({ children }) => {
   return (
     <ColorsContext.Provider
       value={{
-        colors: state.colors,
+        paletteColors: state.paletteColors,
         addColor,
         deleteColor,
         updateColors

@@ -1,6 +1,8 @@
 import "./styles/globals.css";
 import { ColorsProvider } from "./components/ColorsContext";
 import { SquaresProvider } from "./components/SquaresContext";
+import Header from "./components/Header";
+import Navigation from "./components/Navigation";
 import Square from "./components/Square";
 
 function App() {
@@ -9,9 +11,9 @@ function App() {
       <ColorsProvider>
         <SquaresProvider>
           <div className="app">
-            <header className="app-header">
-              <img src="hst-logo.svg" width="30" className="app-logo" alt="PatchNPlay" />
-            </header>
+            <Header>
+              <Navigation />
+            </Header>
             <div id="main">
               <div className="container">
                 <Square />

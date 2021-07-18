@@ -3,6 +3,7 @@
 
 body {
   font-family: "Roboto", sans-serif;
+  color: 
 }
 
 /* Square */
@@ -57,8 +58,8 @@ body {
   z-index: 10;
 }
 
-/* SquareStyler 
-  ================= */
+/* SquareStyler and Color Settings
+  ================================= */
 .styling-dropdown {
   position: absolute;
   top: 60%;
@@ -122,30 +123,80 @@ body {
 .styling-dropdown .form-radio.hst-up input:checked + .form-icon {
   background: hsl(0, 0%, 60%) url(img/hst-up.svg) no-repeat center center;
 }
-.styling-dropdown button.swatch {
+.styling-dropdown button.swatch,
+.colors button.swatch,
+.colors .swatch.current-color,
+.colors .swatch.remove-color {
   width: 1.25rem;
   height: 1.25rem;
   display: inline-block;
   opacity: 1;
   border: 2px solid transparent;
 }
+.colors .swatch.current-color,
+.colors .swatch.remove-color {
+  margin-right: 0.5rem;
+  position: relative;
+  top: 0.4rem;
+}
 .styling-dropdown button.swatch:focus,
-.styling-dropdown button.swatch:active {
+.styling-dropdown button.swatch:active,
+.colors button.swatch:focus,
+.colors button.swatch:active {
   outline: none;
   transform: scale(1.2, 1.2);
 }
-.styling-dropdown .swatches {
+.styling-dropdown .swatches,
+.colors .swatches {
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
   width: 6.25rem;
 }
-.styling-dropdown .swatches-group {
+.styling-dropdown .swatches-group,
+.colors .swatches-group {
   margin: 0.3rem 0;
 }
-.styling-dropdown .h6 {
+.styling-dropdown .h6,
+.colors .h6 {
   font-size: var(--font_13px);
   font-weight: 700;
   text-transform: uppercase;
 }
 
+.btn.add-color,
+.btn.remove-color {
+  font-size: var(--font_14px);
+  background: #dadada linear-gradient(60deg, #cecccc 0%, #ddd 40%, #dadada 100%) no-repeat;
+  border: 1px solid #c0c0c0;
+  color: #2f2f2f;
+}
+.swatch-action {
+  padding: 0.3rem 0;
+  margin-bottom: 1rem;
+}
+
+/* Modal */
+.modal:before {
+  content: '';
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.1);
+}
+
+
+/* Navigation */
+.nav {
+  display: flex;
+  flex-direction: row;
+}
+.nav .btn.btn-link, .nav a {
+  color: #3b4351;
+  font-size: var(--font_14px);
+  /*font-weight: 700;*/
+  text-transform: uppercase;
+}
+.nav .btn.btn-link span {
+  margin-left: 6px;
+}
