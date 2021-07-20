@@ -3,7 +3,7 @@ import { ColorsProvider } from "./components/ColorsContext";
 import { SquaresProvider } from "./components/SquaresContext";
 import Header from "./components/Header";
 import Navigation from "./components/Navigation";
-import Square from "./components/Square";
+import Squares from "./components/Squares";
 
 function App() {
   return (
@@ -15,9 +15,7 @@ function App() {
               <Navigation />
             </Header>
             <div id="main">
-              <div className="container">
-                <Square />
-              </div>
+              <Squares />
             </div>
 
             <footer></footer>

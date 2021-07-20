@@ -8,7 +8,6 @@ const ColorSettingsPalette = () => {
   const { paletteColors, addColor, deleteColor } = useContext(ColorsContext);
 
   // local states
-  // const [currentColor, setCurrentColor] = useState({ h: '5', s: '5', l: '5', a: '1' });
   const [currentColor, setCurrentColor] = useState('transparent');
   const [clickedColor, setClickedColor] = useState('transparent');
 
@@ -65,10 +64,7 @@ const ColorSettingsPalette = () => {
             </div>
           </div>
         </div>
-
-
       </div>
-
     </>
   )
 }

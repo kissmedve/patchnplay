@@ -58,6 +58,53 @@ body {
   z-index: 10;
 }
 
+/* squares grid */
+
+.squares-settings {
+  padding: 0;
+  border: none;
+  display: block;
+}
+.colhead {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.rowhead {
+  display: flex;
+  justify-content: center;
+}
+.colhead .squares-settings {
+  height: 30px;
+}
+.rowhead .squares-settings {
+  width: 30px;
+}
+.squares-settings span {
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: -9999px;
+}
+.squares-settings.col-sashing {
+  background: url(img/icon-s-wide.svg) no-repeat center center;
+}
+.squares-settings.row-sashing {
+  background: url(img/icon-s-high.svg) no-repeat center center;
+}
+.squares-settings.add-column {
+  background: url(img/icon-plus-wide.svg) no-repeat center center;
+}
+.squares-settings.add-row {
+  background: url(img/icon-plus-high.svg) no-repeat center center;
+}
+.squares-settings.delete-column {
+  background: url(img/icon-minus-wide.svg) no-repeat center center;
+}
+.squares-settings.delete-row {
+  background: url(img/icon-minus-high.svg) no-repeat center center;
+}
+
 /* SquareStyler and Color Settings
   ================================= */
 .styling-dropdown {
@@ -66,6 +113,10 @@ body {
   left: 60%;
   z-index: 100;
   border-radius: 8px;
+  display: none;
+}
+.styling-dropdown.active {
+  display: block;
 }
 .popup {
   padding: 0.85rem;
@@ -184,6 +235,8 @@ body {
   height: 100%;
   background-color: rgba(0,0,0,0.1);
 }
+
+/* SquareStyler */
 
 
 /* Navigation */
