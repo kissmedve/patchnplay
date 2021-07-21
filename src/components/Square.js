@@ -1,34 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { StylersContext } from "./StylersContext";
 import SquareStyler from "./SquareStyler";
 
-const Square = ({ id }) => {
+const Square = ({ id, row, col, squareType, fillSquare, fillHstLdown, fillHstRdown, fillHstLup, fillHstRup, covered, sashing, sashingCrossed }) => {
 
-  // local states
-  const [squStylerIsOpen, setSquStylerIsOpen] = useState(false);
+  // global states
+  const { squStylerIsOpen, activeSquStyler, openSquStyler } = useContext(StylersContext);
 
-  const closeSquStyler = (event) => {
+  const openSquareStyler = (event) => {
     event.stopPropagation();
-    setSquStylerIsOpen(false);
+    openSquStyler(id);
   }
 
   return (
     <>
-      <div className="square" key={id} id={`id-${id}`} onClick={() => setSquStylerIsOpen(true)}>
+      <div className={`square ${squareType.toLowerCase()} ${covered === true ? 'covered' : 'not-covered'} ${sashing === true ? 'sashing' : ''} ${sashingCrossed === true ? 'sashing-crossed' : ''}`} onClick={openSquareStyler}>
         <svg
-          viewBox={'0 0 50 50'}
-          preserveAspectRatio="none">
+          viewBox={'0 0 50 50'} >
           <rect className="rect" x="0" y="0"
-            width="50" height="50" fill="red"
+            width="50" height="50" fill={fillSquare}
             stroke="ddd" />
-          <polygon className="hstdown ldown" points="0,0 50,50 0,50" fill="blue" stroke="#ddd" />
-          <polygon className="hstdown rdown" points="0,0 50,0 50,50" fill="yellow" stroke="#ddd" />
-          <polygon className="hstup lup" points="0,50 0,0 50,0" fill="green" stroke="#ddd" />
-          <polygon className="hstup rup" points="0,50 50,0 50,50" fill="turquoise" stroke="#ddd" />
+          <polygon className="hstdown ldown" points="0,0 50,50 0,50" fill={fillHstLdown} stroke="#ddd" />
+          <polygon className="hstdown rdown" points="0,0 50,0 50,50" fill={fillHstRdown} stroke="#ddd" />
+          <polygon className="hstup lup" points="0,50 0,0 50,0" fill={fillHstLup} stroke="#ddd" />
+          <polygon className="hstup rup" points="0,50 50,0 50,50" fill={fillHstRup} stroke="#ddd" />
         </svg>
         <SquareStyler
-          squStylerIsOpen={squStylerIsOpen}
-          closeSquStyler={closeSquStyler}
-          squareId={id} />
+          // squStylerIsOpen={squStylerIsOpen}
+          // activeSquStyler={activeSquStyler}
+          // closeSquareStyler={closeSquStyler}
+          id={id} />
       </div>
     </>
   )

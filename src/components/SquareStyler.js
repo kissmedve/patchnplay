@@ -1,8 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { SquaresContext } from "./SquaresContext";
+import { StylersContext } from "./StylersContext";
 import Palette from './Palette';
 
-const SquareStyler = ({ squStylerIsOpen, closeSquStyler, squareId }) => {
-  console.log(squareId);
+const SquareStyler = ({ id }) => {
+
+  console.log('squarestyler id:', id);
+  // global states
+  const { editSquare } = useContext(SquaresContext);
+  const { squStylerIsOpen, activeSquStyler, closeSquStyler } = useContext(StylersContext);
 
   // local states
   const [squareType, setSquareType] = useState('');
@@ -11,13 +17,28 @@ const SquareStyler = ({ squStylerIsOpen, closeSquStyler, squareId }) => {
     setSquareType(event.target.value);
   }
 
+  const closeSquareStyler = (event) => {
+    event.stopPropagation();
+    closeSquStyler();
+  }
+
+  useEffect(() => {
+    if (squStylerIsOpen === true && activeSquStyler === id) {
+      editSquare({
+        id: id,
+        propertyKey: 'squareType',
+        propertyValue: squareType
+      });
+    }
+  }, [squareType]);
+
   return (
     <>
-      <div className={`styling-dropdown popup ${squStylerIsOpen === true ? "active" : ""}`}>
+      <div className={`styling-dropdown popup ${squStylerIsOpen === true && activeSquStyler === id ? "active" : ""}`}>
 
         <div className="card ">
 
-          <button className="btn btn-clear" aria-label="Close" onClick={closeSquStyler} ></button>
+          <button className="btn btn-clear" aria-label="Close" onClick={closeSquareStyler} ></button>
 
           <div className="card-body">
             <div className="card-title h6">Square Type</div>

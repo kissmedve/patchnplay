@@ -59,7 +59,8 @@ const Squares = () => {
     // each row of squares
     for (let i = 0; i < squares.length; i++) {
       // rowhead
-      let gridRowHeads = <div className="rowhead" >
+      let gridRowHeads = 
+      <div className="rowhead" key={`rowhead-${i}`} id={`rowhead-${i}`}>
         <button className="squares-settings row-sashing" style={{ width: squareWidth, height: squareWidth }}>
           <span >Sashing</span>
         </button>
@@ -78,13 +79,14 @@ const Squares = () => {
       for (let k = 0; k < squares[0].length; k++) {
         let gridSquare =
           <Square
-            key={`${squares[i][k].row}-${squares[i][k].col}`}
-            id={`${squares[i][k].row}-${squares[i][k].col}`}
+            key={squares[i][k].id}
+            id={squares[i][k].id}
             row={squares[i][k].row}
             col={squares[i][k].col}
             squareType={squares[i][k].squareType}
             fillSquare={squares[i][k].fillSquare}
             fillHstLdown={squares[i][k].fillHstLdown}
+            fillHstRdown={squares[i][k].fillHstRdown}
             fillHstLup={squares[i][k].fillHstLup}
             fillHstRup={squares[i][k].fillHstRup}
             covered={squares[i][k].covered}

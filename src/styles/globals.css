@@ -30,16 +30,16 @@ body {
 .square.sashing.sashing-crossed .rect {
   stroke: #ddd !important;
 }
-.square.rect .hstdown,
-.square.rect .hstup {
+.square.rect svg .hstdown,
+.square.rect svg .hstup {
   display: none;
 }
-.square.hstdown .rect,
-.square.hstdown .hstup {
+.square.hstdown svg .rect,
+.square.hstdown svg .hstup {
   display: none;
 }
-.square.hstup .rect,
-.square.hstup .hstdown {
+.square.hstup svg .rect,
+.square.hstup svg .hstdown {
   display: none;
 }
 .slider ul {

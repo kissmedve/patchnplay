@@ -9,19 +9,19 @@ const initialState = {
   sashingHeights: [1, 1, 1],
   squares: [
     [
-      { row: 0, col: 0, squareType: 'rect', fillSquare: 'red', fillHstLdown: 'red', fillHstRdown: 'white', fillHstLup: 'red', fillHstRup: 'white', covered: false, sashing: false, sashingCrossed: false, sashingWidth: 1, sashingHeight: 1 },
-      { row: 0, col: 1, squareType: 'rect', fillSquare: 'blue', fillHstLdown: 'blue', fillHstRdown: 'white', fillHstLup: 'blue', fillHstRup: 'white', covered: false, sashing: false, sashingCrossed: false, sashingWidth: 1, sashingHeight: 1 },
-      { row: 0, col: 2, squareType: 'rect', fillSquare: 'yellow', fillHstLdown: 'yellow', fillHstRdown: 'white', fillHstLup: 'yellow', fillHstRup: 'white', covered: false, sashing: false, sashingCrossed: false, sashingWidth: 1, sashingHeight: 1 }
+      { id: '0-0', row: 0, col: 0, squareType: 'rect', fillSquare: 'red', fillHstLdown: 'red', fillHstRdown: 'white', fillHstLup: 'red', fillHstRup: 'white', covered: false, sashing: false, sashingCrossed: false, sashingWidth: 1, sashingHeight: 1 },
+      { id: '0-1', row: 0, col: 1, squareType: 'rect', fillSquare: 'blue', fillHstLdown: 'blue', fillHstRdown: 'white', fillHstLup: 'blue', fillHstRup: 'white', covered: false, sashing: false, sashingCrossed: false, sashingWidth: 1, sashingHeight: 1 },
+      { id: '0-2', row: 0, col: 2, squareType: 'rect', fillSquare: 'yellow', fillHstLdown: 'yellow', fillHstRdown: 'white', fillHstLup: 'yellow', fillHstRup: 'white', covered: false, sashing: false, sashingCrossed: false, sashingWidth: 1, sashingHeight: 1 }
     ],
     [
-      { row: 1, col: 0, squareType: 'rect', fillSquare: 'magenta', fillHstLdown: 'magenta', fillHstRdown: 'white', fillHstLup: 'magenta', fillHstRup: 'white', covered: false, sashing: false, sashingCrossed: false, sashingWidth: 1, sashingHeight: 1 },
-      { row: 1, col: 1, squareType: 'rect', fillSquare: 'teal', fillHstLdown: 'teal', fillHstRdown: 'white', fillHstLup: 'teal', fillHstRup: 'white', covered: false, sashing: false, sashingCrossed: false, sashingWidth: 1, sashingHeight: 1 },
-      { row: 1, col: 2, squareType: 'rect', fillSquare: 'orange', fillHstLdown: 'orange', fillHstRdown: 'white', fillHstLup: 'orange', fillHstRup: 'white', covered: false, sashing: false, sashingCrossed: false, sashingWidth: 1, sashingHeight: 1 }
+      { id: '1-0', row: 1, col: 0, squareType: 'rect', fillSquare: 'magenta', fillHstLdown: 'magenta', fillHstRdown: 'white', fillHstLup: 'magenta', fillHstRup: 'white', covered: false, sashing: false, sashingCrossed: false, sashingWidth: 1, sashingHeight: 1 },
+      { id: '1-1', row: 1, col: 1, squareType: 'rect', fillSquare: 'teal', fillHstLdown: 'teal', fillHstRdown: 'white', fillHstLup: 'teal', fillHstRup: 'white', covered: false, sashing: false, sashingCrossed: false, sashingWidth: 1, sashingHeight: 1 },
+      { id: '1-2', row: 1, col: 2, squareType: 'rect', fillSquare: 'orange', fillHstLdown: 'orange', fillHstRdown: 'white', fillHstLup: 'orange', fillHstRup: 'white', covered: false, sashing: false, sashingCrossed: false, sashingWidth: 1, sashingHeight: 1 }
     ],
     [
-      { row: 2, col: 0, squareType: 'rect', fillSquare: 'red', fillHstLdown: 'red', fillHstRdown: 'white', fillHstLup: 'red', fillHstRup: 'white', covered: false, sashing: false, sashingCrossed: false, sashingWidth: 1, sashingHeight: 1 },
-      { row: 2, col: 1, squareType: 'rect', fillSquare: 'blue', fillHstLdown: 'blue', fillHstRdown: 'white', fillHstLup: 'blue', fillHstRup: 'white', covered: false, sashing: false, sashingCrossed: false, sashingWidth: 1, sashingHeight: 1 },
-      { row: 2, col: 2, squareType: 'rect', fillSquare: 'yellow', fillHstLdown: 'yellow', fillHstRdown: 'white', fillHstLup: 'yellow', fillHstRup: 'white', covered: false, sashing: false, sashingCrossed: false, sashingWidth: 1, sashingHeight: 1 }
+      { id: '2-0', row: 2, col: 0, squareType: 'rect', fillSquare: 'red', fillHstLdown: 'red', fillHstRdown: 'white', fillHstLup: 'red', fillHstRup: 'white', covered: false, sashing: false, sashingCrossed: false, sashingWidth: 1, sashingHeight: 1 },
+      { id: '2-1', row: 2, col: 1, squareType: 'rect', fillSquare: 'blue', fillHstLdown: 'blue', fillHstRdown: 'white', fillHstLup: 'blue', fillHstRup: 'white', covered: false, sashing: false, sashingCrossed: false, sashingWidth: 1, sashingHeight: 1 },
+      { id: '2-2', row: 2, col: 2, squareType: 'rect', fillSquare: 'yellow', fillHstLdown: 'yellow', fillHstRdown: 'white', fillHstLup: 'yellow', fillHstRup: 'white', covered: false, sashing: false, sashingCrossed: false, sashingWidth: 1, sashingHeight: 1 }
     ]
   ],
   baseColor: 'eee',
@@ -49,17 +49,29 @@ export const SquaresReducer = (state, action) => {
       }
 
     case "EDIT_SQUARE":
-      const updatedSquare = action.payload;
-      const updatedSquares = state.squares.map((squ) => {
-        if (squ.id === updatedSquare.id) {
-          return updatedSquare;
-        }
-        return squ;
+      const propKey = action.payload.propertyKey;
+      const propValue = action.payload.propertyValue;
+      const propId = action.payload.id;
+      console.log('action.payload', action.payload);
+      console.log('propId', propId);
+      const updatedSquares = state.squares.map(squs => {
+        return squs.map(squ => {
+          if (squ.id === propId ) {
+            let prop = propKey;
+            return {
+              ...squ,
+              [prop]: propValue
+            }
+          }
+          return squ;
+        })
       });
+
       return {
         ...state,
-        squares: updatedSquares
+        squares: updatedSquares,
       };
+
 
     case "UPDATE_SQUARES":
       return {
@@ -87,10 +99,10 @@ export const SquaresProvider = ({ children }) => {
     });
   };
   // edit a single square
-  const editSquare = (square) => {
+  const editSquare = ({ id, propertyKey, propertyValue }) => {
     dispatch({
       type: "EDIT_SQUARE",
-      payload: square
+      payload: { id, propertyKey, propertyValue }
     });
   };
 
