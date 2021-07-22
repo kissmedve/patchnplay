@@ -23,7 +23,7 @@ export const StylersReducer = (state, action) => {
         squStylerIsOpen: false,
         activeSquStyler: '',
       };
-    
+
     default:
       return null;
   }
@@ -43,6 +43,7 @@ export const StylersProvider = ({ children }) => {
       type: "CLOSE_SQUSTYLER",
     });
   }
+
 
   return (
     <StylersContext.Provider

@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { StylersContext } from "./StylersContext";
 import Swatches from './Swatches';
 
-const Palette = ({ paletteType }) => {
+const Palette = ({ paletteType, squareId }) => {
+
+  // global states
+  const { colorSquare } = useContext(StylersContext);
 
   // local states
   const [colorData, setColorData] = useState({});
@@ -59,7 +63,6 @@ const Palette = ({ paletteType }) => {
         }
       ],
     },
-
     {
       type: 'sashColumn',
       data: [
@@ -80,13 +83,6 @@ const Palette = ({ paletteType }) => {
     },
   ];
 
-  const setNewColor = (newColor, newSwatchesGroup) => {
-    setColorData({
-      color: newColor,
-      swatchesGroup: newSwatchesGroup
-    })
-  };
-
   const paletteFiltered = paletteData.filter(palette => palette.type === paletteType)[0];
   const paletteFilteredData = paletteFiltered ? paletteFiltered.data : null;
 
@@ -99,7 +95,7 @@ const Palette = ({ paletteType }) => {
         </div>
 
         {paletteFilteredData && paletteFilteredData.length > 0 ? paletteFilteredData.map((item, index) => (
-          <Swatches swatchesTitle={item.swatchesTitle} swatchesGroup={item.swatchesGroup} setNewColor={setNewColor} key={index} />
+          <Swatches squareId={squareId} paletteType={paletteType} swatchesTitle={item.swatchesTitle} swatchesGroup={item.swatchesGroup} key={index} />
         )) : null}
       </div>
 

@@ -26,9 +26,6 @@ const Square = ({ id, row, col, squareType, fillSquare, fillHstLdown, fillHstRdo
           <polygon className="hstup rup" points="0,50 50,0 50,50" fill={fillHstRup} stroke="#ddd" />
         </svg>
         <SquareStyler
-          // squStylerIsOpen={squStylerIsOpen}
-          // activeSquStyler={activeSquStyler}
-          // closeSquareStyler={closeSquStyler}
           id={id} />
       </div>
     </>

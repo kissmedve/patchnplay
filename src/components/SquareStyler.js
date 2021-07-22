@@ -73,7 +73,7 @@ const SquareStyler = ({ id }) => {
               </label>
             </div>
           </div>
-          <Palette paletteType={squareType} />
+          <Palette squareId={id} paletteType={squareType} />
         </div>
 
       </div>
