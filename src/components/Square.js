@@ -14,7 +14,7 @@ const Square = ({ id, row, col, squareType, fillSquare, fillHstLdown, fillHstRdo
 
   return (
     <>
-      <div className={`square ${squareType.toLowerCase()} ${covered === true ? 'covered' : 'not-covered'} ${sashing === true ? 'sashing' : ''} ${sashingCrossed === true ? 'sashing-crossed' : ''}`} onClick={openSquareStyler}>
+      <div className={`square ${squareType.toLowerCase()} ${covered === true ? 'covered' : 'not-covered'} ${sashing === true ? 'sashing' : ''} ${sashingCrossed === true ? 'sashing-crossed' : ''}`} key={id} onClick={openSquareStyler}>
         <svg
           viewBox={'0 0 50 50'} >
           <rect className="rect" x="0" y="0"
@@ -26,7 +26,7 @@ const Square = ({ id, row, col, squareType, fillSquare, fillHstLdown, fillHstRdo
           <polygon className="hstup rup" points="0,50 50,0 50,50" fill={fillHstRup} stroke="#ddd" />
         </svg>
         <SquareStyler
-          id={id} />
+          id={id} key={id} />
       </div>
     </>
   )

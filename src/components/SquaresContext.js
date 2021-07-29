@@ -56,7 +56,7 @@ export const SquaresReducer = (state, action) => {
       console.log('propId', propId);
       const updatedSquares = state.squares.map(squs => {
         return squs.map(squ => {
-          if (squ.id === propId ) {
+          if (squ.id === propId) {
             let prop = propKey;
             return {
               ...squ,
@@ -72,11 +72,46 @@ export const SquaresReducer = (state, action) => {
         squares: updatedSquares,
       };
 
-
     case "UPDATE_SQUARES":
       return {
         ...state,
         squares: action.payload
+      };
+
+    case "UPDATE_COLS":
+      return {
+        ...state,
+        cols: action.payload
+      };
+
+    case "UPDATE_ROWS":
+      return {
+        ...state,
+        rows: action.payload
+      };
+
+    case "UPDATE_SASHINGCOLS":
+      return {
+        ...state,
+        sashingCols: action.payload
+      };
+
+    case "UPDATE_SASHINGROWS":
+      return {
+        ...state,
+        sashingRows: action.payload
+      };
+
+    case "UPDATE_SASHINGWIDTHS":
+      return {
+        ...state,
+        sashingWidths: action.payload
+      };
+
+    case "UPDATE_SASHINGHEIGHTS":
+      return {
+        ...state,
+        sashingHeights: action.payload
       };
 
   }
@@ -114,16 +149,68 @@ export const SquaresProvider = ({ children }) => {
     });
   };
 
+  const updateCols = (cols) => {
+    dispatch({
+      type: "UPDATE_COLS",
+      payload: cols
+    });
+  };
+
+  const updateRows = (rows) => {
+    dispatch({
+      type: "UPDATE_ROWS",
+      payload: rows
+    });
+  };
+
+  const updateSashingCols = (sashingCols) => {
+    dispatch({
+      type: "UPDATE_SASHINGCOLS",
+      payload: sashingCols
+    });
+  };
+
+  const updateSashingRows = (sashingRows) => {
+    dispatch({
+      type: "UPDATE_SASHINGROWS",
+      payload: sashingRows
+    });
+  };
+
+  const updateSashingWidths = (sashingWidths) => {
+    dispatch({
+      type: "UPDATE_SASHINGWIDTHS",
+      payload: sashingWidths
+    });
+  };
+
+  const updateSashingHeights = (sashingHeights) => {
+    dispatch({
+      type: "UPDATE_SASHINGHEIGHTS",
+      payload: sashingHeights
+    });
+  };
+
   return (
     <SquaresContext.Provider
       value={{
         squares: state.squares,
         cols: state.cols,
         rows: state.rows,
+        sashingCols: state.sashingCols,
+        sashingRows: state.sashingRows,
+        sashingWidths: state.sashingWidths,
+        sashingHeights: state.sashingHeights,
         addSquare,
         deleteSquare,
         editSquare,
-        updateSquares
+        updateSquares,
+        updateCols,
+        updateRows,
+        updateSashingCols,
+        updateSashingRows,
+        updateSashingWidths,
+        updateSashingHeights,
       }}
     >
       {children}

@@ -2,6 +2,8 @@ import React, { useContext, useState } from "react";
 import { ColorsContext } from "./ColorsContext";
 import { SquaresContext } from "./SquaresContext";
 import Square from "./Square";
+import AddColumn from "./AddColumn";
+import DeleteColumn from "./DeleteColumn";
 
 const Squares = () => {
 
@@ -36,21 +38,17 @@ const Squares = () => {
     let gridItems = [];
 
     // left top unfilled corner
-    let topLeftCorner = <div className="rowhead colhead"></div>;
+    let topLeftCorner = <div className="rowhead colhead" key={0} ></div>;
     gridItems.push(topLeftCorner);
 
     // first row: column heads
     let gridColheads = cols.map((col, index) =>
-      <div className="colhead" key={index}>
-        <button className="squares-settings col-sashing" style={{ width: squareWidth, height: squareWidth }}>
+      <div className="colhead" key={`colhead-${index}`} id={`colhead-${index}`}>
+        <button className="squares-settings col-sashing" style={{ width: squareWidth, height: squareWidth }} >
           <span >Sashing</span>
         </button>
-        <button className="squares-settings add-column" style={{ width: squareWidth, height: squareWidth }}>
-          <span>Add Column</span>
-        </button>
-        <button className="squares-settings delete-column" style={{ width: squareWidth, height: squareWidth }}>
-          <span>Delete Column</span>
-        </button>
+        <AddColumn colId={col} squareWidth={squareWidth} />
+        <DeleteColumn colId={col} squareWidth={squareWidth} />
         <div className="sashing-styler"></div>
       </div>
     );
@@ -59,19 +57,19 @@ const Squares = () => {
     // each row of squares
     for (let i = 0; i < squares.length; i++) {
       // rowhead
-      let gridRowHeads = 
-      <div className="rowhead" key={`rowhead-${i}`} id={`rowhead-${i}`}>
-        <button className="squares-settings row-sashing" style={{ width: squareWidth, height: squareWidth }}>
-          <span >Sashing</span>
-        </button>
-        <button className="squares-settings add-row" style={{ width: squareWidth, height: squareWidth }}>
-          <span>Add Column</span>
-        </button>
-        <button className="squares-settings delete-row" style={{ width: squareWidth, height: squareWidth }}>
-          <span>Delete Column</span>
-        </button>
-        <div className="sashing-styler"></div>
-      </div>
+      let gridRowHeads =
+        <div className="rowhead" key={`rowhead-${i}`} id={`rowhead-${i}`}>
+          <button className="squares-settings row-sashing" style={{ width: squareWidth, height: squareWidth }}>
+            <span >Sashing</span>
+          </button>
+          <button className="squares-settings add-row" style={{ width: squareWidth, height: squareWidth }}>
+            <span>Add Row</span>
+          </button>
+          <button className="squares-settings delete-row" style={{ width: squareWidth, height: squareWidth }}>
+            <span>Delete Row</span>
+          </button>
+          <div className="sashing-styler"></div>
+        </div>
 
       gridItems.push(gridRowHeads);
 
@@ -99,6 +97,9 @@ const Squares = () => {
         gridItems.push(gridSquare);
       }
     }
+    console.log(squares.map(squs => {
+      return squs.map(squ => squ.id)
+    }));
     return gridItems;
   }
 
