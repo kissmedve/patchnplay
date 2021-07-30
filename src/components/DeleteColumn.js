@@ -22,8 +22,8 @@ const DeleteColumn = ({ colId, squareWidth }) => {
       const newCols = cols.slice(0, cols.length - 1);
 
       // remove the indicated column
-      const newSashingCols = [...sashingCols.slice(0, colId - 1), ...sashingCols.slice(colId + 1)];
-      const newSashingWidths = [...sashingWidths.slice(0, colId - 1), ...sashingWidths.slice(colId + 1)];
+      const newSashingCols = [...sashingCols.slice(0, colId), ...sashingCols.slice(colId + 1)];
+      const newSashingWidths = [...sashingWidths.slice(0, colId), ...sashingWidths.slice(colId + 1)];
 
       // prepare squares for update
 

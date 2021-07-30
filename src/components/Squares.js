@@ -4,6 +4,8 @@ import { SquaresContext } from "./SquaresContext";
 import Square from "./Square";
 import AddColumn from "./AddColumn";
 import DeleteColumn from "./DeleteColumn";
+import AddRow from "./AddRow";
+import DeleteRow from "./DeleteRow";
 
 const Squares = () => {
 
@@ -62,12 +64,8 @@ const Squares = () => {
           <button className="squares-settings row-sashing" style={{ width: squareWidth, height: squareWidth }}>
             <span >Sashing</span>
           </button>
-          <button className="squares-settings add-row" style={{ width: squareWidth, height: squareWidth }}>
-            <span>Add Row</span>
-          </button>
-          <button className="squares-settings delete-row" style={{ width: squareWidth, height: squareWidth }}>
-            <span>Delete Row</span>
-          </button>
+          <AddRow rowId={i} squareWidth={squareWidth} />
+          <DeleteRow rowId={i} squareWidth={squareWidth} />
           <div className="sashing-styler"></div>
         </div>
 
