@@ -32,8 +32,8 @@ const DeleteRow = ({ rowId, squareWidth }) => {
       // close the gap
       for (let i = 0; i < squarez.length; i++) {
         for (let k = 0; k < squarez[0].length; k++) {
-          squarez[i][k].row = squares[i][k].row > rowId ? squares[i][k].row - 1 : squares[i][k].row;
-          squarez[i][k].id = squares[i][k].row > rowId - 1 ? i + '-' + k : squares[i][k].id;
+          squarez[i][k].row = squarez[i][k].row > rowId ? squarez[i][k].row - 1 : squarez[i][k].row;
+          squarez[i][k].id = squarez[i][k].row > rowId - 1 ? i + '-' + k : squarez[i][k].id;
         }
       }
       updateSquares(squarez);

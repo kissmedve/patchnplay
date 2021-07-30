@@ -33,6 +33,7 @@ const AddRow = ({ rowId, squareWidth }) => {
       let squarez = squares;
 
       // make room for new row 
+
       for (let i = 0; i < squarez.length; i++) {
         for (let k = 0; k < squarez[0].length; k++) {
           squarez[i][k].row = squarez[i][k].row > rowId ? squarez[i][k].row + 1 : squarez[i][k].row;
@@ -68,32 +69,6 @@ const AddRow = ({ rowId, squareWidth }) => {
         newRow,
         ...squarez.slice(rowId + 1)
       ]
-
-      // squarez = squarez.map((squs, i) => {
-      //   return [
-      //     // squares above new row
-      //     squs.filter((squ) => squ.row < (rowId + 1)),
-      //     // new square
-      //     {
-      //       id: `${rowId + 1}-${k}`,
-      //       row: rowId + 1,
-      //       col: k,
-      //       squareType: sashingCols[i] === true ? 'rect' : 'hstup',
-      //       fillSquare: sashingCols[i] === true ? squs.squ[0].fillSquare : 'white',
-      //       fillHstLup: 'white',
-      //       fillHstRup: 'white',
-      //       fillHstLdown: 'white',
-      //       fillHstRdown: 'white',
-      //       covered: false,
-      //       sashing: sashingCols[i] === true ? true : false,
-      //       sashingCrossed: false,
-      //       sashingWidth: 1,
-      //       sashingHeight: sashingRows[i] === true ? squs.squ[0].sashingHeight : 1,
-      //     },
-      //     // squares right to new column
-      //     squs.filter((squ) => squ.row > (rowId + 1)),
-      //   ].flat(1)
-      // });
 
       updateSquares(squarez);
       updateRows(newRows);

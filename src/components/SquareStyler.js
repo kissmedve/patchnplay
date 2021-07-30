@@ -5,7 +5,8 @@ import Palette from './Palette';
 
 const SquareStyler = ({ id }) => {
 
-  console.log('squarestyler id:', id);
+  // console.log('squarestyler id:', id);
+  
   // global states
   const { editSquare } = useContext(SquaresContext);
   const { squStylerIsOpen, activeSquStyler, closeSquStyler } = useContext(StylersContext);
