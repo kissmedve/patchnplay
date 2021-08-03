@@ -3,17 +3,17 @@ import { SquaresContext } from "./SquaresContext";
 import { StylersContext } from "./StylersContext";
 import Palette from './Palette';
 
-const SquareStyler = ({ id }) => {
+const SquareStyler = ({ id, squareType }) => {
 
   // global states
   const { editSquare } = useContext(SquaresContext);
-  const { squStylerIsOpen, activeSquStyler, closeSquStyler } = useContext(StylersContext);
+  const { closeSquStyler } = useContext(StylersContext);
 
   // local states
-  const [squareType, setSquareType] = useState('');
+  const [newSquareType, setNewSquareType] = useState(squareType);
 
   const selectSquareType = (event) => {
-    setSquareType(event.target.value);
+    setNewSquareType(event.target.value);
   }
 
   const closeSquareStyler = (event) => {
@@ -22,18 +22,16 @@ const SquareStyler = ({ id }) => {
   }
 
   useEffect(() => {
-    if (squStylerIsOpen === true && activeSquStyler === id) {
-      editSquare({
-        id: id,
-        propertyKey: 'squareType',
-        propertyValue: squareType
-      });
-    }
-  }, [squareType]);
+    editSquare({
+      id: id,
+      propertyKey: 'squareType',
+      propertyValue: newSquareType
+    });
+  }, [newSquareType]);
 
   return (
     <>
-      <div className={`styling-dropdown squares popup ${squStylerIsOpen === true && activeSquStyler === id ? "active" : ""}`}>
+      <div className="styling-dropdown squares popup active" >
 
         <div className="card ">
 
@@ -75,11 +73,12 @@ const SquareStyler = ({ id }) => {
               </label>
             </div>
           </div>
-          <Palette squareId={id} paletteType={squareType} />
+          <Palette squareId={id} paletteType={newSquareType} />
         </div>
 
       </div>
     </>
+
   )
 }
 

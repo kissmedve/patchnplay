@@ -6,7 +6,7 @@ import Palette from './Palette';
 const SashingRowStyler = ({ rowCol, id }) => {
 
   // global states
-  const { sashStylerIsOpen, closeSashStyler, activeSashStyler } = useContext(StylersContext);
+  const { closeSashStyler } = useContext(StylersContext);
   const { cols, squares, sashingRows, updateSashingRows, updateSquares, sashingHeights, updateSashingHeights } = useContext(SquaresContext);
 
   // local states
@@ -21,14 +21,14 @@ const SashingRowStyler = ({ rowCol, id }) => {
 
     let squarez = squares;
     for (let i = 0; i < squarez.length; i++) {
-      for (let k = 0; k < cols.length; k++) {
+      for (let k = 0; k < squarez[0].length; k++) {
+        // mark squares also belonging to sashing columns as sashing cross
+        if (squarez[i][k].row === id && squarez[i][k].sashing === true) {
+          squarez[i][k].sashingCrossed = true;
+        }
         // mark all squares of the sashing row
         if (squarez[i][k].row === id) {
           squarez[i][k].sashing = true;
-        }
-        // square is sashing cross, if squares above or below are part of sashing col
-        if ((squarez[i][k].row === id && (squarez[i - 1][k] && squarez[i - 1][k].sashing === true)) || (squarez[i + 1][k] && squarez[i + 1][k].sashing === true)) {
-          squarez[i][k].sashingCrossed = true;
         }
       }
     }
@@ -39,7 +39,7 @@ const SashingRowStyler = ({ rowCol, id }) => {
   const switchToSquares = () => {
     let offSashingRows = sashingRows.map((sashRow, index) => index === id ? sashRow = false : sashRow = true);
 
-    let offSashingHeights = sashingHeights.map((sashHeight, index) => index === id ? sashHeight = 1 : null);
+    let offSashingHeights = sashingHeights.map((sashHeight, index) => index === id ? sashHeight = 1 : sashHeight);
 
     let squarezz = squares;
     for (let i = 0; i < squarezz.length; i++) {
@@ -48,12 +48,11 @@ const SashingRowStyler = ({ rowCol, id }) => {
         // sashing height back to normal
         if (squarezz[i][k].row === id) {
           squarezz[i][k].sashing = false;
-          squarezz[i][k].sashingWidth = 1;
+          squarezz[i][k].sashingHeight = 1;
         }
-        // with squares above and/or below being sashing, the square is part of sashing column
-        if ((squarezz[i][k].row === id && (squarezz[i - 1][k] && squarezz[i - 1][k].sashing === true)) || (squarezz[i + 1][k] && squarezz[i + 1][k].sashing === true)) {
+        // square that was sashing cross still remains sashing
+        if (squarezz[i][k].row === id && squarezz[i][k].sashingCrossed === true) {
           squarezz[i][k].sashing = true;
-          // without sashing row no more sashing cross
           squarezz[i][k].sashingCrossed = false;
         }
       }
@@ -82,7 +81,7 @@ const SashingRowStyler = ({ rowCol, id }) => {
 
   return (
     <>
-      <div className={`styling-dropdown sashing popup ${sashStylerIsOpen === true && activeSashStyler.rowCol === rowCol && activeSashStyler.id === id ? "active" : ""}`}>
+      <div className="styling-dropdown sashing popup active">
 
         <div className="card ">
 

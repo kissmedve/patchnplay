@@ -15,7 +15,7 @@ const Squares = () => {
   // global states
   const { colors } = useContext(ColorsContext);
   const { squares, cols, sashingWidths, sashingHeights } = useContext(SquaresContext);
-  const { openSashStyler } = useContext(StylersContext);
+  const { sashStylerIsOpen, activeSashStyler, openSashStyler } = useContext(StylersContext);
 
   // local states 
   const [squareWidth, setSquareWidth] = useState('50');
@@ -64,7 +64,11 @@ const Squares = () => {
           <button className="switch-sashing" style={{ width: sashingWidths[index] * squareWidth }} onClick={openSashColStyler(index)} >
             <span >Sashing</span>
           </button>
-          <SashingColStyler rowCol={'col'} id={index} />
+          {
+            sashStylerIsOpen === true && activeSashStyler.rowCol === 'col' && activeSashStyler.id === index ?
+              <SashingColStyler rowCol={'col'} id={index} />
+              : null
+          }
         </div>
         <AddColumn colId={col} squareWidth={squareWidth} />
         <DeleteColumn colId={col} squareWidth={squareWidth} />
@@ -81,7 +85,11 @@ const Squares = () => {
             <button className="switch-sashing" style={{ height: sashingHeights[i] * squareWidth }} onClick={openSashRowStyler(i)} >
               <span >Sashing</span>
             </button>
-            <SashingRowStyler rowCol={'row'} id={i} />
+            {
+              sashStylerIsOpen === true && activeSashStyler.rowCol === 'row' && activeSashStyler.id === i ?
+                <SashingRowStyler rowCol={'row'} id={i} />
+                : null
+            }
           </div>
           <AddRow rowId={i} squareWidth={squareWidth} />
           <DeleteRow rowId={i} squareWidth={squareWidth} />
@@ -115,10 +123,6 @@ const Squares = () => {
         gridItems.push(gridSquare);
       }
     }
-
-    console.log(squares.map(squs => {
-      return squs.map(squ => squ.id)
-    }));
     return gridItems;
   }
 

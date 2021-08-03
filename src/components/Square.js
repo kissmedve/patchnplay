@@ -5,7 +5,7 @@ import SquareStyler from "./SquareStyler";
 const Square = ({ id, row, col, squareType, fillSquare, fillHstLdown, fillHstRdown, fillHstLup, fillHstRup, fillSashing, covered, sashing, sashingCrossed, sashingWidth, sashingHeight, squareWidth }) => {
 
   // global states
-  const { openSquStyler } = useContext(StylersContext);
+  const { openSquStyler, squStylerIsOpen, sashStylerIsOpen, activeSquStyler } = useContext(StylersContext);
 
   const openSquareStyler = (event) => {
     event.stopPropagation();
@@ -30,8 +30,10 @@ const Square = ({ id, row, col, squareType, fillSquare, fillHstLdown, fillHstRdo
           <polygon className="hstup lup" points="0,50 0,0 50,0" fill={fillHstLup} stroke="#ddd" />
           <polygon className="hstup rup" points="0,50 50,0 50,50" fill={fillHstRup} stroke="#ddd" />
         </svg>
-        <SquareStyler
-          id={id} key={id} />
+        {squStylerIsOpen === true && sashStylerIsOpen === false && activeSquStyler === id ?
+          <SquareStyler
+            id={id} key={id} squareType={squareType} />
+          : null}
       </div>
     </>
   )
