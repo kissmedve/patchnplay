@@ -1,22 +1,27 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { StylersContext } from "./StylersContext";
 import SquareStyler from "./SquareStyler";
 
-const Square = ({ id, row, col, squareType, fillSquare, fillHstLdown, fillHstRdown, fillHstLup, fillHstRup, covered, sashing, sashingCrossed }) => {
+const Square = ({ id, row, col, squareType, fillSquare, fillHstLdown, fillHstRdown, fillHstLup, fillHstRup, fillSashing, covered, sashing, sashingCrossed, sashingWidth, sashingHeight, squareWidth }) => {
 
   // global states
-  const { squStylerIsOpen, activeSquStyler, openSquStyler } = useContext(StylersContext);
+  const { openSquStyler } = useContext(StylersContext);
 
   const openSquareStyler = (event) => {
     event.stopPropagation();
-    openSquStyler(id);
+    if (sashing === false && sashingCrossed === false) {
+      openSquStyler(id);
+    }
   }
 
   return (
     <>
-      <div className={`square ${squareType.toLowerCase()} ${covered === true ? 'covered' : 'not-covered'} ${sashing === true ? 'sashing' : ''} ${sashingCrossed === true ? 'sashing-crossed' : ''}`} key={id} onClick={openSquareStyler}>
+      <div className={`square ${squareType.toLowerCase()} ${covered === true ? 'covered' : 'not-covered'} ${sashing === true ? 'sashing' : ''} ${sashingCrossed === true ? 'sashing-crossed' : ''}`} style={{ width: sashingWidth > 1 ? sashingWidth * squareWidth + `px` : ``, height: sashingHeight > 1 ? sashingHeight * squareWidth + `px` : '' }} key={id} onClick={openSquareStyler}>
         <svg
           viewBox={'0 0 50 50'} >
+          <rect className="sashing" x="0" y="0"
+            width="50" height="50" fill={fillSashing}
+            stroke="ddd" />
           <rect className="rect" x="0" y="0"
             width="50" height="50" fill={fillSquare}
             stroke="ddd" />

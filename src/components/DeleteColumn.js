@@ -35,8 +35,8 @@ const DeleteColumn = ({ colId, squareWidth }) => {
       // close the gap
       for (let i = 0; i < squarez.length; i++) {
         for (let k = 0; k < squarez[0].length; k++) {
-          squarez[i][k].col = squares[i][k].col > colId ? squares[i][k].col - 1 : squares[i][k].col;
-          squarez[i][k].id = squares[i][k].col > colId - 1 ? i + '-' + k : squares[i][k].id;
+          squarez[i][k].col = squarez[i][k].col > colId ? squarez[i][k].col - 1 : squares[i][k].col;
+          squarez[i][k].id = squarez[i][k].col > colId - 1 ? i + '-' + k : squarez[i][k].id;
         }
       }
       updateSquares(squarez);
@@ -51,7 +51,7 @@ const DeleteColumn = ({ colId, squareWidth }) => {
     <>
       <button
         className="squares-settings delete-column"
-        style={{ width: squareWidth, height: squareWidth }}
+        style={{ width: sashingWidths[colId] * squareWidth }}
         onClick={() => deleteThisColumn(colId)} >
         <span>Delete Column</span>
       </button>

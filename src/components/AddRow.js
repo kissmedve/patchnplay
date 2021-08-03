@@ -50,7 +50,8 @@ const AddRow = ({ rowId, squareWidth }) => {
             row: rowId + 1,
             col: k,
             squareType: sashingCols[k] === true ? 'rect' : 'hstup',
-            fillSquare: sashingCols[k] === true ? squares[0][k].fillSquare : 'white',
+            fillSquare: 'white',
+            fillSashing: sashingCols[k] === true ? squares[0][k].fillSashing : 'white',
             fillHstLup: 'white',
             fillHstRup: 'white',
             fillHstLdown: 'white',
@@ -81,7 +82,7 @@ const AddRow = ({ rowId, squareWidth }) => {
     <>
       <button
         className="squares-settings add-row"
-        style={{ width: squareWidth, height: squareWidth }}
+        style={{ height: sashingHeights[rowId] * squareWidth }}
         onClick={() => addRowDown(rowId)}>
         <span>Add Row</span>
       </button>

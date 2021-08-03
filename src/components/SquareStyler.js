@@ -5,8 +5,6 @@ import Palette from './Palette';
 
 const SquareStyler = ({ id }) => {
 
-  // console.log('squarestyler id:', id);
-  
   // global states
   const { editSquare } = useContext(SquaresContext);
   const { squStylerIsOpen, activeSquStyler, closeSquStyler } = useContext(StylersContext);
@@ -35,7 +33,7 @@ const SquareStyler = ({ id }) => {
 
   return (
     <>
-      <div className={`styling-dropdown popup ${squStylerIsOpen === true && activeSquStyler === id ? "active" : ""}`}>
+      <div className={`styling-dropdown squares popup ${squStylerIsOpen === true && activeSquStyler === id ? "active" : ""}`}>
 
         <div className="card ">
 
@@ -47,6 +45,7 @@ const SquareStyler = ({ id }) => {
 
               <label className="form-radio rect">
                 <input
+                  className="square-type"
                   type="radio"
                   name="squareType"
                   value="rect"
@@ -56,6 +55,7 @@ const SquareStyler = ({ id }) => {
               </label>
               <label className="form-radio hst-up">
                 <input
+                  className="square-type"
                   type="radio"
                   name="squareType"
                   value="hstUp"
@@ -65,6 +65,7 @@ const SquareStyler = ({ id }) => {
               </label>
               <label className="form-radio hst-down">
                 <input
+                  className="square-type"
                   type="radio"
                   name="squareType"
                   value="hstDown"

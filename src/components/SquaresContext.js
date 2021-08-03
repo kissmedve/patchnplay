@@ -9,19 +9,19 @@ const initialState = {
   sashingHeights: [1, 1, 1],
   squares: [
     [
-      { id: '0-0', row: 0, col: 0, squareType: 'rect', fillSquare: 'red', fillHstLdown: 'red', fillHstRdown: 'white', fillHstLup: 'red', fillHstRup: 'white', covered: false, sashing: false, sashingCrossed: false, sashingWidth: 1, sashingHeight: 1 },
-      { id: '0-1', row: 0, col: 1, squareType: 'rect', fillSquare: 'blue', fillHstLdown: 'blue', fillHstRdown: 'white', fillHstLup: 'blue', fillHstRup: 'white', covered: false, sashing: false, sashingCrossed: false, sashingWidth: 1, sashingHeight: 1 },
-      { id: '0-2', row: 0, col: 2, squareType: 'rect', fillSquare: 'yellow', fillHstLdown: 'yellow', fillHstRdown: 'white', fillHstLup: 'yellow', fillHstRup: 'white', covered: false, sashing: false, sashingCrossed: false, sashingWidth: 1, sashingHeight: 1 }
+      { id: '0-0', row: 0, col: 0, squareType: 'rect', fillSquare: 'red', fillHstLdown: 'red', fillHstRdown: 'white', fillHstLup: 'red', fillHstRup: 'white', fillSashing: 'white', covered: false, sashing: false, sashingCrossed: false, sashingWidth: 1, sashingHeight: 1 },
+      { id: '0-1', row: 0, col: 1, squareType: 'rect', fillSquare: 'blue', fillHstLdown: 'blue', fillHstRdown: 'white', fillHstLup: 'blue', fillHstRup: 'white', fillSashing: 'white', covered: false, sashing: false, sashingCrossed: false, sashingWidth: 1, sashingHeight: 1 },
+      { id: '0-2', row: 0, col: 2, squareType: 'rect', fillSquare: 'yellow', fillHstLdown: 'yellow', fillHstRdown: 'white', fillHstLup: 'yellow', fillHstRup: 'white', fillSashing: 'white', covered: false, sashing: false, sashingCrossed: false, sashingWidth: 1, sashingHeight: 1 }
     ],
     [
-      { id: '1-0', row: 1, col: 0, squareType: 'rect', fillSquare: 'magenta', fillHstLdown: 'magenta', fillHstRdown: 'white', fillHstLup: 'magenta', fillHstRup: 'white', covered: false, sashing: false, sashingCrossed: false, sashingWidth: 1, sashingHeight: 1 },
-      { id: '1-1', row: 1, col: 1, squareType: 'rect', fillSquare: 'teal', fillHstLdown: 'teal', fillHstRdown: 'white', fillHstLup: 'teal', fillHstRup: 'white', covered: false, sashing: false, sashingCrossed: false, sashingWidth: 1, sashingHeight: 1 },
-      { id: '1-2', row: 1, col: 2, squareType: 'rect', fillSquare: 'orange', fillHstLdown: 'orange', fillHstRdown: 'white', fillHstLup: 'orange', fillHstRup: 'white', covered: false, sashing: false, sashingCrossed: false, sashingWidth: 1, sashingHeight: 1 }
+      { id: '1-0', row: 1, col: 0, squareType: 'rect', fillSquare: 'magenta', fillHstLdown: 'magenta', fillHstRdown: 'white', fillHstLup: 'magenta', fillHstRup: 'white', fillSashing: 'white', covered: false, sashing: false, sashingCrossed: false, sashingWidth: 1, sashingHeight: 1 },
+      { id: '1-1', row: 1, col: 1, squareType: 'rect', fillSquare: 'teal', fillHstLdown: 'teal', fillHstRdown: 'white', fillHstLup: 'teal', fillHstRup: 'white', fillSashing: 'white', covered: false, sashing: false, sashingCrossed: false, sashingWidth: 1, sashingHeight: 1 },
+      { id: '1-2', row: 1, col: 2, squareType: 'rect', fillSquare: 'orange', fillHstLdown: 'orange', fillHstRdown: 'white', fillHstLup: 'orange', fillHstRup: 'white', fillSashing: 'white', covered: false, sashing: false, sashingCrossed: false, sashingWidth: 1, sashingHeight: 1 }
     ],
     [
-      { id: '2-0', row: 2, col: 0, squareType: 'rect', fillSquare: 'red', fillHstLdown: 'red', fillHstRdown: 'white', fillHstLup: 'red', fillHstRup: 'white', covered: false, sashing: false, sashingCrossed: false, sashingWidth: 1, sashingHeight: 1 },
-      { id: '2-1', row: 2, col: 1, squareType: 'rect', fillSquare: 'blue', fillHstLdown: 'blue', fillHstRdown: 'white', fillHstLup: 'blue', fillHstRup: 'white', covered: false, sashing: false, sashingCrossed: false, sashingWidth: 1, sashingHeight: 1 },
-      { id: '2-2', row: 2, col: 2, squareType: 'rect', fillSquare: 'yellow', fillHstLdown: 'yellow', fillHstRdown: 'white', fillHstLup: 'yellow', fillHstRup: 'white', covered: false, sashing: false, sashingCrossed: false, sashingWidth: 1, sashingHeight: 1 }
+      { id: '2-0', row: 2, col: 0, squareType: 'rect', fillSquare: 'red', fillHstLdown: 'red', fillHstRdown: 'white', fillHstLup: 'red', fillHstRup: 'white', fillSashing: 'white', covered: false, sashing: false, sashingCrossed: false, sashingWidth: 1, sashingHeight: 1 },
+      { id: '2-1', row: 2, col: 1, squareType: 'rect', fillSquare: 'blue', fillHstLdown: 'blue', fillHstRdown: 'white', fillHstLup: 'blue', fillHstRup: 'white', fillSashing: 'white', covered: false, sashing: false, sashingCrossed: false, sashingWidth: 1, sashingHeight: 1 },
+      { id: '2-2', row: 2, col: 2, squareType: 'rect', fillSquare: 'yellow', fillHstLdown: 'yellow', fillHstRdown: 'white', fillHstLup: 'yellow', fillHstRup: 'white', fillSashing: 'white', covered: false, sashing: false, sashingCrossed: false, sashingWidth: 1, sashingHeight: 1 }
     ]
   ],
   baseColor: 'eee',

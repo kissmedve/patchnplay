@@ -51,7 +51,8 @@ const AddColumn = ({ colId, squareWidth }) => {
             row: i,
             col: colId + 1,
             squareType: sashingRows[i] === true ? 'rect' : 'hstup',
-            fillSquare: sashingRows[i] === true ? squs.squ[0].fillSquare : 'white',
+            fillSquare: 'white',
+            fillSashing: sashingRows[i] === true ? squs.squ[0].fillSashing : 'white',
             fillHstLup: 'white',
             fillHstRup: 'white',
             fillHstLdown: 'white',
@@ -78,7 +79,7 @@ const AddColumn = ({ colId, squareWidth }) => {
     <>
       <button
         className="squares-settings add-column"
-        style={{ width: squareWidth, height: squareWidth }}
+        style={{ width: sashingWidths[colId] * squareWidth }}
         onClick={() => addColumnRight(colId)}>
         <span>Add Column</span>
       </button>

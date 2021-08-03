@@ -1,27 +1,33 @@
 import React, { useContext, useState } from "react";
 import { ColorsContext } from "./ColorsContext";
 import { SquaresContext } from "./SquaresContext";
+import { StylersContext } from "./StylersContext";
 import Square from "./Square";
 import AddColumn from "./AddColumn";
 import DeleteColumn from "./DeleteColumn";
 import AddRow from "./AddRow";
 import DeleteRow from "./DeleteRow";
+import SashingColStyler from "./SashingColStyler";
+import SashingRowStyler from "./SashingRowStyler";
 
 const Squares = () => {
 
   // global states
   const { colors } = useContext(ColorsContext);
-  const { squares, cols, rows } = useContext(SquaresContext);
+  const { squares, cols, sashingWidths, sashingHeights } = useContext(SquaresContext);
+  const { openSashStyler } = useContext(StylersContext);
 
   // local states 
   const [squareWidth, setSquareWidth] = useState('50');
 
   const allSquaresGrid = () => {
 
-    let gridColumns = ['90px'];
-    cols.map((col) => gridColumns.push('1fr'));
-    let gridColumnsStyle = gridColumns.join(' ');
-    let containerWidth = (cols.length * squareWidth + 90) + 'px';
+    let gridColumns = [90];
+
+    // sashingWidths has 1 as base value for every regular width (= squares) column
+    sashingWidths.map((width) => gridColumns.push(width * squareWidth));
+    let containerWidth = gridColumns.reduce((prev, curr) => prev + curr) + 'px';
+    let gridColumnsStyle = gridColumns.map(col => col + 'px').join(' ');
     let styles = {
       display: 'grid',
       gridTemplateColumns: gridColumnsStyle,
@@ -32,6 +38,14 @@ const Squares = () => {
         {allSquares()}
       </div>
     )
+  }
+  const openSashColStyler = (id) => (event) => {
+    event.stopPropagation();
+    openSashStyler({ rowCol: 'col', id: id });
+  }
+  const openSashRowStyler = (id) => (event) => {
+    event.stopPropagation();
+    openSashStyler({ rowCol: 'row', id: id });
   }
 
   // build the grid of all squares with "column heads" and "row heads"
@@ -46,12 +60,14 @@ const Squares = () => {
     // first row: column heads
     let gridColheads = cols.map((col, index) =>
       <div className="colhead" key={`colhead-${index}`} id={`colhead-${index}`}>
-        <button className="squares-settings col-sashing" style={{ width: squareWidth, height: squareWidth }} >
-          <span >Sashing</span>
-        </button>
+        <div className="squares-settings col-sashing">
+          <button className="switch-sashing" style={{ width: sashingWidths[index] * squareWidth }} onClick={openSashColStyler(index)} >
+            <span >Sashing</span>
+          </button>
+          <SashingColStyler rowCol={'col'} id={index} />
+        </div>
         <AddColumn colId={col} squareWidth={squareWidth} />
         <DeleteColumn colId={col} squareWidth={squareWidth} />
-        <div className="sashing-styler"></div>
       </div>
     );
     gridItems.push(gridColheads);
@@ -61,12 +77,14 @@ const Squares = () => {
       // rowhead
       let gridRowHeads =
         <div className="rowhead" key={`rowhead-${i}`} id={`rowhead-${i}`}>
-          <button className="squares-settings row-sashing" style={{ width: squareWidth, height: squareWidth }}>
-            <span >Sashing</span>
-          </button>
+          <div className="squares-settings row-sashing">
+            <button className="switch-sashing" style={{ height: sashingHeights[i] * squareWidth }} onClick={openSashRowStyler(i)} >
+              <span >Sashing</span>
+            </button>
+            <SashingRowStyler rowCol={'row'} id={i} />
+          </div>
           <AddRow rowId={i} squareWidth={squareWidth} />
           <DeleteRow rowId={i} squareWidth={squareWidth} />
-          <div className="sashing-styler"></div>
         </div>
 
       gridItems.push(gridRowHeads);
@@ -85,16 +103,19 @@ const Squares = () => {
             fillHstRdown={squares[i][k].fillHstRdown}
             fillHstLup={squares[i][k].fillHstLup}
             fillHstRup={squares[i][k].fillHstRup}
+            fillSashing={squares[i][k].fillSashing}
             covered={squares[i][k].covered}
             sashing={squares[i][k].sashing}
             sashingCrossed={squares[i][k].sashingCrossed}
             sashingWidth={squares[i][k].sashingWidth}
             sashingHeight={squares[i][k].sashingHeight}
+            squareWidth={squareWidth}
           />
 
         gridItems.push(gridSquare);
       }
     }
+
     console.log(squares.map(squs => {
       return squs.map(squ => squ.id)
     }));

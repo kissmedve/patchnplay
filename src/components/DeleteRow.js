@@ -45,7 +45,7 @@ const DeleteRow = ({ rowId, squareWidth }) => {
 
   return (
     <>
-      <button className="squares-settings delete-row" style={{ width: squareWidth, height: squareWidth }} onClick={() => deleteThisRow(rowId)}>
+      <button className="squares-settings delete-row" style={{ height: sashingHeights[rowId] * squareWidth }} onClick={() => deleteThisRow(rowId)}>
         <span>Delete Row</span>
       </button>
     </>

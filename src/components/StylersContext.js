@@ -3,6 +3,8 @@ import React, { createContext, useReducer } from "react";
 const initialState = {
   squStylerIsOpen: false,
   activeSquStyler: '',
+  sashStylerIsOpen: false,
+  activeSashStyler: '',
 };
 
 export const StylersContext = createContext(initialState);
@@ -24,6 +26,20 @@ export const StylersReducer = (state, action) => {
         activeSquStyler: '',
       };
 
+    case "OPEN_SASHSTYLER":
+      return {
+        ...state,
+        sashStylerIsOpen: true,
+        activeSashStyler: action.payload,
+      };
+
+    case "CLOSE_SASHSTYLER":
+      return {
+        ...state,
+        sashStylerIsOpen: false,
+        activeSashStyler: '',
+      };
+
     default:
       return null;
   }
@@ -35,12 +51,23 @@ export const StylersProvider = ({ children }) => {
   const openSquStyler = (id) => {
     dispatch({
       type: "OPEN_SQUSTYLER",
-      payload: id 
+      payload: id
     });
   }
   const closeSquStyler = () => {
     dispatch({
       type: "CLOSE_SQUSTYLER",
+    });
+  }
+  const openSashStyler = ({ rowCol, id }) => {
+    dispatch({
+      type: "OPEN_SASHSTYLER",
+      payload: { rowCol, id }
+    });
+  }
+  const closeSashStyler = () => {
+    dispatch({
+      type: "CLOSE_SASHSTYLER",
     });
   }
 
@@ -50,8 +77,12 @@ export const StylersProvider = ({ children }) => {
       value={{
         squStylerIsOpen: state.squStylerIsOpen,
         activeSquStyler: state.activeSquStyler,
+        sashStylerIsOpen: state.sashStylerIsOpen,
+        activeSashStyler: state.activeSashStyler,
         openSquStyler,
         closeSquStyler,
+        openSashStyler,
+        closeSashStyler,
       }}
     >
       {children}
