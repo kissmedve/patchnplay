@@ -72,6 +72,36 @@ export const SquaresReducer = (state, action) => {
         squares: updatedSquares,
       };
 
+    case "EDIT_SQUARES":
+      const propKey2 = action.payload.propertyKey;
+      const propValue2 = action.payload.propertyValue;
+      const propId2 = action.payload.id;
+      const propRowCol = action.payload.rowCol;
+      const updatedSquares2 = state.squares.map(squs => {
+        return squs.map(squ => {
+          if (propRowCol === 'col' && squ.col === propId2) {
+            let prop = propKey2;
+            return {
+              ...squ,
+              [prop]: propValue2
+            }
+          }
+          if (propRowCol === 'row' && squ.row === propId2) {
+            let prop = propKey2;
+            return {
+              ...squ,
+              [prop]: propValue2
+            }
+          }
+          return squ;
+        })
+      });
+
+      return {
+        ...state,
+        squares: updatedSquares2,
+      };
+
     case "UPDATE_SQUARES":
       return {
         ...state,
@@ -140,6 +170,13 @@ export const SquaresProvider = ({ children }) => {
       payload: { id, propertyKey, propertyValue }
     });
   };
+  // edit multiple squares (column or row) 
+  const editSquares = ({ rowCol, id, propertyKey, propertyValue }) => {
+    dispatch({
+      type: "EDIT_SQUARES",
+      payload: { rowCol, id, propertyKey, propertyValue }
+    });
+  };
 
   // update all squares (e.g. uploading)
   const updateSquares = (squares) => {
@@ -204,6 +241,7 @@ export const SquaresProvider = ({ children }) => {
         addSquare,
         deleteSquare,
         editSquare,
+        editSquares,
         updateSquares,
         updateCols,
         updateRows,

@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import { SquaresContext } from "./SquaresContext";
-const Swatches = ({ swatchesTitle, swatchesGroup, paletteType, squareId }) => {
+const Swatches = ({ swatchesTitle, swatchesGroup, paletteType, squareId, rowColId }) => {
 
   // temporary solution: default palette colors 
   // later on palette colors will come through the PaletteSettings component
   const paletteColors = ['red', 'blue', 'yellow', 'green', 'turquoise'];
 
   // global states
-  const { editSquare } = useContext(SquaresContext);
+  const { editSquare, editSquares } = useContext(SquaresContext);
 
   // local states
   const [color, setColor] = useState('');
@@ -29,6 +29,12 @@ const Swatches = ({ swatchesTitle, swatchesGroup, paletteType, squareId }) => {
     if (paletteType === 'hstDown' && swatchesGroup === '2') {
       setColorTarget('fillHstRdown');
     }
+    if (paletteType === 'sashColumn' && swatchesGroup === '1') {
+      setColorTarget('fillSashing');
+    }
+    if (paletteType === 'sashRow' && swatchesGroup === '1') {
+      setColorTarget('fillSashing');
+    }
   }, [paletteType]);
 
   const pickColor = (pickedColor) => {
@@ -36,11 +42,28 @@ const Swatches = ({ swatchesTitle, swatchesGroup, paletteType, squareId }) => {
   };
 
   useEffect(() => {
-    editSquare({
-      id: squareId,
-      propertyKey: colorTarget,
-      propertyValue: color
-    });
+    if (paletteType === 'sashColumn') {
+      editSquares({
+        rowCol: 'col',
+        id: rowColId,
+        propertyKey: colorTarget,
+        propertyValue: color
+      });
+    } else if (paletteType === "sashRow") {
+      editSquares({
+        rowCol: 'row',
+        id: rowColId,
+        propertyKey: colorTarget,
+        propertyValue: color
+      });
+    } else {
+      editSquare({
+        id: squareId,
+        propertyKey: colorTarget,
+        propertyValue: color
+      });
+    }
+
   }, [color]);
 
   const swatches =

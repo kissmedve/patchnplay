@@ -127,8 +127,9 @@ const SashingRowStyler = ({ rowCol, id }) => {
             </div>
 
           </div>
+          <Palette paletteType={'sashRow'} rowColId={id} />
         </div>
-        {/* <Palette paletteType={sashColumn} /> */}
+
       </div>
 
     </>
