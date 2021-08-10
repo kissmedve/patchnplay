@@ -7,13 +7,19 @@ const SquareStyler = ({ id, squareType }) => {
 
   // global states
   const { editSquare } = useContext(SquaresContext);
-  const { closeSquStyler } = useContext(StylersContext);
+  const { closeSquStyler, openBigBlockStyler, bigBlockStylerIsOpen } = useContext(StylersContext);
 
   // local states
   const [newSquareType, setNewSquareType] = useState(squareType);
 
   const selectSquareType = (event) => {
     setNewSquareType(event.target.value);
+  }
+
+  const showBigBlockForm = (event) => {
+    event.stopPropagation();
+    closeSquStyler();
+    openBigBlockStyler(id);
   }
 
   const closeSquareStyler = (event) => {
@@ -74,6 +80,17 @@ const SquareStyler = ({ id, squareType }) => {
             </div>
           </div>
           <Palette squareId={id} paletteType={newSquareType} />
+          <div className="card-footer">
+            <div className="form-title h6">
+              Big Block
+            </div>
+            <button
+              className="btn bigblock-insert"
+              onClick={showBigBlockForm}
+            >
+              Insert Big Block
+              </button>
+          </div>
         </div>
 
       </div>

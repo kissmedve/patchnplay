@@ -1,5 +1,6 @@
 import "./styles/globals.css";
 import { ColorsProvider } from "./components/ColorsContext";
+import { BigBlocksProvider } from "./components/BigBlocksContext";
 import { SquaresProvider } from "./components/SquaresContext";
 import { StylersProvider } from "./components/StylersContext";
 import Header from "./components/Header";
@@ -10,20 +11,22 @@ function App() {
   return (
     <>
       <ColorsProvider>
-        <SquaresProvider>
-          <StylersProvider>
-            <div className="app">
-              <Header>
-                <Navigation />
-              </Header>
-              <div id="main">
-                <Squares />
-              </div>
+        <BigBlocksProvider>
+          <SquaresProvider>
+            <StylersProvider>
+              <div className="app">
+                <Header>
+                  <Navigation />
+                </Header>
+                <div id="main">
+                  <Squares />
+                </div>
 
-              <footer></footer>
-            </div>
-          </StylersProvider>
-        </SquaresProvider>
+                <footer></footer>
+              </div>
+            </StylersProvider>
+          </SquaresProvider>
+        </BigBlocksProvider>
       </ColorsProvider>
     </>
   );

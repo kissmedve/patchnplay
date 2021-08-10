@@ -1,19 +1,27 @@
 import React, { useState } from "react";
 import Modal from "./Modal";
 import ColorSettingsPalette from "./ColorSettingsPalette";
+import BigBlockGallery from "./BigBlockGallery";
 
 const Navigation = () => {
 
   // local states
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [colorsModalIsOpen, setColorsModalIsOpen] = useState(false);
+  const [premadesModalIsOpen, setPremadesModalIsOpen] = useState(false);
 
   return (
     <>
       <ul className="nav">
         <li className="nav-item">
-          <button className="btn btn-link" onClick={() => setModalIsOpen(!modalIsOpen)}>
+          <button className="btn btn-link" onClick={() => setColorsModalIsOpen(!colorsModalIsOpen)}>
             <img src="icon-colors.svg" alt="Colors" />
             <span>Colors</span>
+          </button>
+        </li>
+        <li className="nav-item">
+          <button className="btn btn-link" onClick={() => setPremadesModalIsOpen(!premadesModalIsOpen)}>
+            <img src="icon-premades.svg" alt="Premades" />
+            <span>Premades</span>
           </button>
         </li>
         <li className="nav-item">
@@ -31,9 +39,14 @@ const Navigation = () => {
 
       </ul>
       <Modal
-        modalIsOpen={modalIsOpen}
-        closeModal={() => setModalIsOpen(false)} >
+        modalIsOpen={colorsModalIsOpen}
+        closeModal={() => setColorsModalIsOpen(false)} >
         <ColorSettingsPalette />
+      </Modal>
+      <Modal
+        modalIsOpen={premadesModalIsOpen}
+        closeModal={() => setPremadesModalIsOpen(false)} >
+        <BigBlockGallery />
       </Modal>
     </>
   )

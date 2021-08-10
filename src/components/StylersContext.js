@@ -5,6 +5,8 @@ const initialState = {
   activeSquStyler: '',
   sashStylerIsOpen: false,
   activeSashStyler: '',
+  bigBlockStylerIsOpen: false,
+  activeBigBlockStyler: '',
 };
 
 export const StylersContext = createContext(initialState);
@@ -40,6 +42,20 @@ export const StylersReducer = (state, action) => {
         activeSashStyler: '',
       };
 
+    case "OPEN_BIGBLOCKSTYLER":
+      return {
+        ...state,
+        bigBlockStylerIsOpen: true,
+        activeBigBlockStyler: action.payload,
+      };
+
+    case "CLOSE_BIGBLOCKSTYLER":
+      return {
+        ...state,
+        bigBlockStylerIsOpen: false,
+        activeBigBlockStyler: '',
+      };
+
     default:
       return null;
   }
@@ -70,6 +86,17 @@ export const StylersProvider = ({ children }) => {
       type: "CLOSE_SASHSTYLER",
     });
   }
+  const openBigBlockStyler = (id) => {
+    dispatch({
+      type: "OPEN_BIGBLOCKSTYLER",
+      payload: id
+    });
+  }
+  const closeBigBlockStyler = () => {
+    dispatch({
+      type: "CLOSE_BIGBLOCKSTYLER",
+    });
+  }
 
 
   return (
@@ -79,10 +106,14 @@ export const StylersProvider = ({ children }) => {
         activeSquStyler: state.activeSquStyler,
         sashStylerIsOpen: state.sashStylerIsOpen,
         activeSashStyler: state.activeSashStyler,
+        bigBlockStylerIsOpen: state.bigBlockStylerIsOpen,
+        activeBigBlockStyler: state.activeBigBlockStyler,
         openSquStyler,
         closeSquStyler,
         openSashStyler,
         closeSashStyler,
+        openBigBlockStyler,
+        closeBigBlockStyler,
       }}
     >
       {children}

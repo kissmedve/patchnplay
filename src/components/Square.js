@@ -1,15 +1,16 @@
 import React, { useContext } from 'react';
 import { StylersContext } from "./StylersContext";
 import SquareStyler from "./SquareStyler";
+import BigBlockStyler from "./BigBlockStyler";
 
 const Square = ({ id, row, col, squareType, fillSquare, fillHstLdown, fillHstRdown, fillHstLup, fillHstRup, fillSashing, covered, sashing, sashingCrossed, sashingWidth, sashingHeight, squareWidth }) => {
 
   // global states
-  const { openSquStyler, squStylerIsOpen, sashStylerIsOpen, activeSquStyler } = useContext(StylersContext);
+  const { openSquStyler, squStylerIsOpen, sashStylerIsOpen, activeSquStyler, bigBlockStylerIsOpen, activeBigBlockStyler } = useContext(StylersContext);
 
   const openSquareStyler = (event) => {
     event.stopPropagation();
-    if (sashing === false && sashingCrossed === false) {
+    if (sashing === false && sashingCrossed === false && bigBlockStylerIsOpen === false) {
       openSquStyler(id);
     }
   }
@@ -30,9 +31,13 @@ const Square = ({ id, row, col, squareType, fillSquare, fillHstLdown, fillHstRdo
           <polygon className="hstup lup" points="0,50 0,0 50,0" fill={fillHstLup} stroke="#ddd" />
           <polygon className="hstup rup" points="0,50 50,0 50,50" fill={fillHstRup} stroke="#ddd" />
         </svg>
-        {squStylerIsOpen === true && sashStylerIsOpen === false && activeSquStyler === id ?
+        {squStylerIsOpen === true && sashStylerIsOpen === false && bigBlockStylerIsOpen === false && activeSquStyler === id ?
           <SquareStyler
             id={id} key={id} squareType={squareType} />
+          : null}
+        {bigBlockStylerIsOpen === true && sashStylerIsOpen === false && squStylerIsOpen === false && activeBigBlockStyler === id ?
+          <BigBlockStyler
+            id={id} key={id} squareType={'bigBlock'} />
           : null}
       </div>
     </>
