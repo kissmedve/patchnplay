@@ -7,7 +7,7 @@ const Swatches = ({ swatchesTitle, swatchesGroup, paletteType, squareId, rowColI
   const paletteColors = ['red', 'blue', 'yellow', 'green', 'turquoise'];
 
   // global states
-  const { editSquare, editSquares } = useContext(SquaresContext);
+  const { editSquare, editSquares, insertedBigBlocks, editInsertedBigBlock } = useContext(SquaresContext);
 
   // local states
   const [color, setColor] = useState('');
@@ -35,6 +35,21 @@ const Swatches = ({ swatchesTitle, swatchesGroup, paletteType, squareId, rowColI
     if (paletteType === 'sashRow' && swatchesGroup === '1') {
       setColorTarget('fillSashing');
     }
+    if (paletteType === 'bigBlockCol2' && swatchesGroup === '1') {
+      setColorTarget('color1');
+    }
+    if (paletteType === 'bigBlockCol2' && swatchesGroup === '2') {
+      setColorTarget('color2');
+    }
+    if (paletteType === 'bigBlockCol3' && swatchesGroup === '1') {
+      setColorTarget('color1');
+    }
+    if (paletteType === 'bigBlockCol3' && swatchesGroup === '2') {
+      setColorTarget('color2');
+    }
+    if (paletteType === 'bigBlockCol3' && swatchesGroup === '3') {
+      setColorTarget('color3');
+    }
   }, [paletteType]);
 
   const pickColor = (pickedColor) => {
@@ -56,6 +71,13 @@ const Swatches = ({ swatchesTitle, swatchesGroup, paletteType, squareId, rowColI
         propertyKey: colorTarget,
         propertyValue: color
       });
+    } else if (paletteType === "bigBlockCol2" || paletteType === "bigBlockCol3") {
+      let insIndex = insertedBigBlocks.indexOf(insertedBigBlocks.find(block => block.anchorSquare === squareId));
+      let colorTargetProp = colorTarget;
+      editInsertedBigBlock({
+        ...insertedBigBlocks[insIndex],
+        [colorTargetProp]: color,
+      })
     } else {
       editSquare({
         id: squareId,
@@ -63,7 +85,6 @@ const Swatches = ({ swatchesTitle, swatchesGroup, paletteType, squareId, rowColI
         propertyValue: color
       });
     }
-
   }, [color]);
 
   const swatches =

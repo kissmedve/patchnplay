@@ -54,8 +54,6 @@ export const SquaresReducer = (state, action) => {
       const propKey = action.payload.propertyKey;
       const propValue = action.payload.propertyValue;
       const propId = action.payload.id;
-      console.log('action.payload', action.payload);
-      console.log('propId', propId);
       const updatedSquares = state.squares.map(squs => {
         return squs.map(squ => {
           if (squ.id === propId) {

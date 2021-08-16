@@ -135,8 +135,6 @@ const BigBlockStyler = ({ id, squareType }) => {
   const removeBigBlock = () => {
     if (insertedBigBlocks && insertedBigBlocks.find(block => block.anchorSquare === id)) {
       let blockToRemove = insertedBigBlocks.find(block => block.anchorSquare === id);
-      console.log('blockToRemove', blockToRemove);
-      console.log('coveredSquares()', coveredSquares());
       deleteInsertedBigBlock(blockToRemove.anchorSquare);
       insertedBigBlockEditSquares({
         ids: coveredSquares(),
