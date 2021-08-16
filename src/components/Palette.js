@@ -47,7 +47,20 @@ const Palette = ({ paletteType, squareId, rowColId }) => {
       ],
     },
     {
-      type: 'bigBlock',
+      type: 'bigBlockCol2',
+      data: [
+        {
+          swatchesGroup: '1',
+          swatchesTitle: 'Colour 1',
+        },
+        {
+          swatchesGroup: '2',
+          swatchesTitle: 'Colour 2',
+        },
+      ],
+    },
+    {
+      type: 'bigBlockCol3',
       data: [
         {
           swatchesGroup: '1',
@@ -88,7 +101,7 @@ const Palette = ({ paletteType, squareId, rowColId }) => {
 
   return (
     <>
-      <div className="color-swatches card-footer">
+      <div className="color-swatches">
 
         <div className="h6">
           {paletteFilteredData && paletteFilteredData.length > 1 ? 'Colours' : paletteFilteredData && paletteFilteredData.length === 1 ? 'Colour' : null}

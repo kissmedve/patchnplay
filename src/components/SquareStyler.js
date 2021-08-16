@@ -13,14 +13,15 @@ const SquareStyler = ({ id, squareType }) => {
   const [newSquareType, setNewSquareType] = useState(squareType);
 
   const selectSquareType = (event) => {
+    event.stopPropagation();
     setNewSquareType(event.target.value);
   }
 
-  const showBigBlockForm = (event) => {
-    event.stopPropagation();
-    closeSquStyler();
-    openBigBlockStyler(id);
-  }
+  // const showBigBlockForm = (event) => {
+  //   event.stopPropagation();
+  //   closeSquStyler();
+  //   openBigBlockStyler(id);
+  // }
 
   const closeSquareStyler = (event) => {
     event.stopPropagation();
@@ -28,11 +29,16 @@ const SquareStyler = ({ id, squareType }) => {
   }
 
   useEffect(() => {
-    editSquare({
-      id: id,
-      propertyKey: 'squareType',
-      propertyValue: newSquareType
-    });
+    if (newSquareType === 'bigBlockAnchor') {
+      closeSquStyler();
+      openBigBlockStyler(id);
+    } else {
+      editSquare({
+        id: id,
+        propertyKey: 'squareType',
+        propertyValue: newSquareType
+      });
+    }
   }, [newSquareType]);
 
   return (
@@ -77,19 +83,18 @@ const SquareStyler = ({ id, squareType }) => {
                 <i className="form-icon"></i>
                 <span>HST Down</span>
               </label>
+              <label className="form-radio hst-bigblock">
+                <input
+                  className="square-type"
+                  type="radio"
+                  name="squareType"
+                  value="bigBlockAnchor"
+                  onChange={selectSquareType} />
+                <i className="form-icon"></i>
+                <span>Big Block Anchor</span>
+              </label>
             </div>
-          </div>
-          <Palette squareId={id} paletteType={newSquareType} />
-          <div className="card-footer">
-            <div className="form-title h6">
-              Big Block
-            </div>
-            <button
-              className="btn bigblock-insert"
-              onClick={showBigBlockForm}
-            >
-              Insert Big Block
-              </button>
+            <Palette squareId={id} paletteType={newSquareType} />
           </div>
         </div>
 

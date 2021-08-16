@@ -113,6 +113,8 @@ const Squares = () => {
             fillHstRup={squares[i][k].fillHstRup}
             fillSashing={squares[i][k].fillSashing}
             covered={squares[i][k].covered}
+            bigBlockAnchor={squares[i][k].bigBlockAnchor}
+            coveredByBigBlock={squares[i][k].coveredByBigBlock}
             sashing={squares[i][k].sashing}
             sashingCrossed={squares[i][k].sashingCrossed}
             sashingWidth={squares[i][k].sashingWidth}

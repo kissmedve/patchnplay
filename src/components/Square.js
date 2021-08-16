@@ -3,7 +3,7 @@ import { StylersContext } from "./StylersContext";
 import SquareStyler from "./SquareStyler";
 import BigBlockStyler from "./BigBlockStyler";
 
-const Square = ({ id, row, col, squareType, fillSquare, fillHstLdown, fillHstRdown, fillHstLup, fillHstRup, fillSashing, covered, sashing, sashingCrossed, sashingWidth, sashingHeight, squareWidth }) => {
+const Square = ({ id, row, col, squareType, fillSquare, fillHstLdown, fillHstRdown, fillHstLup, fillHstRup, fillSashing, covered, bigBlockAnchor, coveredByBigBlock, sashing, sashingCrossed, sashingWidth, sashingHeight, squareWidth }) => {
 
   // global states
   const { openSquStyler, squStylerIsOpen, sashStylerIsOpen, activeSquStyler, bigBlockStylerIsOpen, activeBigBlockStyler } = useContext(StylersContext);

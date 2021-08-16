@@ -197,6 +197,11 @@ button.squares-settings,
 .styling-dropdown .form-radio.hst-up input.square-type:checked + .form-icon {
   background: hsl(0, 0%, 60%) url(img/hst-up.svg) no-repeat center center;
 }
+.styling-dropdown .form-radio.hst-bigblock .form-icon,
+.styling-dropdown .form-radio.hst-bigblock input.square-type:focus + .form-icon,
+.styling-dropdown .form-radio.hst-bigblock input.square-type:checked + .form-icon {
+  background: hsl(0, 0%, 60%) url(img/hst-bigblock.svg) no-repeat center center;
+}
 .form-group.sashing-number {
   display: flex;
 }
@@ -248,6 +253,10 @@ button.sashing-switch  {
 .colors .swatches-group {
   margin: 0.3rem 0;
 }
+.styling-dropdown .selected-gallery {
+  margin: 0.5rem 0;
+  width: 9rem;
+}
 .styling-dropdown .h6,
 .colors .h6 {
   font-size: var(--font_13px);
@@ -260,7 +269,17 @@ button.sashing-switch  {
 .styling-dropdown.sashing .h6:first-child {
   margin-top: 0;
 }
-
+.styling-dropdown .bigblock-width {
+  display: flex;
+  padding: 0.3rem 0;
+}
+.bigblock-width  input {
+  width: 3.5rem;
+  margin-right: 0.25rem;
+}
+.bigblock-size {
+  margin-top: 1.25rem;
+}
 .btn.add-color,
 .btn.remove-color {
   font-size: var(--font_14px);
@@ -302,14 +321,19 @@ button.sashing-switch  {
 
 /* Premades Gallery */
 .big-blocks,
-.selected-blocks {
+.selected-blocks,
+.selected-gallery {
   display: flex;
   flex-wrap: wrap;
 }
-.gallery .premade {
+.gallery .premade,
+.selected-gallery .premade {
   width: 50px;
   margin: 5px;
   font-size: 0; 
+}
+.selected-gallery .premade.active {
+  transform: scale(1.2);
 }
 .filters {
   margin-bottom: 0.5rem;
