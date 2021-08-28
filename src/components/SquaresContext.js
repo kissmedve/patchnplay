@@ -191,6 +191,7 @@ export const SquaresReducer = (state, action) => {
       const anchorSquare = action.payload.anchorSquare;
       const newStretchSquares = action.payload.stretchSquares;
       const newElementBlocksId = action.payload.elementBlocksId;
+      const newColours = action.payload.colours;
       const newColor1 = action.payload.color1;
       const newColor2 = action.payload.color2;
       const newColor3 = action.payload.color3;
@@ -200,6 +201,7 @@ export const SquaresReducer = (state, action) => {
             ...block,
             stretchSquares: newStretchSquares,
             elementBlocksId: newElementBlocksId,
+            colours: newColours,
             color1: newColor1 !== '' ? newColor1 : block.color1,
             color2: newColor2 !== '' ? newColor2 : block.color2,
             color3: newColor3 !== '' ? newColor3 : block.color3,

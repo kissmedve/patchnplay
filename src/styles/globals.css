@@ -67,6 +67,15 @@ body {
 
 /* squares grid */
 
+.grid-container {
+  position: relative;
+}
+.bigblocks-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 .squares-settings {
   padding: 0;
   border: none;
@@ -132,8 +141,8 @@ button.squares-settings,
   ================================= */
 .styling-dropdown {
   position: absolute;
-  top: 60%;
-  left: 60%;
+  /* top: 60%;
+  left: 60%; */
   z-index: 100;
   border-radius: 8px;
   display: none;
@@ -142,7 +151,7 @@ button.squares-settings,
   display: block;
 }
 .popup {
-  padding: 0.85rem;
+  padding: 18px;
   background: rgba(240, 240, 240, 0.8); 
 }
 .styling-dropdown .card {

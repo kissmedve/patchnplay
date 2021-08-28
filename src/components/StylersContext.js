@@ -49,6 +49,13 @@ export const StylersReducer = (state, action) => {
         activeBigBlockStyler: action.payload,
       };
 
+    case "REOPEN_BIGBLOCKSTYLER":
+      return {
+        ...state,
+        bigBlockStylerIsOpen: true,
+        activeBigBlockStyler: action.payload,
+      };
+
     case "CLOSE_BIGBLOCKSTYLER":
       return {
         ...state,
@@ -92,6 +99,12 @@ export const StylersProvider = ({ children }) => {
       payload: id
     });
   }
+  const reopenBigBlockStyler = (id) => {
+    dispatch({
+      type: "REOPEN_BIGBLOCKSTYLER",
+      payload: id
+    });
+  }
   const closeBigBlockStyler = () => {
     dispatch({
       type: "CLOSE_BIGBLOCKSTYLER",
@@ -113,6 +126,7 @@ export const StylersProvider = ({ children }) => {
         openSashStyler,
         closeSashStyler,
         openBigBlockStyler,
+        reopenBigBlockStyler,
         closeBigBlockStyler,
       }}
     >

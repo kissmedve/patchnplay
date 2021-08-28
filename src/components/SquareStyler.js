@@ -3,7 +3,7 @@ import { SquaresContext } from "./SquaresContext";
 import { StylersContext } from "./StylersContext";
 import Palette from './Palette';
 
-const SquareStyler = ({ id, squareType }) => {
+const SquareStyler = ({ id, squareType, squareWidth }) => {
 
   // global states
   const { editSquare } = useContext(SquaresContext);
@@ -16,12 +16,6 @@ const SquareStyler = ({ id, squareType }) => {
     event.stopPropagation();
     setNewSquareType(event.target.value);
   }
-
-  // const showBigBlockForm = (event) => {
-  //   event.stopPropagation();
-  //   closeSquStyler();
-  //   openBigBlockStyler(id);
-  // }
 
   const closeSquareStyler = (event) => {
     event.stopPropagation();
@@ -43,7 +37,7 @@ const SquareStyler = ({ id, squareType }) => {
 
   return (
     <>
-      <div className="styling-dropdown squares popup active" >
+      <div className="styling-dropdown squares popup active" style={{ left: (squareWidth - 18) + `px`, top: (squareWidth - 18) + `px` }} >
 
         <div className="card ">
 

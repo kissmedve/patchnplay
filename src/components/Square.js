@@ -10,14 +10,14 @@ const Square = ({ id, row, col, squareType, fillSquare, fillHstLdown, fillHstRdo
 
   const openSquareStyler = (event) => {
     event.stopPropagation();
-    if (sashing === false && sashingCrossed === false && bigBlockStylerIsOpen === false) {
+    if (sashing === false && sashingCrossed === false && covered === false && bigBlockStylerIsOpen === false) {
       openSquStyler(id);
     }
   }
 
   return (
     <>
-      <div className={`square ${squareType.toLowerCase()} ${covered === true ? 'covered' : 'not-covered'} ${sashing === true ? 'sashing' : ''} ${sashingCrossed === true ? 'sashing-crossed' : ''}`} style={{ width: sashingWidth > 1 ? sashingWidth * squareWidth + `px` : ``, height: sashingHeight > 1 ? sashingHeight * squareWidth + `px` : '' }} key={id} onClick={openSquareStyler}>
+      <div className={`square ${squareType.toLowerCase()} ${covered === true ? 'covered' : 'not-covered'} ${sashing === true ? 'sashing' : ''} ${sashingCrossed === true ? 'sashing-crossed' : ''} `} style={{ width: sashingWidth > 1 ? sashingWidth * squareWidth + `px` : ``, height: sashingHeight > 1 ? sashingHeight * squareWidth + `px` : '' }} key={id} onClick={openSquareStyler}>
         <svg
           viewBox={'0 0 50 50'} width="100%" height="100%" preserveAspectRatio="none" >
           <rect className="sashing" x="0" y="0"
@@ -33,11 +33,11 @@ const Square = ({ id, row, col, squareType, fillSquare, fillHstLdown, fillHstRdo
         </svg>
         {squStylerIsOpen === true && sashStylerIsOpen === false && bigBlockStylerIsOpen === false && activeSquStyler === id ?
           <SquareStyler
-            id={id} key={id} squareType={squareType} />
+            id={id} key={id} squareType={squareType} squareWidth={squareWidth} />
           : null}
         {bigBlockStylerIsOpen === true && sashStylerIsOpen === false && squStylerIsOpen === false && activeBigBlockStyler === id ?
           <BigBlockStyler
-            id={id} key={id} squareType={'bigBlock'} />
+            id={id} key={id} squareType={'bigBlock'} squareWidth={squareWidth} />
           : null}
       </div>
     </>

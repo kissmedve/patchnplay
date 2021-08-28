@@ -1,5 +1,4 @@
-import React, { useContext, useState } from "react";
-import { ColorsContext } from "./ColorsContext";
+import React, { useContext, useState, useEffect } from "react";
 import { SquaresContext } from "./SquaresContext";
 import { StylersContext } from "./StylersContext";
 import Square from "./Square";
@@ -9,25 +8,31 @@ import AddRow from "./AddRow";
 import DeleteRow from "./DeleteRow";
 import SashingColStyler from "./SashingColStyler";
 import SashingRowStyler from "./SashingRowStyler";
+import SVGBlock from "./SVGBlock";
 
 const Squares = () => {
 
   // global states
-  const { colors } = useContext(ColorsContext);
-  const { squares, cols, sashingWidths, sashingHeights } = useContext(SquaresContext);
-  const { sashStylerIsOpen, activeSashStyler, openSashStyler } = useContext(StylersContext);
+  const { squares, cols, sashingWidths, sashingHeights, insertedBigBlocks, id } = useContext(SquaresContext);
+  const { sashStylerIsOpen, activeSashStyler, openSashStyler, squStylerIsOpen, bigBlockStylerIsOpen, activeBigBlockStyler, openBigBlockStyler, reopenBigBlockStyler } = useContext(StylersContext);
 
   // local states 
   const [squareWidth, setSquareWidth] = useState('50');
 
+  // grid columns and rows
+
+  // sashingWidths / sashingHeights have 1 as base value for every regular width (= squares) column or regular height row 
+  let gridColumns = [90]; // starting value for column heads' widths
+  sashingWidths.map((width) => gridColumns.push(width * squareWidth));
+  let containerWidth = gridColumns.reduce((prev, curr) => prev + curr) + 'px';
+  let gridColumnsStyle = gridColumns.map(col => col + 'px').join(' ');
+
+  let gridRows = [90]; // starting value for row heads' heights
+  sashingHeights.map((height) => gridRows.push(height * squareWidth));
+  let containerHeight = gridRows.reduce((prev, curr) => prev + curr) + 'px';
+  let gridRowsStyle = gridRows.map(row => row + 'px').join(' ');
+
   const allSquaresGrid = () => {
-
-    let gridColumns = [90];
-
-    // sashingWidths has 1 as base value for every regular width (= squares) column
-    sashingWidths.map((width) => gridColumns.push(width * squareWidth));
-    let containerWidth = gridColumns.reduce((prev, curr) => prev + curr) + 'px';
-    let gridColumnsStyle = gridColumns.map(col => col + 'px').join(' ');
     let styles = {
       display: 'grid',
       gridTemplateColumns: gridColumnsStyle,
@@ -39,6 +44,28 @@ const Squares = () => {
       </div>
     )
   }
+
+  const insertedBlocksOverlay = () => {
+    let overlayBlocks = insertedBigBlocks.map((block, index) => {
+      let anchor = block.anchorSquare.split('-');
+      let widthOffset = (sashingWidths.slice(0, anchor[1]).reduce((acc, val) => acc + val, 0) * squareWidth) + 90;
+      let heightOffset = (sashingHeights.slice(0, anchor[0]).reduce((acc, val) => acc + val, 0) * squareWidth) + 95;
+
+      return (
+        <>
+          <div className="bigblock" key={block.anchorSquare} style={{ position: "absolute", left: widthOffset + "px", top: heightOffset + "px", width: (block.stretchSquares * squareWidth) + "px", height: (block.stretchSquares * squareWidth) + "px", background: "rgba(0,0,0,0.7)" }} onClick={(event) => openBiggBlockStyler(block.anchorSquare)(event)} >
+
+            <SVGBlock anchorSquare={block.anchorSquare} blockId={block.elementBlocksId} color1={block.color1} color2={block.color2} color3={block.color3} />
+
+          </div>
+        </>
+      )
+    })
+    return (
+      <>{overlayBlocks}</>
+    )
+  }
+
   const openSashColStyler = (id) => (event) => {
     event.stopPropagation();
     openSashStyler({ rowCol: 'col', id: id });
@@ -46,6 +73,11 @@ const Squares = () => {
   const openSashRowStyler = (id) => (event) => {
     event.stopPropagation();
     openSashStyler({ rowCol: 'row', id: id });
+  }
+
+  const openBiggBlockStyler = (id) => (event) => {
+    event.stopPropagation();
+    reopenBigBlockStyler(id);
   }
 
   // build the grid of all squares with "column heads" and "row heads"
@@ -130,7 +162,10 @@ const Squares = () => {
 
   return (
     <>
-      {allSquaresGrid()}
+      <div className="grid-container">
+        {allSquaresGrid()}
+        {insertedBlocksOverlay()}
+      </div>
     </>
   )
 }

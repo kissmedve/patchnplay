@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { ColorsContext } from "./ColorsContext";
 import { ChromePicker } from 'react-color';
 

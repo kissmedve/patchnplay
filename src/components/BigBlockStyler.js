@@ -5,28 +5,45 @@ import Palette from './Palette';
 import elementBlocks from "../data/elementBlocks";
 import { BigBlocksContext } from "./BigBlocksContext";
 
-const BigBlockStyler = ({ id, squareType }) => {
+const BigBlockStyler = ({ id, squareType, squareWidth }) => {
 
   // global states
   const { squares, insertedBigBlocks, addInsertedBigBlock, editInsertedBigBlock, deleteInsertedBigBlock, insertedBigBlockEditSquares } = useContext(SquaresContext);
-  const { closeBigBlockStyler, closeSquStyler } = useContext(StylersContext);
+  const { closeBigBlockStyler } = useContext(StylersContext);
   const { selectedBigBlocks } = useContext(BigBlocksContext);
 
   // local states
-
-  // only responsible for display of palettes
-  const [selectedBigBlockColoursAmount, setSelectedBigBlockColoursAmount] = useState();
-
   const [selectedBigBlock, setSelectedBigBlock] = useState({
     elementBlocksId: '',
     stretchSquares: 1,
-    anchorSquare: '',
+    anchorSquare: id,
+    colours: '',
   });
   const [selectedBigBlockColours, setSelectedBigBlockColours] = useState({
     color1: '',
     color2: '',
     color3: '',
   })
+
+  // first, check if a BigBlock is set, and if so, transfer its properties to local state
+  useEffect(() => {
+    if (insertedBigBlocks && insertedBigBlocks.length > 0) {
+      let activeBlock = insertedBigBlocks.find(block => block.anchorSquare === id);
+      if (activeBlock) {
+        setSelectedBigBlock({
+          elementBlocksId: activeBlock.elementBlocksId,
+          stretchSquares: activeBlock.stretchSquares,
+          anchorSquare: activeBlock.anchorSquare,
+          colours: activeBlock.colours,
+        });
+        setSelectedBigBlockColours({
+          color1: activeBlock.color1,
+          color2: activeBlock.color2,
+          color3: activeBlock.color3,
+        });
+      }
+    }
+  }, []);
 
   const coveredSquares = () => {
     let arrayedIds = [];
@@ -37,8 +54,8 @@ const BigBlockStyler = ({ id, squareType }) => {
         arrayedIds.push([parseInt(anchorRowCol[0]) + i, parseInt(anchorRowCol[1]) + k]);
       }
     }
-    let patchedIds = arrayedIds.map(id => id[0] + '-' + id[1]);
-    return patchedIds;
+    let coveredIds = arrayedIds.map(id => id[0] + '-' + id[1]);
+    return coveredIds;
   }
 
   // insert or edit when selected Big Block changes
@@ -52,18 +69,20 @@ const BigBlockStyler = ({ id, squareType }) => {
       editInsertedBigBlock({
         ...insertedBigBlocks[insIndex],
         elementBlocksId: selectedBigBlock.elementBlocksId,
+        colours: selectedBigBlock.colours,
       });
       insertedBigBlockEditSquares({
         ids: coveredSquares(),
         covered: true,
         bigBlockAnchor: id,
-      })
+      });
     } else {
       // initial settings of inserted block
       addInsertedBigBlock({
         anchorSquare: id,
         stretchSquares: selectedBigBlock.stretchSquares !== '' ? selectedBigBlock.stretchSquares : 1,
         elementBlocksId: selectedBigBlock.elementBlocksId,
+        colours: selectedBigBlock.colours,
         color1: selectedBigBlockColours.color1 !== '' ? selectedBigBlockColours.color1 : '#888',
         color2: selectedBigBlockColours.color2 !== '' ? selectedBigBlockColours.color2 : '#ddd',
         color3: selectedBigBlockColours.color3 !== '' ? selectedBigBlockColours.color3 : '#eee',
@@ -72,7 +91,8 @@ const BigBlockStyler = ({ id, squareType }) => {
         ids: coveredSquares(),
         covered: true,
         bigBlockAnchor: id,
-      })
+      });
+
     }
   }, [selectedBigBlock.elementBlocksId]);
 
@@ -90,6 +110,7 @@ const BigBlockStyler = ({ id, squareType }) => {
         stretchSquares: selectedBigBlock.stretchSquares !== '' ? selectedBigBlock.stretchSquares : 1,
         anchorSquare: id,
         elementBlocksId: selectedBigBlock.elementBlocksId,
+        colours: selectedBigBlock.colours,
         color1: selectedBigBlockColours.color1 !== '' ? selectedBigBlockColours.color1 : '#888',
         color2: selectedBigBlockColours.color2 !== '' ? selectedBigBlockColours.color2 : '#ddd',
         color3: selectedBigBlockColours.color3 !== '' ? selectedBigBlockColours.color3 : '#eee',
@@ -132,7 +153,8 @@ const BigBlockStyler = ({ id, squareType }) => {
     setSelectedBigBlock({ ...selectedBigBlock, stretchSquares: event.target.value });
   }
 
-  const removeBigBlock = () => {
+  const removeBigBlock = (event) => {
+    event.stopPropagation();
     if (insertedBigBlocks && insertedBigBlocks.find(block => block.anchorSquare === id)) {
       let blockToRemove = insertedBigBlocks.find(block => block.anchorSquare === id);
       deleteInsertedBigBlock(blockToRemove.anchorSquare);
@@ -146,14 +168,14 @@ const BigBlockStyler = ({ id, squareType }) => {
 
   const preselectedBlocks = elementBlocks.filter(block => selectedBigBlocks.includes(block.id)).map(block =>
     <div className={`premade 
-    ${selectedBigBlock.id === block.id ? "active" : null}`} key={block.id} onClick={() => { setSelectedBigBlockColoursAmount(block.colours); setSelectedBigBlock({ ...selectedBigBlock, elementBlocksId: block.id }) }} >
-      <img src={`svgs/${block.file}`} alt={`${block.name}`} />
+    ${selectedBigBlock.id === block.id ? "active" : ''}`} key={block.id} onClick={() => { setSelectedBigBlock({ ...selectedBigBlock, elementBlocksId: block.id, colours: block.colours }) }} >
+      <img src={`svgs/${block.file}.svg`} alt={`${block.name}`} />
     </div>)
 
   // colour palette only pops up when Big Block is selected
   // amount of subpalettes depending on selected Big Block
-  const bigBlockColourType = selectedBigBlockColoursAmount !== '' ?
-    (selectedBigBlockColoursAmount === '2' ?
+  const bigBlockColourType = selectedBigBlock.colours !== '' ?
+    (selectedBigBlock.colours === 2 ?
       'bigBlockCol2' :
       'bigBlockCol3') : '';
 
@@ -162,7 +184,7 @@ const BigBlockStyler = ({ id, squareType }) => {
 
   return (
     <>
-      <div className="styling-dropdown popup active" >
+      <div className="bigblock styling-dropdown popup active" style={{ left: ((squareWidth * selectedBigBlock.stretchSquares - 1) - 18) + `px`, top: ((squareWidth * selectedBigBlock.stretchSquares - 1) - 18) + `px` }} >
 
         <div className="card ">
 
@@ -194,10 +216,9 @@ const BigBlockStyler = ({ id, squareType }) => {
 
             <button
               className="btn btn-apply"
-              onClick={removeBigBlock}
+              onClick={(event) => removeBigBlock(event)}
             >Delete Big Block</button>
           </div>
-
 
         </div>
       </div>

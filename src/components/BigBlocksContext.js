@@ -16,7 +16,6 @@ export const BigBlocksReducer = (state, action) => {
     };
   }
   if (action.type === "DELETE_BIGBLOCK") {
-    const deletedBigBlock = action.payload;
     const remainingSelection = state.selectedBigBlocks.filter(block => block !== action.payload);
     return {
       ...state,

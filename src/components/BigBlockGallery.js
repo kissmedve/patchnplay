@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import elementBlocks from "../data/elementBlocks";
 import { BigBlocksContext } from "./BigBlocksContext";
 
@@ -22,12 +22,12 @@ const BigBlockGallery = () => {
     filtered3
       .map(el =>
         <div className="premade" key={el.id} onClick={() => addBigBlock(el.id)} >
-          <img src={`svgs/${el.file}`} alt={`${el.name}`} />
+          <img src={`svgs/${el.file}.svg`} alt={`${el.name}`} />
         </div>)
 
   const bigBlocksSelection =
     elementBlocks.filter(block => selectedBigBlocks.includes(block.id)).map(block => <div className="premade" key={block.id} onClick={() => deleteBigBlock(block.id)} >
-      <img src={`svgs/${block.file}`} alt={`${block.name}`} />
+      <img src={`svgs/${block.file}.svg`} alt={`${block.name}`} />
     </div>)
 
   const selectedBorder = bigBlocksSelection.length === 0 ? 'dashed 1px #333' : 'solid 1px transparent';
