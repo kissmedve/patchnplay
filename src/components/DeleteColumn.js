@@ -4,7 +4,7 @@ import { SquaresContext } from "./SquaresContext";
 const DeleteColumn = ({ colId, squareWidth }) => {
 
   // global states
-  const { squares, cols, sashingCols, sashingWidths, updateSquares, updateCols, updateSashingCols, updateSashingWidths } = useContext(SquaresContext);
+  const { squares, cols, sashingCols, sashingWidths, updateSquares, updateCols, updateSashingCols, updateSashingWidths, insertedBigBlocks, updateInsertedBigBlocks } = useContext(SquaresContext);
 
   const deleteThisColumn = (colId) => {
 
@@ -12,8 +12,7 @@ const DeleteColumn = ({ colId, squareWidth }) => {
     let dontRemove = 0;
     squares.map((squs, i) => {
       return squs.filter(squ => squ.col === colId).forEach(squ => squ.covered === true ? dontRemove += 1 : dontRemove += 0);
-    }
-    )
+    })
 
     // never remove the last existing column
     if (dontRemove === 0 && cols.length > 1) {
@@ -39,10 +38,24 @@ const DeleteColumn = ({ colId, squareWidth }) => {
           squarez[i][k].id = squarez[i][k].col > colId - 1 ? i + '-' + k : squarez[i][k].id;
         }
       }
+
+      // adjust BigBlock position (anchorSquares)
+      let newInsertedBigBlocks = insertedBigBlocks.map(block => {
+        let anchorSplit = block.anchorSquare.split('-');
+        anchorSplit = [parseInt(anchorSplit[0]), parseInt(anchorSplit[1])];
+        anchorSplit[1] = anchorSplit[1] >= colId ? anchorSplit[1] - 1 : anchorSplit[1];
+        let newAnchorSquare = [anchorSplit[0], anchorSplit[1]].join('-');
+        return {
+          ...block,
+          anchorSquare: newAnchorSquare,
+        };
+      })
+
       updateSquares(squarez);
       updateCols(newCols);
       updateSashingCols(newSashingCols);
       updateSashingWidths(newSashingWidths);
+      updateInsertedBigBlocks(newInsertedBigBlocks);
     }
 
   }

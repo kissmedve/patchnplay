@@ -4,6 +4,7 @@ import { StylersContext } from "./StylersContext";
 import Palette from './Palette';
 import elementBlocks from "../data/elementBlocks";
 import { BigBlocksContext } from "./BigBlocksContext";
+import Message from './Message';
 
 const BigBlockStyler = ({ id, squareType, squareWidth }) => {
 
@@ -17,13 +18,16 @@ const BigBlockStyler = ({ id, squareType, squareWidth }) => {
     elementBlocksId: '',
     stretchSquares: 1,
     anchorSquare: id,
+    rowCol: 2,
     colours: '',
   });
   const [selectedBigBlockColours, setSelectedBigBlockColours] = useState({
     color1: '',
     color2: '',
     color3: '',
-  })
+  });
+  const [messageIsActive, setMessageIsActive] = useState(false);
+  const [messageText, setMessageText] = useState('');
 
   // first, check if a BigBlock is set, and if so, transfer its properties to local state
   useEffect(() => {
@@ -34,6 +38,7 @@ const BigBlockStyler = ({ id, squareType, squareWidth }) => {
           elementBlocksId: activeBlock.elementBlocksId,
           stretchSquares: activeBlock.stretchSquares,
           anchorSquare: activeBlock.anchorSquare,
+          rowCol: activeBlock.rowCol,
           colours: activeBlock.colours,
         });
         setSelectedBigBlockColours({
@@ -45,18 +50,19 @@ const BigBlockStyler = ({ id, squareType, squareWidth }) => {
     }
   }, []);
 
-  const coveredSquares = () => {
+  const checkSquares = (stretch) => {
     let arrayedIds = [];
     let anchorRowCol = id.split('-');
-    let stretched = selectedBigBlock.stretchSquares !== '' ? selectedBigBlock.stretchSquares : 1;
-    for (let i = 0; i < stretched; i++) {
-      for (let k = 0; k < stretched; k++) {
+    for (let i = 0; i < stretch; i++) {
+      for (let k = 0; k < stretch; k++) {
         arrayedIds.push([parseInt(anchorRowCol[0]) + i, parseInt(anchorRowCol[1]) + k]);
       }
-    }
+    };
     let coveredIds = arrayedIds.map(id => id[0] + '-' + id[1]);
     return coveredIds;
   }
+
+  const coveredSquares = checkSquares(selectedBigBlock.stretchSquares);
 
   // insert or edit when selected Big Block changes
   useEffect(() => {
@@ -69,10 +75,11 @@ const BigBlockStyler = ({ id, squareType, squareWidth }) => {
       editInsertedBigBlock({
         ...insertedBigBlocks[insIndex],
         elementBlocksId: selectedBigBlock.elementBlocksId,
+        rowCol: selectedBigBlock.rowCol,
         colours: selectedBigBlock.colours,
       });
       insertedBigBlockEditSquares({
-        ids: coveredSquares(),
+        ids: coveredSquares,
         covered: true,
         bigBlockAnchor: id,
       });
@@ -82,13 +89,14 @@ const BigBlockStyler = ({ id, squareType, squareWidth }) => {
         anchorSquare: id,
         stretchSquares: selectedBigBlock.stretchSquares !== '' ? selectedBigBlock.stretchSquares : 1,
         elementBlocksId: selectedBigBlock.elementBlocksId,
+        rowCol: selectedBigBlock.rowCol,
         colours: selectedBigBlock.colours,
         color1: selectedBigBlockColours.color1 !== '' ? selectedBigBlockColours.color1 : '#888',
         color2: selectedBigBlockColours.color2 !== '' ? selectedBigBlockColours.color2 : '#ddd',
         color3: selectedBigBlockColours.color3 !== '' ? selectedBigBlockColours.color3 : '#eee',
       });
       insertedBigBlockEditSquares({
-        ids: coveredSquares(),
+        ids: coveredSquares,
         covered: true,
         bigBlockAnchor: id,
       });
@@ -110,6 +118,7 @@ const BigBlockStyler = ({ id, squareType, squareWidth }) => {
         stretchSquares: selectedBigBlock.stretchSquares !== '' ? selectedBigBlock.stretchSquares : 1,
         anchorSquare: id,
         elementBlocksId: selectedBigBlock.elementBlocksId,
+        rowCol: selectedBigBlock.rowCol,
         colours: selectedBigBlock.colours,
         color1: selectedBigBlockColours.color1 !== '' ? selectedBigBlockColours.color1 : '#888',
         color2: selectedBigBlockColours.color2 !== '' ? selectedBigBlockColours.color2 : '#ddd',
@@ -119,7 +128,7 @@ const BigBlockStyler = ({ id, squareType, squareWidth }) => {
       if (selectedBigBlock.stretchSquares > previousStretch) {
         // stretch increased
         insertedBigBlockEditSquares({
-          ids: coveredSquares(),
+          ids: coveredSquares,
           covered: true,
           bigBlockAnchor: id,
         });
@@ -129,11 +138,11 @@ const BigBlockStyler = ({ id, squareType, squareWidth }) => {
         let previousAnchorSqus = squares.map(squs => {
           return squs.filter(squ => squ.bigBlockAnchor === id)
         });
-        let obsoleteAnchorSqus = previousAnchorSqus.reduce((acc, val) => acc.concat(val), []).map(squ => squ.id).filter(squ => !coveredSquares().includes(squ));
+        let obsoleteAnchorSqus = previousAnchorSqus.reduce((acc, val) => acc.concat(val), []).map(squ => squ.id).filter(squ => !coveredSquares.includes(squ));
 
         // remaining covered squares
         insertedBigBlockEditSquares({
-          ids: coveredSquares(),
+          ids: coveredSquares,
           covered: true,
           bigBlockAnchor: id,
         });
@@ -150,6 +159,34 @@ const BigBlockStyler = ({ id, squareType, squareWidth }) => {
 
   const handleBigBlockStretch = (event) => {
     event.stopPropagation();
+    // evaluate BigBlock placement conflicts
+    let evalStretch = parseInt(event.target.value);
+    const startRow = parseInt(id.split('-')[0]);
+    const startCol = parseInt(id.split('-')[1]);
+    for (let i = startRow; i < (startRow + evalStretch); i++) {
+      for (let k = startCol; k < (startCol + evalStretch); k++) {
+        if (squares[i] === undefined) {
+          setMessageText('A Big Block can\'t be placed outside of the Squares Grid.');
+          setMessageIsActive(true);
+          return;
+        }
+        if (squares[i][k] === undefined) {
+          setMessageText('A Big Block can\'t be placed outside of the Squares Grid.');
+          setMessageIsActive(true);
+          return;
+        }
+        if (squares[i][k].sashing === true) {
+          setMessageText('A Big Block can\'t be placed on top of sashing.');
+          setMessageIsActive(true);
+          return;
+        }
+        if (squares[i][k].covered === true && squares[i][k].bigBlockAnchor !== selectedBigBlock.anchorSquare) {
+          setMessageText('Big Blocks can\'t overlap.');
+          setMessageIsActive(true);
+          return;
+        }
+      }
+    }
     setSelectedBigBlock({ ...selectedBigBlock, stretchSquares: event.target.value });
   }
 
@@ -159,7 +196,7 @@ const BigBlockStyler = ({ id, squareType, squareWidth }) => {
       let blockToRemove = insertedBigBlocks.find(block => block.anchorSquare === id);
       deleteInsertedBigBlock(blockToRemove.anchorSquare);
       insertedBigBlockEditSquares({
-        ids: coveredSquares(),
+        ids: coveredSquares,
         covered: false,
         bigBlockAnchor: '',
       });
@@ -168,7 +205,7 @@ const BigBlockStyler = ({ id, squareType, squareWidth }) => {
 
   const preselectedBlocks = elementBlocks.filter(block => selectedBigBlocks.includes(block.id)).map(block =>
     <div className={`premade 
-    ${selectedBigBlock.id === block.id ? "active" : ''}`} key={block.id} onClick={() => { setSelectedBigBlock({ ...selectedBigBlock, elementBlocksId: block.id, colours: block.colours }) }} >
+    ${selectedBigBlock.id === block.id ? "active" : ''}`} key={block.id} onClick={() => { setSelectedBigBlock({ ...selectedBigBlock, elementBlocksId: block.id, rowCol: block.rowCol, colours: block.colours }) }} >
       <img src={`svgs/${block.file}.svg`} alt={`${block.name}`} />
     </div>)
 
@@ -181,6 +218,10 @@ const BigBlockStyler = ({ id, squareType, squareWidth }) => {
 
   const selectedBorder = preselectedBlocks.length === 0 ? 'dashed 1px #333' : 'solid 1px transparent';
   const selectedMargin = preselectedBlocks.length === 0 ? '15px 0 25px' : '0';
+
+  const closeMessage = (event) => {
+    setMessageIsActive(false);
+  }
 
   return (
     <>
@@ -196,6 +237,10 @@ const BigBlockStyler = ({ id, squareType, squareWidth }) => {
             <div className="selected-gallery" style={{ minHeight: "50px", minWidth: "50px", border: selectedBorder, margin: selectedMargin }}>
               {preselectedBlocks}
             </div>
+
+            {messageIsActive ?
+              <Message text={messageText} closeMessage={closeMessage} />
+              : ''}
 
             <div className="form-group bigblock-size">
               <div className="card-title h6">Stretch</div>

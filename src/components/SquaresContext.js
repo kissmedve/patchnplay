@@ -191,6 +191,7 @@ export const SquaresReducer = (state, action) => {
       const anchorSquare = action.payload.anchorSquare;
       const newStretchSquares = action.payload.stretchSquares;
       const newElementBlocksId = action.payload.elementBlocksId;
+      const newRowCol = action.payload.rowCol;
       const newColours = action.payload.colours;
       const newColor1 = action.payload.color1;
       const newColor2 = action.payload.color2;
@@ -201,6 +202,7 @@ export const SquaresReducer = (state, action) => {
             ...block,
             stretchSquares: newStretchSquares,
             elementBlocksId: newElementBlocksId,
+            rowCol: newRowCol,
             colours: newColours,
             color1: newColor1 !== '' ? newColor1 : block.color1,
             color2: newColor2 !== '' ? newColor2 : block.color2,
@@ -213,6 +215,13 @@ export const SquaresReducer = (state, action) => {
       return {
         ...state,
         insertedBigBlocks: updatedBigBlocks,
+      };
+
+    case "UPDATE_INSERTED_BIGBLOCKS":
+      // exchange full edited set of BigBlocks against previous set
+      return {
+        ...state,
+        insertedBigBlocks: action.payload
       };
 
   }
@@ -327,6 +336,13 @@ export const SquaresProvider = ({ children }) => {
     });
   };
 
+  const updateInsertedBigBlocks = (bigBlocks) => {
+    dispatch({
+      type: "UPDATE_INSERTED_BIGBLOCKS",
+      payload: bigBlocks
+    });
+  };
+
   return (
     <SquaresContext.Provider
       value={{
@@ -353,6 +369,7 @@ export const SquaresProvider = ({ children }) => {
         addInsertedBigBlock,
         deleteInsertedBigBlock,
         editInsertedBigBlock,
+        updateInsertedBigBlocks,
       }}
     >
       {children}

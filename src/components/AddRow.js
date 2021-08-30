@@ -3,7 +3,7 @@ import { SquaresContext } from "./SquaresContext";
 
 const AddRow = ({ rowId, squareWidth }) => {
   // global states
-  const { squares, rows, sashingCols, sashingRows, sashingHeights, updateSquares, updateRows, updateSashingRows, updateSashingHeights } = useContext(SquaresContext);
+  const { squares, rows, sashingCols, sashingRows, sashingHeights, updateSquares, updateRows, updateSashingRows, updateSashingHeights, insertedBigBlocks, updateInsertedBigBlocks } = useContext(SquaresContext);
 
   // row is always added below the clicked one
   // default new row is: 
@@ -14,12 +14,12 @@ const AddRow = ({ rowId, squareWidth }) => {
     // don't add row, if the clicked one AND the one below have "covered" squares (BigBlock sitting on them)
 
     let dontAdd = 0;
-    let squCovered = 0;
-    squares.map((squs, i) => {
-      return squs.filter(squ => squ.row > rowId - 1 && squ.row < rowId + 2).forEach(squ => squ.covered === true ? squCovered += 1 : squCovered += 0);
+    let squsCovered = [];
+    for (let k = 0; k < squares[0].length; k++) {
+      !squares[rowId + 1] ? squsCovered.push(0) :
+        (squares[rowId + 1] && squares[rowId][k].covered === true && squares[rowId + 1][k].covered === true) ? squsCovered.push(1) : squsCovered.push(0)
     }
-    )
-    squCovered === 2 ? dontAdd += 1 : dontAdd += 0;
+    squsCovered.indexOf(1) > -1 ? dontAdd += 1 : dontAdd += 0;
 
     if (dontAdd === 0) {
       // add row for rowhead rendering
@@ -30,6 +30,7 @@ const AddRow = ({ rowId, squareWidth }) => {
       const newSashingHeights = [...sashingHeights.slice(0, rowId), 1, ...sashingHeights.slice(rowId)];
 
       // prepare squares for update
+
       let squarez = squares;
 
       // make room for new row 
@@ -69,12 +70,26 @@ const AddRow = ({ rowId, squareWidth }) => {
         ...squarez.slice(0, (rowId + 1)),
         newRow,
         ...squarez.slice(rowId + 1)
-      ]
+      ];
+
+      // adjust BigBlock position (anchorSquares)
+      let newInsertedBigBlocks = insertedBigBlocks.map(block => {
+        let anchorSplit = block.anchorSquare.split('-');
+        anchorSplit = [parseInt(anchorSplit[0]), parseInt(anchorSplit[1])];
+        anchorSplit[0] = anchorSplit[0] >= rowId ? anchorSplit[0] + 1 : anchorSplit[0];
+        let newAnchorSquare = [anchorSplit[0], anchorSplit[1]].join('-');
+        return {
+          ...block,
+          anchorSquare: newAnchorSquare,
+        };
+      }
+      )
 
       updateSquares(squarez);
       updateRows(newRows);
       updateSashingRows(newSashingRows);
       updateSashingHeights(newSashingHeights);
+      updateInsertedBigBlocks(newInsertedBigBlocks);
     }
   }
 

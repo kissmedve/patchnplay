@@ -4,7 +4,7 @@ import { SquaresContext } from "./SquaresContext";
 const DeleteRow = ({ rowId, squareWidth }) => {
 
   // global states
-  const { squares, rows, sashingRows, sashingHeights, updateSquares, updateRows, updateSashingRows, updateSashingHeights } = useContext(SquaresContext);
+  const { squares, rows, sashingRows, sashingHeights, updateSquares, updateRows, updateSashingRows, updateSashingHeights, insertedBigBlocks, updateInsertedBigBlocks } = useContext(SquaresContext);
 
   const deleteThisRow = (rowId) => {
 
@@ -36,10 +36,24 @@ const DeleteRow = ({ rowId, squareWidth }) => {
           squarez[i][k].id = squarez[i][k].row > rowId - 1 ? i + '-' + k : squarez[i][k].id;
         }
       }
+
+      // adjust BigBlock position (anchorSquares)
+      let newInsertedBigBlocks = insertedBigBlocks.map(block => {
+        let anchorSplit = block.anchorSquare.split('-');
+        anchorSplit = [parseInt(anchorSplit[0]), parseInt(anchorSplit[1])];
+        anchorSplit[0] = anchorSplit[0] >= rowId ? anchorSplit[0] - 1 : anchorSplit[0];
+        let newAnchorSquare = [anchorSplit[0], anchorSplit[1]].join('-');
+        return {
+          ...block,
+          anchorSquare: newAnchorSquare,
+        };
+      })
+
       updateSquares(squarez);
       updateRows(newRows);
       updateSashingRows(newSashingRows);
       updateSashingHeights(newSashingHeights);
+      updateInsertedBigBlocks(newInsertedBigBlocks);
     }
   }
 

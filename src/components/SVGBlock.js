@@ -2,7 +2,7 @@ import React from "react";
 import elementBlocks from "../data/elementBlocks";
 import SVGPath from "./SVGPath";
 
-const SVGBlock = ({ blockId, color1, color2, color3 }) => {
+const SVGBlock = ({ anchorSquare, rowCol, blockId, color1, color2, color3, squareWidth }) => {
 
   const bigBlock = elementBlocks.find(block => block.id === blockId);
 
@@ -12,7 +12,7 @@ const SVGBlock = ({ blockId, color1, color2, color3 }) => {
     : null;
 
   return (
-    <svg viewBox="0 0 150 150" width="100%" >
+    <svg viewBox={`0 0 ${rowCol * squareWidth} ${rowCol * squareWidth}`} width="100%" >
 
       {
         renderedBlock ? renderedBlock : null

@@ -301,6 +301,20 @@ button.sashing-switch  {
   margin-bottom: 1rem;
 }
 
+/* Toast */
+.toast {
+  position: relative;
+  padding-top: 1.25rem;
+}
+.bigblock.styling-dropdown .toast {
+  margin-top: 1rem;
+}
+.toast p {
+  font-size: --font_14px;
+  font-weight: 700;
+  text-align: center;
+}
+
 /* Modal */
 .modal:before {
   content: '';

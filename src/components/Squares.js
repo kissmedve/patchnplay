@@ -55,7 +55,7 @@ const Squares = () => {
         <>
           <div className="bigblock" key={block.anchorSquare} style={{ position: "absolute", left: widthOffset + "px", top: heightOffset + "px", width: (block.stretchSquares * squareWidth) + "px", height: (block.stretchSquares * squareWidth) + "px", background: "rgba(0,0,0,0.7)" }} onClick={(event) => openBiggBlockStyler(block.anchorSquare)(event)} >
 
-            <SVGBlock anchorSquare={block.anchorSquare} blockId={block.elementBlocksId} color1={block.color1} color2={block.color2} color3={block.color3} />
+            <SVGBlock anchorSquare={block.anchorSquare} rowCol={block.rowCol} blockId={block.elementBlocksId} color1={block.color1} color2={block.color2} color3={block.color3} squareWidth={squareWidth} />
 
           </div>
         </>

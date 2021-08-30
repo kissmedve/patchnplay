@@ -4,7 +4,7 @@ import { SquaresContext } from "./SquaresContext";
 const AddColumn = ({ colId, squareWidth }) => {
 
   // global states
-  const { squares, cols, sashingCols, sashingRows, sashingWidths, updateSquares, updateCols, updateSashingCols, updateSashingWidths } = useContext(SquaresContext);
+  const { squares, cols, sashingCols, sashingRows, sashingWidths, updateSquares, updateCols, updateSashingCols, updateSashingWidths, insertedBigBlocks, updateInsertedBigBlocks } = useContext(SquaresContext);
 
   // column is always added to the right of the clicked one
   // default new column is: 
@@ -15,12 +15,15 @@ const AddColumn = ({ colId, squareWidth }) => {
     // don't add column, if the clicked one AND the right neighbouring one have "covered" squares (BigBlock sitting on them)
 
     let dontAdd = 0;
-    let squCovered = 0;
+    let squsCovered = [];
     squares.map((squs, i) => {
-      return squs.filter(squ => squ.col > colId - 1 && squ.col < colId + 2).forEach(squ => squ.covered === true ? squCovered += 1 : squCovered += 0);
-    }
-    )
-    squCovered === 2 ? dontAdd += 1 : dontAdd += 0;
+      let squsCoveredByRow = 0;
+      return squs.filter(squ => squ.col > colId - 1 && squ.col < colId + 2).forEach(squ => {
+        squ.covered === true ? squsCoveredByRow += 1 : squsCoveredByRow += 0;
+        squsCovered.push(squsCoveredByRow);
+      });
+    });
+    squsCovered.indexOf(2) > -1 ? dontAdd += 1 : dontAdd += 0;
 
     if (dontAdd === 0) {
       // add column for colhead rendering
@@ -31,9 +34,10 @@ const AddColumn = ({ colId, squareWidth }) => {
       const newSashingWidths = [...sashingWidths.slice(0, colId), 1, ...sashingWidths.slice(colId)];
 
       // prepare squares for update
+
       let squarez = squares;
 
-      // add squares to new column 
+      // push columns to the right to make room for new column
       for (let i = 0; i < squarez.length; i++) {
         for (let k = 0; k < squarez[0].length; k++) {
           squarez[i][k].col = squarez[i][k].col > colId ? squarez[i][k].col + 1 : squarez[i][k].col;
@@ -41,6 +45,7 @@ const AddColumn = ({ colId, squareWidth }) => {
         }
       }
 
+      // add squares to new column 
       squarez = squarez.map((squs, i) => {
         return [
           // squares left to new column
@@ -68,10 +73,23 @@ const AddColumn = ({ colId, squareWidth }) => {
         ].flat(1)
       });
 
+      // adjust BigBlock position (anchorSquares)
+      let newInsertedBigBlocks = insertedBigBlocks.map(block => {
+        let anchorSplit = block.anchorSquare.split('-');
+        anchorSplit = [parseInt(anchorSplit[0]), parseInt(anchorSplit[1])];
+        anchorSplit[1] = anchorSplit[1] >= colId ? anchorSplit[1] + 1 : anchorSplit[1];
+        let newAnchorSquare = [anchorSplit[0], anchorSplit[1]].join('-');
+        return {
+          ...block,
+          anchorSquare: newAnchorSquare,
+        };
+      })
+
       updateSquares(squarez);
       updateCols(newCols);
       updateSashingCols(newSashingCols);
       updateSashingWidths(newSashingWidths);
+      updateInsertedBigBlocks(newInsertedBigBlocks);
     }
   }
 
