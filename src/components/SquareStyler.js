@@ -7,7 +7,7 @@ const SquareStyler = ({ id, squareType, squareWidth }) => {
 
   // global states
   const { editSquare } = useContext(SquaresContext);
-  const { closeSquStyler, openBigBlockStyler, bigBlockStylerIsOpen } = useContext(StylersContext);
+  const { closeSquStyler, openBigBlockStyler } = useContext(StylersContext);
 
   // local states
   const [newSquareType, setNewSquareType] = useState(squareType);

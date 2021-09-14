@@ -7,6 +7,8 @@ const initialState = {
   activeSashStyler: '',
   bigBlockStylerIsOpen: false,
   activeBigBlockStyler: '',
+  borderStylerIsOpen: false,
+  calcStylerIsOpen: false,
 };
 
 export const StylersContext = createContext(initialState);
@@ -63,6 +65,30 @@ export const StylersReducer = (state, action) => {
         activeBigBlockStyler: '',
       };
 
+    case "OPEN_CALCSTYLER":
+      return {
+        ...state,
+        calcStylerIsOpen: true,
+      };
+
+    case "CLOSE_CALCSTYLER":
+      return {
+        ...state,
+        calcStylerIsOpen: false,
+      };
+
+    case "OPEN_BORDERSTYLER":
+      return {
+        ...state,
+        borderStylerIsOpen: true,
+      };
+
+    case "CLOSE_BORDERSTYLER":
+      return {
+        ...state,
+        borderStylerIsOpen: false,
+      };
+
     default:
       return null;
   }
@@ -110,6 +136,26 @@ export const StylersProvider = ({ children }) => {
       type: "CLOSE_BIGBLOCKSTYLER",
     });
   }
+  const openBorderStyler = () => {
+    dispatch({
+      type: "OPEN_BORDERSTYLER",
+    });
+  }
+  const closeBorderStyler = () => {
+    dispatch({
+      type: "CLOSE_BORDERSTYLER",
+    });
+  }
+  const openCalcStyler = () => {
+    dispatch({
+      type: "OPEN_CALCSTYLER",
+    });
+  }
+  const closeCalcStyler = () => {
+    dispatch({
+      type: "CLOSE_CALCSTYLER",
+    });
+  }
 
 
   return (
@@ -121,6 +167,8 @@ export const StylersProvider = ({ children }) => {
         activeSashStyler: state.activeSashStyler,
         bigBlockStylerIsOpen: state.bigBlockStylerIsOpen,
         activeBigBlockStyler: state.activeBigBlockStyler,
+        borderStylerIsOpen: state.borderStylerIsOpen,
+        calcStylerIsOpen: state.calcStylerIsOpen,
         openSquStyler,
         closeSquStyler,
         openSashStyler,
@@ -128,6 +176,10 @@ export const StylersProvider = ({ children }) => {
         openBigBlockStyler,
         reopenBigBlockStyler,
         closeBigBlockStyler,
+        openBorderStyler,
+        closeBorderStyler,
+        openCalcStyler,
+        closeCalcStyler,
       }}
     >
       {children}

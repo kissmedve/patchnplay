@@ -77,7 +77,7 @@ const AddColumn = ({ colId, squareWidth }) => {
       let newInsertedBigBlocks = insertedBigBlocks.map(block => {
         let anchorSplit = block.anchorSquare.split('-');
         anchorSplit = [parseInt(anchorSplit[0]), parseInt(anchorSplit[1])];
-        anchorSplit[1] = anchorSplit[1] >= colId ? anchorSplit[1] + 1 : anchorSplit[1];
+        anchorSplit[1] = anchorSplit[1] > colId ? anchorSplit[1] + 1 : anchorSplit[1];
         let newAnchorSquare = [anchorSplit[0], anchorSplit[1]].join('-');
         return {
           ...block,

@@ -25,6 +25,42 @@ const initialState = {
     ]
   ],
   insertedBigBlocks: [],
+  borders: [
+    {
+      pos: 0,
+      background: 'red',
+      widthTop: 1,
+      widthRight: 1,
+      widthBottom: 1,
+      widthLeft: 1,
+    },
+    {
+      pos: 1,
+      background: 'blue',
+      widthTop: 1,
+      widthRight: 1,
+      widthBottom: 1,
+      widthLeft: 1,
+    },
+    {
+      pos: 2,
+      background: 'yellow',
+      widthTop: 1,
+      widthRight: 1,
+      widthBottom: 1,
+      widthLeft: 1,
+    },
+    {
+      pos: 3,
+      background: 'turquoise',
+      widthTop: 1,
+      widthRight: 1,
+      widthBottom: 1,
+      widthLeft: 1,
+    }
+  ],
+  squareWidth: 50,
+  borderBaseWidth: 10,
   baseColor: 'eee',
 };
 
@@ -35,10 +71,10 @@ export const SquaresReducer = (state, action) => {
 
     case "ADD_SQUARE":
       const addedSquare = action.payload;
-      const expandedQuares = [...state.squares, addedSquare];
+      const expandedSquares = [...state.squares, addedSquare];
       return {
         ...state,
-        squares: expandedQuares,
+        squares: expandedSquares,
       };
 
     case "DELETE_SQUARE":
@@ -224,6 +260,37 @@ export const SquaresReducer = (state, action) => {
         insertedBigBlocks: action.payload
       };
 
+    case "UPDATE_BORDERS":
+      return {
+        ...state,
+        borders: action.payload,
+      };
+
+    case "EDIT_BORDER":
+      const pos = action.payload.pos;
+      const newBackground = action.payload.background;
+      const newWidthTop = action.payload.widthTop;
+      const newWidthRight = action.payload.widthRight;
+      const newWidthBottom = action.payload.widthBottom;
+      const newWidthLeft = action.payload.widthLeft;
+      const updatedBorders = state.borders.map(border => {
+        if (border.pos === pos) {
+          return {
+            ...border,
+            background: newBackground,
+            widthTop: newWidthTop,
+            widthRight: newWidthRight,
+            widthBottom: newWidthBottom,
+            widthLeft: newWidthLeft,
+          }
+        }
+        return border;
+      });
+
+      return {
+        ...state,
+        borders: updatedBorders,
+      };
   }
 
 };
@@ -343,6 +410,20 @@ export const SquaresProvider = ({ children }) => {
     });
   };
 
+  const updateBorders = (borders) => {
+    dispatch({
+      type: "UPDATE_BORDERS",
+      payload: borders
+    });
+  };
+
+  const editBorder = ({ pos, background, widthTop, widthRight, widthBottom, widthLeft }) => {
+    dispatch({
+      type: "EDIT_BORDER",
+      payload: { pos, background, widthTop, widthRight, widthBottom, widthLeft }
+    });
+  };
+
   return (
     <SquaresContext.Provider
       value={{
@@ -354,6 +435,9 @@ export const SquaresProvider = ({ children }) => {
         sashingWidths: state.sashingWidths,
         sashingHeights: state.sashingHeights,
         insertedBigBlocks: state.insertedBigBlocks,
+        borders: state.borders,
+        squareWidth: state.squareWidth,
+        borderBaseWidth: state.borderBaseWidth,
         addSquare,
         deleteSquare,
         editSquare,
@@ -370,6 +454,8 @@ export const SquaresProvider = ({ children }) => {
         deleteInsertedBigBlock,
         editInsertedBigBlock,
         updateInsertedBigBlocks,
+        updateBorders,
+        editBorder,
       }}
     >
       {children}

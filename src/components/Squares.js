@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 import { SquaresContext } from "./SquaresContext";
 import { StylersContext } from "./StylersContext";
 import Square from "./Square";
@@ -9,33 +9,45 @@ import DeleteRow from "./DeleteRow";
 import SashingColStyler from "./SashingColStyler";
 import SashingRowStyler from "./SashingRowStyler";
 import SVGBlock from "./SVGBlock";
+import Border from "./Border";
+import BorderStyler from "./BorderStyler";
 
 const Squares = () => {
 
   // global states
-  const { squares, cols, sashingWidths, sashingHeights, insertedBigBlocks, id } = useContext(SquaresContext);
-  const { sashStylerIsOpen, activeSashStyler, openSashStyler, squStylerIsOpen, bigBlockStylerIsOpen, activeBigBlockStyler, openBigBlockStyler, reopenBigBlockStyler } = useContext(StylersContext);
+  const { squares, cols, sashingWidths, sashingHeights, insertedBigBlocks, squareWidth, borders, borderBaseWidth } = useContext(SquaresContext);
+  const { sashStylerIsOpen, activeSashStyler, openSashStyler, squStylerIsOpen, bigBlockStylerIsOpen, activeBigBlockStyler, openBigBlockStyler, reopenBigBlockStyler, openCalcStyler, openBorderStyler, calcStylerIsOpen, borderStylerIsOpen } = useContext(StylersContext);
 
-  // local states 
-  const [squareWidth, setSquareWidth] = useState('50');
+  // summed up widths of borders
+  let bordersTopWidth = borders.map(border => border.widthTop).reduce((acc, curr) => acc + curr);
+  let bordersRightWidth = borders.map(border => border.widthRight).reduce((acc, curr) => acc + curr);
+  let bordersBottomWidth = borders.map(border => border.widthBottom).reduce((acc, curr) => acc + curr);
+  let bordersLeftWidth = borders.map(border => border.widthLeft).reduce((acc, curr) => acc + curr);
 
-  // grid columns and rows
+  // calculate grid columns width
+  let gridColumns = [90]; // starting value for column heads' widths
+  gridColumns[0] += bordersLeftWidth * borderBaseWidth;
 
   // sashingWidths / sashingHeights have 1 as base value for every regular width (= squares) column or regular height row 
-  let gridColumns = [90]; // starting value for column heads' widths
   sashingWidths.map((width) => gridColumns.push(width * squareWidth));
+
   let containerWidth = gridColumns.reduce((prev, curr) => prev + curr) + 'px';
   let gridColumnsStyle = gridColumns.map(col => col + 'px').join(' ');
 
+  // calculate grid rows height
   let gridRows = [90]; // starting value for row heads' heights
+  gridRows[0] += bordersTopWidth * borderBaseWidth;
+
   sashingHeights.map((height) => gridRows.push(height * squareWidth));
   let containerHeight = gridRows.reduce((prev, curr) => prev + curr) + 'px';
   let gridRowsStyle = gridRows.map(row => row + 'px').join(' ');
 
+  // build squares grid container
   const allSquaresGrid = () => {
     let styles = {
       display: 'grid',
       gridTemplateColumns: gridColumnsStyle,
+      gridTemplateRows: gridRowsStyle,
       width: containerWidth
     }
     return (
@@ -45,11 +57,12 @@ const Squares = () => {
     )
   }
 
+  // define offsets of inserted BigBlocks related to squares grid, build them
   const insertedBlocksOverlay = () => {
     let overlayBlocks = insertedBigBlocks.map((block, index) => {
       let anchor = block.anchorSquare.split('-');
-      let widthOffset = (sashingWidths.slice(0, anchor[1]).reduce((acc, val) => acc + val, 0) * squareWidth) + 90;
-      let heightOffset = (sashingHeights.slice(0, anchor[0]).reduce((acc, val) => acc + val, 0) * squareWidth) + 95;
+      let widthOffset = (sashingWidths.slice(0, anchor[1]).reduce((acc, val) => acc + val, 0) * squareWidth) + bordersLeftWidth * borderBaseWidth + 90;
+      let heightOffset = (sashingHeights.slice(0, anchor[0]).reduce((acc, val) => acc + val, 0) * squareWidth) + bordersTopWidth * borderBaseWidth + 90;
 
       return (
         <>
@@ -65,7 +78,6 @@ const Squares = () => {
       <>{overlayBlocks}</>
     )
   }
-
   const openSashColStyler = (id) => (event) => {
     event.stopPropagation();
     openSashStyler({ rowCol: 'col', id: id });
@@ -74,7 +86,6 @@ const Squares = () => {
     event.stopPropagation();
     openSashStyler({ rowCol: 'row', id: id });
   }
-
   const openBiggBlockStyler = (id) => (event) => {
     event.stopPropagation();
     reopenBigBlockStyler(id);
@@ -85,8 +96,20 @@ const Squares = () => {
 
     let gridItems = [];
 
-    // left top unfilled corner
-    let topLeftCorner = <div className="rowhead colhead" key={0} ></div>;
+    // left top corner with buttons
+    let topLeftCorner = <div className="rowhead colhead" key={0} >
+      <button className="calc-styler" onClick={openCalcStyler}>
+        <span>Calculate </span>
+      </button>
+      <button className="border-styler" onClick={openBorderStyler}>
+        <span>Border</span>
+      </button>
+      {
+        borderStylerIsOpen === true ?
+          <BorderStyler />
+          : null
+      }
+    </div>;
     gridItems.push(topLeftCorner);
 
     // first row: column heads
@@ -160,9 +183,18 @@ const Squares = () => {
     return gridItems;
   }
 
+  const bordersUnderlay = () => {
+    return (
+      <div className="borders-underlay">
+        <Border />
+      </div>
+    )
+  }
+
   return (
     <>
       <div className="grid-container">
+        {bordersUnderlay()}
         {allSquaresGrid()}
         {insertedBlocksOverlay()}
       </div>

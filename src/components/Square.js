@@ -10,7 +10,7 @@ const Square = ({ id, row, col, squareType, fillSquare, fillHstLdown, fillHstRdo
 
   const openSquareStyler = (event) => {
     event.stopPropagation();
-    if (sashing === false && sashingCrossed === false && covered === false && bigBlockStylerIsOpen === false) {
+    if ((sashing === false || (sashing === true && sashingCrossed === true)) && covered === false && bigBlockStylerIsOpen === false) {
       openSquStyler(id);
     }
   }

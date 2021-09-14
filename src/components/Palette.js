@@ -94,6 +94,15 @@ const Palette = ({ paletteType, squareId, rowColId }) => {
         }
       ],
     },
+    {
+      type: 'border',
+      data: [
+        {
+          swatchesGroup: '1',
+          swatchesTitle: 'Border',
+        }
+      ],
+    },
   ];
 
   const paletteFiltered = paletteData.filter(palette => palette.type === paletteType)[0];

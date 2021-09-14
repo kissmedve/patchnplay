@@ -84,13 +84,34 @@ body {
 .colhead {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  margin-bottom: 5px;
+  /* justify-content: center;
+  margin-bottom: 5px; */
 }
 .rowhead {
   display: flex;
-  justify-content: center;
-  margin-right: 5px;
+  /* justify-content: center;
+  margin-right: 5px; */
+}
+.rowhead.colhead {
+  position: relative;
+}
+.calc-styler,
+.border-styler {
+  position: absolute;
+  width: 45px;
+  height: 45px;
+  border: 2px solid #e3e3e3;
+  border-radius: 3px;
+}
+.calc-styler {
+  top: 0;
+  left: 0;
+  background: url(img/icon-c-noborder-40.svg) 0 0 no-repeat;
+}
+.border-styler {
+  top: 45px;
+  left: 45px;
+  background: url(img/icon-b-noborder-40.svg) 0 0 no-repeat;
 }
 .colhead .squares-settings {
   height: 30px;
@@ -98,8 +119,26 @@ body {
 .rowhead .squares-settings {
   width: 30px;
 }
+.styling-dropdown .edit-border,
+.styling-dropdown .add-border,
+.styling-dropdown .delete-border {
+  width: 30px;
+  height: 30px;
+  border: 2px solid #e3e3e3;
+  border-radius: 3px;
+}
+.styling-dropdown .border-icon {
+  margin-right: 3px;
+  border-top: 1px solid transparent;
+  border-left: 1px solid transparent;
+}
 .squares-settings button span,
-.squares-settings > span {
+.squares-settings > span,
+.edit-border > span,
+.add-border > span,
+.delete-border > span,
+.border-styler > span,
+.calc-styler >span {
   width: 0;
   height: 0;
   position: absolute;
@@ -135,6 +174,15 @@ button.squares-settings,
 }
 .squares-settings.delete-row {
   background: url(img/icon-minus-high-noborder.svg) no-repeat center center;
+}
+.styling-dropdown .edit-border {
+  background: url(img/icon-edit-noborder.svg) no-repeat center center;
+}
+.styling-dropdown .add-border {
+  background: url(img/icon-plus-noborder.svg) no-repeat center center;
+}
+.styling-dropdown .delete-border {
+  background: url(img/icon-minus-noborder.svg) no-repeat center center;
 }
 
 /* SquareStyler and Color Settings
@@ -211,15 +259,19 @@ button.squares-settings,
 .styling-dropdown .form-radio.hst-bigblock input.square-type:checked + .form-icon {
   background: hsl(0, 0%, 60%) url(img/hst-bigblock.svg) no-repeat center center;
 }
-.form-group.sashing-number {
+.form-group.sashing-number,
+.form-group.border-width {
   display: flex;
 }
-.sashing-number input {
+.sashing-number input,
+.border-width input {
   width: 4rem;
 }
 .sashing-number input,
 .sashing-number button,
-button.sashing-switch  {
+button.sashing-switch,
+.border-width input,
+button.border-add {
   font-size: var(--font_14px);
 }
 .sashing-number button {
@@ -227,6 +279,10 @@ button.sashing-switch  {
 }
 .explanation {
   font-size: var(--font_12px);
+}
+.expl {
+  font-size: var(--font_14px);
+  width: 3rem;
 }
 .styling-dropdown button.swatch,
 .colors button.swatch,
@@ -266,6 +322,11 @@ button.sashing-switch  {
   margin: 0.5rem 0;
   width: 9rem;
 }
+.styling-dropdown .h5,
+.colors .h5 {
+  font-size: var(--font_18px);
+  text-transform: uppercase;
+}
 .styling-dropdown .h6,
 .colors .h6 {
   font-size: var(--font_13px);
@@ -300,6 +361,35 @@ button.sashing-switch  {
   padding: 0.3rem 0;
   margin-bottom: 1rem;
 }
+.border-button-group {
+  display: flex;
+}
+
+/* .styling-dropdown .border-select .form-radio {
+  display: flex;
+  line-height: 1rem;
+  margin: 0;
+  min-height: 1rem; 
+  padding: 0; 
+  position: relative;
+}
+.styling-dropdown .border-select .form-radio input {
+  clip: none;
+  width: .7rem;
+  height: .7rem; 
+  margin: 0.2rem 0 0 0; 
+  overflow: visible;
+  position: relative;  
+}
+.styling-dropdown .border-select .border-icon {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 0;
+  border: 0.2rem solid transparent;
+  background: #ccc;
+  margin-right: 8px;
+} */
+
 
 /* Toast */
 .toast {
@@ -376,3 +466,13 @@ button.sashing-switch  {
   margin-top: 0;
   margin-bottom: 0.25rem;
 }
+.border {
+  padding:20px;
+}
+.borders-underlay {
+  display: inline-block;
+  position: absolute;
+  top: 90px;
+  left: 90px;
+}
+

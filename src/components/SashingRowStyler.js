@@ -19,21 +19,30 @@ const SashingRowStyler = ({ rowCol, id }) => {
   const switchToSashing = (event) => {
     let onSashingRows = sashingRows.map((sashRow, index) => index === id ? sashRow = true : sashRow = false);
 
-    let squarez = squares;
-    for (let i = 0; i < squarez.length; i++) {
-      for (let k = 0; k < squarez[0].length; k++) {
-        // mark squares also belonging to sashing columns as sashing cross
-        if (squarez[i][k].row === id && squarez[i][k].sashing === true) {
-          squarez[i][k].sashingCrossed = true;
-        }
-        // mark all squares of the sashing row
-        if (squarez[i][k].row === id) {
-          squarez[i][k].sashing = true;
+    // check if any square on the row is covered by a BigBlock
+    let isSquCovered = squares.map(squs => {
+      return squs.some(squ => squ.row === id && squ.covered === true)
+    }).some(el => el === true);
+    console.log('isSquCovered', isSquCovered);
+
+    // only switch to sashing, if not covered
+    if (!isSquCovered) {
+      let squarez = squares;
+      for (let i = 0; i < squarez.length; i++) {
+        for (let k = 0; k < squarez[0].length; k++) {
+          // mark squares also belonging to sashing columns as sashing cross
+          if (squarez[i][k].row === id && squarez[i][k].sashing === true) {
+            squarez[i][k].sashingCrossed = true;
+          }
+          // mark all squares of the sashing row
+          if (squarez[i][k].row === id) {
+            squarez[i][k].sashing = true;
+          }
         }
       }
+      updateSashingRows(onSashingRows);
+      updateSquares(squarez);
     }
-    updateSashingRows(onSashingRows);
-    updateSquares(squarez);
   }
 
   const switchToSquares = () => {
