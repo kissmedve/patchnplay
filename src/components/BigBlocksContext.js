@@ -22,7 +22,7 @@ export const BigBlocksReducer = (state, action) => {
       selectedBigBlocks: remainingSelection
     };
   };
-  if (action.type === "UPDATE_BIGBLOCK") {
+  if (action.type === "UPDATE_BIGBLOCKS") {
     return {
       ...state,
       selectedBigBlocks: action.payload

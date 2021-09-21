@@ -65,7 +65,6 @@ const BorderStyler = () => {
   }
 
   useEffect(() => {
-    console.log('borderData', borderData);
     editBorder(borderData);
   }, [borderData]);
 
@@ -175,7 +174,7 @@ const BorderStyler = () => {
 
                 </div>
 
-                <Palette paletteType={'border'} />
+                <Palette paletteType={'border'} borderPos={selectedBorder} />
               </>
               : null}
 

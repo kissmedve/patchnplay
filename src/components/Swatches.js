@@ -1,13 +1,16 @@
 import React, { useState, useEffect, useContext } from "react";
 import { SquaresContext } from "./SquaresContext";
-const Swatches = ({ swatchesTitle, swatchesGroup, paletteType, squareId, rowColId }) => {
+import { ColorsContext } from "./ColorsContext";
+
+const Swatches = ({ swatchesTitle, swatchesGroup, paletteType, squareId, rowColId, borderPos }) => {
 
   // temporary solution: default palette colors 
   // later on palette colors will come through the PaletteSettings component
-  const paletteColors = ['red', 'blue', 'yellow', 'green', 'turquoise'];
+  // const paletteColors = ['red', 'blue', 'yellow', 'green', 'turquoise'];
 
   // global states
-  const { editSquare, editSquares, insertedBigBlocks, editInsertedBigBlock } = useContext(SquaresContext);
+  const { editSquare, editSquares, insertedBigBlocks, editInsertedBigBlock, editBorder } = useContext(SquaresContext);
+  const { paletteColors } = useContext(ColorsContext);
 
   // local states
   const [color, setColor] = useState('');
@@ -50,6 +53,9 @@ const Swatches = ({ swatchesTitle, swatchesGroup, paletteType, squareId, rowColI
     if (paletteType === 'bigBlockCol3' && swatchesGroup === '3') {
       setColorTarget('color3');
     }
+    if (paletteType === 'border' && swatchesGroup === '1') {
+      setColorTarget('background');
+    }
   }, [paletteType]);
 
   const pickColor = (pickedColor) => {
@@ -70,6 +76,13 @@ const Swatches = ({ swatchesTitle, swatchesGroup, paletteType, squareId, rowColI
         id: rowColId,
         propertyKey: colorTarget,
         propertyValue: color
+      });
+    } else if (paletteType === "border") {
+      editBorder({
+        pos: borderPos,
+        background: color,
+        //propertyKey: colorTarget,
+        //propertyValue: color
       });
     } else if (paletteType === "bigBlockCol2" || paletteType === "bigBlockCol3") {
       let insIndex = insertedBigBlocks.indexOf(insertedBigBlocks.find(block => block.anchorSquare === squareId));

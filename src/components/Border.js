@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { SquaresContext } from "./SquaresContext";
 
 const Border = ({ index = 0 }) => {
-
   const { borders, sashingWidths, sashingHeights, squareWidth, borderBaseWidth } = useContext(SquaresContext);
 
   let currentBorder = borders.find(border => border.pos === index);

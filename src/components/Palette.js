@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { StylersContext } from "./StylersContext";
 import Swatches from './Swatches';
 
-const Palette = ({ paletteType, squareId, rowColId }) => {
+const Palette = ({ paletteType, squareId, rowColId, borderPos }) => {
 
   // global states
   const { colorSquare } = useContext(StylersContext);
@@ -117,7 +117,7 @@ const Palette = ({ paletteType, squareId, rowColId }) => {
         </div>
 
         {paletteFilteredData && paletteFilteredData.length > 0 ? paletteFilteredData.map((item, index) => (
-          <Swatches squareId={squareId} rowColId={rowColId} paletteType={paletteType} swatchesTitle={item.swatchesTitle} swatchesGroup={item.swatchesGroup} key={index} />
+          <Swatches squareId={squareId} rowColId={rowColId} paletteType={paletteType} swatchesTitle={item.swatchesTitle} swatchesGroup={item.swatchesGroup} borderPos={borderPos} key={index} />
         )) : null}
       </div>
 

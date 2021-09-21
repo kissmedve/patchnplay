@@ -6,6 +6,12 @@ const elementBlocks = [
     rowCol: 2,
     colours: 2,
     elements: 'rect',
+    squaresColor1: 2,
+    squaresColor2: 2,
+    squaresColor3: 0,
+    trianglesColor1: 0,
+    trianglesColor2: 0,
+    trianglesColor3: 0,
     size: 100,
     paths: [
       {
@@ -13,30 +19,25 @@ const elementBlocks = [
           [0, 0], [50, 0], [50, 50], [0, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 0], [100, 0], [100, 50], [50, 50],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [0, 50], [50, 50], [50, 100], [0, 100],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 50], [100, 50], [100, 100], [50, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
-
     ],
   },
   {
@@ -46,6 +47,12 @@ const elementBlocks = [
     rowCol: 2,
     colours: 2,
     elements: 'rect',
+    squaresColor1: 2,
+    squaresColor2: 2,
+    squaresColor3: 0,
+    trianglesColor1: 0,
+    trianglesColor2: 0,
+    trianglesColor3: 0,
     size: 100,
     paths: [
       {
@@ -53,28 +60,24 @@ const elementBlocks = [
           [0, 0], [50, 0], [50, 50], [0, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 0], [100, 0], [100, 50], [50, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [0, 50], [50, 50], [50, 100], [0, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 50], [100, 50], [100, 100], [50, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
     ],
   },
@@ -85,6 +88,12 @@ const elementBlocks = [
     rowCol: 2,
     colours: 2,
     elements: 'rect',
+    squaresColor1: 2,
+    squaresColor2: 2,
+    squaresColor3: 0,
+    trianglesColor1: 0,
+    trianglesColor2: 0,
+    trianglesColor3: 0,
     size: 100,
     paths: [
       {
@@ -92,28 +101,24 @@ const elementBlocks = [
           [0, 0], [50, 0], [50, 50], [0, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 0], [100, 0], [100, 50], [50, 50],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [0, 50], [50, 50], [50, 100], [0, 100],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 50], [100, 50], [100, 100], [50, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
     ],
   },
@@ -124,6 +129,12 @@ const elementBlocks = [
     rowCol: 3,
     colours: 2,
     elements: 'rect',
+    squaresColor1: 8,
+    squaresColor2: 1,
+    squaresColor3: 0,
+    trianglesColor1: 0,
+    trianglesColor2: 0,
+    trianglesColor3: 0,
     size: 100,
     paths: [
       {
@@ -131,63 +142,54 @@ const elementBlocks = [
           [0, 0], [50, 0], [50, 50], [0, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 0], [100, 0], [100, 50], [50, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 0], [150, 0], [150, 50], [100, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [0, 50], [50, 50], [50, 100], [0, 100],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 50], [100, 50], [100, 100], [50, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 50], [150, 50], [150, 100], [100, 100],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [0, 100], [50, 100], [50, 150], [0, 150],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 100], [100, 100], [100, 150], [50, 150],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 100], [150, 100], [150, 150], [100, 150],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
     ],
   },
@@ -198,6 +200,12 @@ const elementBlocks = [
     rowCol: 3,
     colours: 2,
     elements: 'rect',
+    squaresColor1: 4,
+    squaresColor2: 5,
+    squaresColor3: 0,
+    trianglesColor1: 0,
+    trianglesColor2: 0,
+    trianglesColor3: 0,
     size: 100,
     paths: [
       {
@@ -205,63 +213,54 @@ const elementBlocks = [
           [0, 0], [50, 0], [50, 50], [0, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 0], [100, 0], [100, 50], [50, 50],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 0], [150, 0], [150, 50], [100, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [0, 50], [50, 50], [50, 100], [0, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 50], [100, 50], [100, 100], [50, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 50], [150, 50], [150, 100], [100, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [0, 100], [50, 100], [50, 150], [0, 150],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 100], [100, 100], [100, 150], [50, 150],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 100], [150, 100], [150, 150], [100, 150],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
     ],
   },
@@ -272,6 +271,12 @@ const elementBlocks = [
     rowCol: 3,
     colours: 2,
     elements: 'rect',
+    squaresColor1: 5,
+    squaresColor2: 4,
+    squaresColor3: 0,
+    trianglesColor1: 0,
+    trianglesColor2: 0,
+    trianglesColor3: 0,
     size: 100,
     paths: [
       {
@@ -279,63 +284,54 @@ const elementBlocks = [
           [0, 0], [50, 0], [50, 50], [0, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 0], [100, 0], [100, 50], [50, 50],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 0], [150, 0], [150, 50], [100, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [0, 50], [50, 50], [50, 100], [0, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 50], [100, 50], [100, 100], [50, 100],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 50], [150, 50], [150, 100], [100, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [0, 100], [50, 100], [50, 150], [0, 150],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 100], [100, 100], [100, 150], [50, 150],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 100], [150, 100], [150, 150], [100, 150],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
     ],
   },
@@ -346,6 +342,12 @@ const elementBlocks = [
     rowCol: 3,
     colours: 2,
     elements: 'rect',
+    squaresColor1: 3,
+    squaresColor2: 6,
+    squaresColor3: 0,
+    trianglesColor1: 0,
+    trianglesColor2: 0,
+    trianglesColor3: 0,
     size: 100,
     paths: [
       {
@@ -353,63 +355,54 @@ const elementBlocks = [
           [0, 0], [50, 0], [50, 50], [0, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 0], [100, 0], [100, 50], [50, 50],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 0], [150, 0], [150, 50], [100, 50],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [0, 50], [50, 50], [50, 100], [0, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 50], [100, 50], [100, 100], [50, 100],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 50], [150, 50], [150, 100], [100, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [0, 100], [50, 100], [50, 150], [0, 150],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 100], [100, 100], [100, 150], [50, 150],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 100], [150, 100], [150, 150], [100, 150],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
     ],
   },
@@ -420,6 +413,12 @@ const elementBlocks = [
     rowCol: 3,
     colours: 2,
     elements: 'rect',
+    squaresColor1: 3,
+    squaresColor2: 6,
+    squaresColor3: 0,
+    trianglesColor1: 0,
+    trianglesColor2: 0,
+    trianglesColor3: 0,
     size: 100,
     paths: [
       {
@@ -427,63 +426,54 @@ const elementBlocks = [
           [0, 0], [50, 0], [50, 50], [0, 50],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 0], [100, 0], [100, 50], [50, 50],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 0], [150, 0], [150, 50], [100, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [0, 50], [50, 50], [50, 100], [0, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 50], [100, 50], [100, 100], [50, 100],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 50], [150, 50], [150, 100], [100, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [0, 100], [50, 100], [50, 150], [0, 150],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 100], [100, 100], [100, 150], [50, 150],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 100], [150, 100], [150, 150], [100, 150],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
     ],
   },
@@ -494,6 +484,12 @@ const elementBlocks = [
     rowCol: 3,
     colours: 2,
     elements: 'rect',
+    squaresColor1: 6,
+    squaresColor2: 3,
+    squaresColor3: 0,
+    trianglesColor1: 0,
+    trianglesColor2: 0,
+    trianglesColor3: 0,
     size: 100,
     paths: [
       {
@@ -501,63 +497,54 @@ const elementBlocks = [
           [0, 0], [50, 0], [50, 50], [0, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 0], [100, 0], [100, 50], [50, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 0], [150, 0], [150, 50], [100, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [0, 50], [50, 50], [50, 100], [0, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 50], [100, 50], [100, 100], [50, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 50], [150, 50], [150, 100], [100, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [0, 100], [50, 100], [50, 150], [0, 150],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 100], [100, 100], [100, 150], [50, 150],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 100], [150, 100], [150, 150], [100, 150],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
     ],
   },
@@ -568,6 +555,12 @@ const elementBlocks = [
     rowCol: 3,
     colours: 2,
     elements: 'rect',
+    squaresColor1: 6,
+    squaresColor2: 3,
+    squaresColor3: 0,
+    trianglesColor1: 0,
+    trianglesColor2: 0,
+    trianglesColor3: 0,
     size: 100,
     paths: [
       {
@@ -575,63 +568,54 @@ const elementBlocks = [
           [0, 0], [50, 0], [50, 50], [0, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 0], [100, 0], [100, 50], [50, 50],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 0], [150, 0], [150, 50], [100, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [0, 50], [50, 50], [50, 100], [0, 100],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 50], [100, 50], [100, 100], [50, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 50], [150, 50], [150, 100], [100, 100],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [0, 100], [50, 100], [50, 150], [0, 150],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 100], [100, 100], [100, 150], [50, 150],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 100], [150, 100], [150, 150], [100, 150],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
     ],
   },
@@ -642,6 +626,12 @@ const elementBlocks = [
     rowCol: 4,
     colours: 2,
     elements: 'rect',
+    squaresColor1: 12,
+    squaresColor2: 4,
+    squaresColor3: 0,
+    trianglesColor1: 0,
+    trianglesColor2: 0,
+    trianglesColor3: 0,
     size: 100,
     paths: [
       {
@@ -649,112 +639,96 @@ const elementBlocks = [
           [0, 0], [50, 0], [50, 50], [0, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 0], [100, 0], [100, 50], [50, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 0], [150, 0], [150, 50], [100, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 0], [200, 0], [200, 50], [150, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [0, 50], [50, 50], [50, 100], [0, 100],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 50], [100, 50], [100, 100], [50, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 50], [150, 50], [150, 100], [100, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 50], [200, 50], [200, 100], [150, 100],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [0, 100], [50, 100], [50, 150], [0, 150],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 100], [100, 100], [100, 150], [50, 150],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 100], [150, 100], [150, 150], [100, 150],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 100], [200, 100], [200, 150], [150, 150],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [0, 150], [50, 150], [50, 200], [0, 200],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 150], [100, 150], [100, 200], [50, 200],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 150], [150, 150], [150, 200], [100, 200],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 150], [200, 150], [200, 200], [150, 200],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
     ],
   },
@@ -765,6 +739,12 @@ const elementBlocks = [
     rowCol: 4,
     colours: 2,
     elements: 'rect',
+    squaresColor1: 4,
+    squaresColor2: 12,
+    squaresColor3: 0,
+    trianglesColor1: 0,
+    trianglesColor2: 0,
+    trianglesColor3: 0,
     size: 100,
     paths: [
       {
@@ -772,112 +752,96 @@ const elementBlocks = [
           [0, 0], [50, 0], [50, 50], [0, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 0], [100, 0], [100, 50], [50, 50],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 0], [150, 0], [150, 50], [100, 50],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 0], [200, 0], [200, 50], [150, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [0, 50], [50, 50], [50, 100], [0, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 50], [100, 50], [100, 100], [50, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 50], [150, 50], [150, 100], [100, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 50], [200, 50], [200, 100], [150, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [0, 100], [50, 100], [50, 150], [0, 150],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 100], [100, 100], [100, 150], [50, 150],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 100], [150, 100], [150, 150], [100, 150],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 100], [200, 100], [200, 150], [150, 150],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [0, 150], [50, 150], [50, 200], [0, 200],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 150], [100, 150], [100, 200], [50, 200],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 150], [150, 150], [150, 200], [100, 200],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 150], [200, 150], [200, 200], [150, 200],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
     ],
   },
@@ -888,6 +852,12 @@ const elementBlocks = [
     rowCol: 4,
     colours: 2,
     elements: 'rect',
+    squaresColor1: 8,
+    squaresColor2: 8,
+    squaresColor3: 0,
+    trianglesColor1: 0,
+    trianglesColor2: 0,
+    trianglesColor3: 0,
     size: 100,
     paths: [
       {
@@ -895,112 +865,96 @@ const elementBlocks = [
           [0, 0], [50, 0], [50, 50], [0, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 0], [100, 0], [100, 50], [50, 50],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 0], [150, 0], [150, 50], [100, 50],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 0], [200, 0], [200, 50], [150, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [0, 50], [50, 50], [50, 100], [0, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 50], [100, 50], [100, 100], [50, 100],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 50], [150, 50], [150, 100], [100, 100],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 50], [200, 50], [200, 100], [150, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [0, 100], [50, 100], [50, 150], [0, 150],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 100], [100, 100], [100, 150], [50, 150],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 100], [150, 100], [150, 150], [100, 150],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 100], [200, 100], [200, 150], [150, 150],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [0, 150], [50, 150], [50, 200], [0, 200],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 150], [100, 150], [100, 200], [50, 200],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 150], [150, 150], [150, 200], [100, 200],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 150], [200, 150], [200, 200], [150, 200],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
     ],
   },
@@ -1011,6 +965,12 @@ const elementBlocks = [
     rowCol: 4,
     colours: 2,
     elements: 'rect',
+    squaresColor1: 8,
+    squaresColor2: 8,
+    squaresColor3: 0,
+    trianglesColor1: 0,
+    trianglesColor2: 0,
+    trianglesColor3: 0,
     size: 100,
     paths: [
       {
@@ -1018,112 +978,96 @@ const elementBlocks = [
           [0, 0], [50, 0], [50, 50], [0, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 0], [100, 0], [100, 50], [50, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 0], [150, 0], [150, 50], [100, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 0], [200, 0], [200, 50], [150, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [0, 50], [50, 50], [50, 100], [0, 100],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 50], [100, 50], [100, 100], [50, 100],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 50], [150, 50], [150, 100], [100, 100],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 50], [200, 50], [200, 100], [150, 100],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [0, 100], [50, 100], [50, 150], [0, 150],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 100], [100, 100], [100, 150], [50, 150],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 100], [150, 100], [150, 150], [100, 150],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 100], [200, 100], [200, 150], [150, 150],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [0, 150], [50, 150], [50, 200], [0, 200],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 150], [100, 150], [100, 200], [50, 200],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 150], [150, 150], [150, 200], [100, 200],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 150], [200, 150], [200, 200], [150, 200],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
     ],
   },
@@ -1134,6 +1078,12 @@ const elementBlocks = [
     rowCol: 4,
     colours: 2,
     elements: 'rect',
+    squaresColor1: 8,
+    squaresColor2: 8,
+    squaresColor3: 0,
+    trianglesColor1: 0,
+    trianglesColor2: 0,
+    trianglesColor3: 0,
     size: 100,
     paths: [
       {
@@ -1141,112 +1091,96 @@ const elementBlocks = [
           [0, 0], [50, 0], [50, 50], [0, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 0], [100, 0], [100, 50], [50, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 0], [150, 0], [150, 50], [100, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 0], [200, 0], [200, 50], [150, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [0, 50], [50, 50], [50, 100], [0, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 50], [100, 50], [100, 100], [50, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 50], [150, 50], [150, 100], [100, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 50], [200, 50], [200, 100], [150, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [0, 100], [50, 100], [50, 150], [0, 150],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 100], [100, 100], [100, 150], [50, 150],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 100], [150, 100], [150, 150], [100, 150],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 100], [200, 100], [200, 150], [150, 150],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [0, 150], [50, 150], [50, 200], [0, 200],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 150], [100, 150], [100, 200], [50, 200],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 150], [150, 150], [150, 200], [100, 200],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 150], [200, 150], [200, 200], [150, 200],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
     ],
   },
@@ -1257,6 +1191,12 @@ const elementBlocks = [
     rowCol: 4,
     colours: 2,
     elements: 'rect',
+    squaresColor1: 8,
+    squaresColor2: 8,
+    squaresColor3: 0,
+    trianglesColor1: 0,
+    trianglesColor2: 0,
+    trianglesColor3: 0,
     size: 100,
     paths: [
       {
@@ -1264,112 +1204,96 @@ const elementBlocks = [
           [0, 0], [50, 0], [50, 50], [0, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 0], [100, 0], [100, 50], [50, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 0], [150, 0], [150, 50], [100, 50],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 0], [200, 0], [200, 50], [150, 50],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [0, 50], [50, 50], [50, 100], [0, 100],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 50], [100, 50], [100, 100], [50, 100],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 50], [150, 50], [150, 100], [100, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 50], [200, 50], [200, 100], [150, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [0, 100], [50, 100], [50, 150], [0, 150],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 100], [100, 100], [100, 150], [50, 150],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 100], [150, 100], [150, 150], [100, 150],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 100], [200, 100], [200, 150], [150, 150],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [0, 150], [50, 150], [50, 200], [0, 200],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 150], [100, 150], [100, 200], [50, 200],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 150], [150, 150], [150, 200], [100, 200],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 150], [200, 150], [200, 200], [150, 200],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
     ],
   },
@@ -1380,6 +1304,12 @@ const elementBlocks = [
     rowCol: 4,
     colours: 2,
     elements: 'rect',
+    squaresColor1: 8,
+    squaresColor2: 8,
+    squaresColor3: 0,
+    trianglesColor1: 0,
+    trianglesColor2: 0,
+    trianglesColor3: 0,
     size: 100,
     paths: [
       {
@@ -1387,112 +1317,96 @@ const elementBlocks = [
           [0, 0], [50, 0], [50, 50], [0, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 0], [100, 0], [100, 50], [50, 50],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 0], [150, 0], [150, 50], [100, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 0], [200, 0], [200, 50], [150, 50],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [0, 50], [50, 50], [50, 100], [0, 100],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 50], [100, 50], [100, 100], [50, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 50], [150, 50], [150, 100], [100, 100],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 50], [200, 50], [200, 100], [150, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [0, 100], [50, 100], [50, 150], [0, 150],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 100], [100, 100], [100, 150], [50, 150],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 100], [150, 100], [150, 150], [100, 150],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 100], [200, 100], [200, 150], [150, 150],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [0, 150], [50, 150], [50, 200], [0, 200],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 150], [100, 150], [100, 200], [50, 200],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 150], [150, 150], [150, 200], [100, 200],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 150], [200, 150], [200, 200], [150, 200],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
     ],
   },
@@ -1503,6 +1417,12 @@ const elementBlocks = [
     rowCol: 5,
     colours: 2,
     elements: 'rect',
+    squaresColor1: 16,
+    squaresColor2: 9,
+    squaresColor3: 0,
+    trianglesColor1: 0,
+    trianglesColor2: 0,
+    trianglesColor3: 0,
     size: 100,
     paths: [
       {
@@ -1510,182 +1430,151 @@ const elementBlocks = [
           [0, 0], [50, 0], [50, 50], [0, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 0], [100, 0], [100, 50], [50, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 0], [150, 0], [150, 50], [100, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 0], [200, 0], [200, 50], [150, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [200, 0], [250, 0], [250, 50], [200, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
-
       {
         vertices: [
           [0, 50], [50, 50], [50, 100], [0, 100],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 50], [100, 50], [100, 100], [50, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 50], [150, 50], [150, 100], [100, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 50], [200, 50], [200, 100], [150, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [200, 50], [250, 50], [250, 100], [200, 100],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
-
       {
         vertices: [
           [0, 100], [50, 100], [50, 150], [0, 150],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 100], [100, 100], [100, 150], [50, 150],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 100], [150, 100], [150, 150], [100, 150],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 100], [200, 100], [200, 150], [150, 150],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [200, 100], [250, 100], [250, 150], [200, 150],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
-
       {
         vertices: [
           [0, 150], [50, 150], [50, 200], [0, 200],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 150], [100, 150], [100, 200], [50, 200],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 150], [150, 150], [150, 200], [100, 200],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 150], [200, 150], [200, 200], [150, 200],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [200, 150], [250, 150], [250, 200], [200, 200],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
-
-
       {
         vertices: [
           [0, 200], [50, 200], [50, 250], [0, 250],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 200], [100, 200], [100, 250], [50, 250],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 200], [150, 200], [150, 250], [100, 250],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 200], [200, 200], [200, 250], [150, 250],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [200, 200], [250, 200], [250, 250], [200, 250],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
-
     ],
   },
   {
@@ -1695,6 +1584,12 @@ const elementBlocks = [
     rowCol: 5,
     colours: 2,
     elements: 'rect',
+    squaresColor1: 16,
+    squaresColor2: 9,
+    squaresColor3: 0,
+    trianglesColor1: 0,
+    trianglesColor2: 0,
+    trianglesColor3: 0,
     size: 100,
     paths: [
       {
@@ -1702,182 +1597,151 @@ const elementBlocks = [
           [0, 0], [50, 0], [50, 50], [0, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 0], [100, 0], [100, 50], [50, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 0], [150, 0], [150, 50], [100, 50],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 0], [200, 0], [200, 50], [150, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [200, 0], [250, 0], [250, 50], [200, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
-
       {
         vertices: [
           [0, 50], [50, 50], [50, 100], [0, 100],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 50], [100, 50], [100, 100], [50, 100],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 50], [150, 50], [150, 100], [100, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 50], [200, 50], [200, 100], [150, 100],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [200, 50], [250, 50], [250, 100], [200, 100],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
-
       {
         vertices: [
           [0, 100], [50, 100], [50, 150], [0, 150],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 100], [100, 100], [100, 150], [50, 150],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 100], [150, 100], [150, 150], [100, 150],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 100], [200, 100], [200, 150], [150, 150],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [200, 100], [250, 100], [250, 150], [200, 150],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
-
       {
         vertices: [
           [0, 150], [50, 150], [50, 200], [0, 200],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 150], [100, 150], [100, 200], [50, 200],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 150], [150, 150], [150, 200], [100, 200],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 150], [200, 150], [200, 200], [150, 200],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [200, 150], [250, 150], [250, 200], [200, 200],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
-
-
       {
         vertices: [
           [0, 200], [50, 200], [50, 250], [0, 250],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 200], [100, 200], [100, 250], [50, 250],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 200], [150, 200], [150, 250], [100, 250],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 200], [200, 200], [200, 250], [150, 250],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [200, 200], [250, 200], [250, 250], [200, 250],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
-
     ],
   },
   {
@@ -1887,6 +1751,12 @@ const elementBlocks = [
     rowCol: 5,
     colours: 2,
     elements: 'rect',
+    squaresColor1: 4,
+    squaresColor2: 21,
+    squaresColor3: 0,
+    trianglesColor1: 0,
+    trianglesColor2: 0,
+    trianglesColor3: 0,
     size: 100,
     paths: [
       {
@@ -1894,182 +1764,151 @@ const elementBlocks = [
           [0, 0], [50, 0], [50, 50], [0, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 0], [100, 0], [100, 50], [50, 50],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 0], [150, 0], [150, 50], [100, 50],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 0], [200, 0], [200, 50], [150, 50],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [200, 0], [250, 0], [250, 50], [200, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
-
       {
         vertices: [
           [0, 50], [50, 50], [50, 100], [0, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 50], [100, 50], [100, 100], [50, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 50], [150, 50], [150, 100], [100, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 50], [200, 50], [200, 100], [150, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [200, 50], [250, 50], [250, 100], [200, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
-
       {
         vertices: [
           [0, 100], [50, 100], [50, 150], [0, 150],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 100], [100, 100], [100, 150], [50, 150],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 100], [150, 100], [150, 150], [100, 150],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 100], [200, 100], [200, 150], [150, 150],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [200, 100], [250, 100], [250, 150], [200, 150],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
-
       {
         vertices: [
           [0, 150], [50, 150], [50, 200], [0, 200],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 150], [100, 150], [100, 200], [50, 200],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 150], [150, 150], [150, 200], [100, 200],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 150], [200, 150], [200, 200], [150, 200],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [200, 150], [250, 150], [250, 200], [200, 200],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
-
-
       {
         vertices: [
           [0, 200], [50, 200], [50, 250], [0, 250],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 200], [100, 200], [100, 250], [50, 250],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 200], [150, 200], [150, 250], [100, 250],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 200], [200, 200], [200, 250], [150, 250],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [200, 200], [250, 200], [250, 250], [200, 250],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
-
     ],
   },
   {
@@ -2079,6 +1918,12 @@ const elementBlocks = [
     rowCol: 5,
     colours: 2,
     elements: 'rect',
+    squaresColor1: 13,
+    squaresColor2: 12,
+    squaresColor3: 0,
+    trianglesColor1: 0,
+    trianglesColor2: 0,
+    trianglesColor3: 0,
     size: 100,
     paths: [
       {
@@ -2086,35 +1931,30 @@ const elementBlocks = [
           [0, 0], [50, 0], [50, 50], [0, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 0], [100, 0], [100, 50], [50, 50],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 0], [150, 0], [150, 50], [100, 50],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 0], [200, 0], [200, 50], [150, 50],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [200, 0], [250, 0], [250, 50], [200, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
 
       {
@@ -2122,146 +1962,121 @@ const elementBlocks = [
           [0, 50], [50, 50], [50, 100], [0, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 50], [100, 50], [100, 100], [50, 100],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 50], [150, 50], [150, 100], [100, 100],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 50], [200, 50], [200, 100], [150, 100],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [200, 50], [250, 50], [250, 100], [200, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
-
       {
         vertices: [
           [0, 100], [50, 100], [50, 150], [0, 150],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 100], [100, 100], [100, 150], [50, 150],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 100], [150, 100], [150, 150], [100, 150],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 100], [200, 100], [200, 150], [150, 150],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [200, 100], [250, 100], [250, 150], [200, 150],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
-
       {
         vertices: [
           [0, 150], [50, 150], [50, 200], [0, 200],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 150], [100, 150], [100, 200], [50, 200],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 150], [150, 150], [150, 200], [100, 200],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 150], [200, 150], [200, 200], [150, 200],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [200, 150], [250, 150], [250, 200], [200, 200],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
-
-
       {
         vertices: [
           [0, 200], [50, 200], [50, 250], [0, 250],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 200], [100, 200], [100, 250], [50, 250],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 200], [150, 200], [150, 250], [100, 250],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 200], [200, 200], [200, 250], [150, 250],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [200, 200], [250, 200], [250, 250], [200, 250],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
-
     ],
   },
   {
@@ -2271,6 +2086,12 @@ const elementBlocks = [
     rowCol: 5,
     colours: 2,
     elements: 'rect',
+    squaresColor1: 16,
+    squaresColor2: 9,
+    squaresColor3: 0,
+    trianglesColor1: 0,
+    trianglesColor2: 0,
+    trianglesColor3: 0,
     size: 100,
     paths: [
       {
@@ -2278,182 +2099,151 @@ const elementBlocks = [
           [0, 0], [50, 0], [50, 50], [0, 50],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 0], [100, 0], [100, 50], [50, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 0], [150, 0], [150, 50], [100, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 0], [200, 0], [200, 50], [150, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [200, 0], [250, 0], [250, 50], [200, 50],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
-
       {
         vertices: [
           [0, 50], [50, 50], [50, 100], [0, 100],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 50], [100, 50], [100, 100], [50, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 50], [150, 50], [150, 100], [100, 100],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 50], [200, 50], [200, 100], [150, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [200, 50], [250, 50], [250, 100], [200, 100],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
-
       {
         vertices: [
           [0, 100], [50, 100], [50, 150], [0, 150],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 100], [100, 100], [100, 150], [50, 150],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 100], [150, 100], [150, 150], [100, 150],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 100], [200, 100], [200, 150], [150, 150],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [200, 100], [250, 100], [250, 150], [200, 150],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
-
       {
         vertices: [
           [0, 150], [50, 150], [50, 200], [0, 200],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 150], [100, 150], [100, 200], [50, 200],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 150], [150, 150], [150, 200], [100, 200],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 150], [200, 150], [200, 200], [150, 200],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [200, 150], [250, 150], [250, 200], [200, 200],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
-
-
       {
         vertices: [
           [0, 200], [50, 200], [50, 250], [0, 250],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 200], [100, 200], [100, 250], [50, 250],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 200], [150, 200], [150, 250], [100, 250],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 200], [200, 200], [200, 250], [150, 250],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [200, 200], [250, 200], [250, 250], [200, 250],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
-
     ],
   },
   {
@@ -2463,6 +2253,12 @@ const elementBlocks = [
     rowCol: 5,
     colours: 2,
     elements: 'rect',
+    squaresColor1: 15,
+    squaresColor2: 10,
+    squaresColor3: 0,
+    trianglesColor1: 0,
+    trianglesColor2: 0,
+    trianglesColor3: 0,
     size: 100,
     paths: [
       {
@@ -2470,182 +2266,151 @@ const elementBlocks = [
           [0, 0], [50, 0], [50, 50], [0, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 0], [100, 0], [100, 50], [50, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 0], [150, 0], [150, 50], [100, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 0], [200, 0], [200, 50], [150, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [200, 0], [250, 0], [250, 50], [200, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
-
       {
         vertices: [
           [0, 50], [50, 50], [50, 100], [0, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 50], [100, 50], [100, 100], [50, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 50], [150, 50], [150, 100], [100, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 50], [200, 50], [200, 100], [150, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [200, 50], [250, 50], [250, 100], [200, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
-
       {
         vertices: [
           [0, 100], [50, 100], [50, 150], [0, 150],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 100], [100, 100], [100, 150], [50, 150],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 100], [150, 100], [150, 150], [100, 150],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 100], [200, 100], [200, 150], [150, 150],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [200, 100], [250, 100], [250, 150], [200, 150],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
-
       {
         vertices: [
           [0, 150], [50, 150], [50, 200], [0, 200],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 150], [100, 150], [100, 200], [50, 200],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 150], [150, 150], [150, 200], [100, 200],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 150], [200, 150], [200, 200], [150, 200],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [200, 150], [250, 150], [250, 200], [200, 200],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
-
-
       {
         vertices: [
           [0, 200], [50, 200], [50, 250], [0, 250],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 200], [100, 200], [100, 250], [50, 250],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 200], [150, 200], [150, 250], [100, 250],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 200], [200, 200], [200, 250], [150, 250],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [200, 200], [250, 200], [250, 250], [200, 250],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
-
     ],
   },
   {
@@ -2655,6 +2420,12 @@ const elementBlocks = [
     rowCol: 5,
     colours: 2,
     elements: 'rect',
+    squaresColor1: 15,
+    squaresColor2: 10,
+    squaresColor3: 0,
+    trianglesColor1: 0,
+    trianglesColor2: 0,
+    trianglesColor3: 0,
     size: 100,
     paths: [
       {
@@ -2662,182 +2433,151 @@ const elementBlocks = [
           [0, 0], [50, 0], [50, 50], [0, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 0], [100, 0], [100, 50], [50, 50],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 0], [150, 0], [150, 50], [100, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 0], [200, 0], [200, 50], [150, 50],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [200, 0], [250, 0], [250, 50], [200, 50],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
-
       {
         vertices: [
           [0, 50], [50, 50], [50, 100], [0, 100],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 50], [100, 50], [100, 100], [50, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 50], [150, 50], [150, 100], [100, 100],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 50], [200, 50], [200, 100], [150, 100],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [200, 50], [250, 50], [250, 100], [200, 100],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
-
       {
         vertices: [
           [0, 100], [50, 100], [50, 150], [0, 150],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 100], [100, 100], [100, 150], [50, 150],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 100], [150, 100], [150, 150], [100, 150],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 100], [200, 100], [200, 150], [150, 150],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [200, 100], [250, 100], [250, 150], [200, 150],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
-
       {
         vertices: [
           [0, 150], [50, 150], [50, 200], [0, 200],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 150], [100, 150], [100, 200], [50, 200],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 150], [150, 150], [150, 200], [100, 200],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 150], [200, 150], [200, 200], [150, 200],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [200, 150], [250, 150], [250, 200], [200, 200],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
-
-
       {
         vertices: [
           [0, 200], [50, 200], [50, 250], [0, 250],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [50, 200], [100, 200], [100, 250], [50, 250],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [100, 200], [150, 200], [150, 250], [100, 250],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [150, 200], [200, 200], [200, 250], [150, 250],
         ],
         fillColor: 'color2',
-        strokeColor: '#eee',
       },
       {
         vertices: [
           [200, 200], [250, 200], [250, 250], [200, 250],
         ],
         fillColor: 'color1',
-        strokeColor: '#eee',
       },
-
     ],
   }
 ];

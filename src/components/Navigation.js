@@ -2,12 +2,17 @@ import React, { useState } from "react";
 import Modal from "./Modal";
 import ColorSettingsPalette from "./ColorSettingsPalette";
 import BigBlockGallery from "./BigBlockGallery";
+import DownloadJSON from "./DownloadJSON";
+import UploadJSON from "./UploadJSON";
+import PrintableSquaresGrid from "./PrintableSquaresGrid";
 
 const Navigation = () => {
 
   // local states
   const [colorsModalIsOpen, setColorsModalIsOpen] = useState(false);
   const [premadesModalIsOpen, setPremadesModalIsOpen] = useState(false);
+  const [previewModalIsOpen, setPreviewModalIsOpen] = useState(false);
+  const [uploadModalIsOpen, setUploadModalIsOpen] = useState(false);
 
   return (
     <>
@@ -25,16 +30,19 @@ const Navigation = () => {
           </button>
         </li>
         <li className="nav-item">
-          <button className="btn btn-link" >
+          <button className="btn btn-link" onClick={() => setPreviewModalIsOpen(!previewModalIsOpen)}>
+            <img src="icon-preview.svg" alt="Preview" />
+            <span>Preview</span>
+          </button>
+        </li>
+        <li className="nav-item">
+          <button className="btn btn-link" onClick={() => setUploadModalIsOpen(!uploadModalIsOpen)}>
             <img src="icon-upload.svg" alt="Upload" />
             <span>Upload</span>
           </button>
         </li>
         <li className="nav-item">
-          <button className="btn btn-link" >
-            <img src="icon-download.svg" alt="Download" />
-            <span>Download</span>
-          </button>
+          <DownloadJSON />
         </li>
 
       </ul>
@@ -47,6 +55,16 @@ const Navigation = () => {
         modalIsOpen={premadesModalIsOpen}
         closeModal={() => setPremadesModalIsOpen(false)} >
         <BigBlockGallery />
+      </Modal>
+      <Modal
+        modalIsOpen={previewModalIsOpen}
+        closeModal={() => setPreviewModalIsOpen(false)} >
+        <PrintableSquaresGrid />
+      </Modal>
+      <Modal
+        modalIsOpen={uploadModalIsOpen}
+        closeModal={() => setUploadModalIsOpen(false)} >
+        <UploadJSON />
       </Modal>
     </>
   )

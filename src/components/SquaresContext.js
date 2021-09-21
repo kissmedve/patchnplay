@@ -87,16 +87,14 @@ export const SquaresReducer = (state, action) => {
 
     case "EDIT_SQUARE":
       // edit fill color depending on targeted svg part
-      const propKey = action.payload.propertyKey;
-      const propValue = action.payload.propertyValue;
-      const propId = action.payload.id;
+      const { propertyKey, propertyValue, id } = action.payload;
       const updatedSquares = state.squares.map(squs => {
         return squs.map(squ => {
-          if (squ.id === propId) {
-            let prop = propKey;
+          if (squ.id === id) {
+            let prop = propertyKey;
             return {
               ...squ,
-              [prop]: propValue
+              [prop]: propertyValue
             }
           }
           return squ;
@@ -148,10 +146,7 @@ export const SquaresReducer = (state, action) => {
       };
 
     case "INSERTED_BIGBLOCK_EDIT_SQUARES":
-      const covered = action.payload.covered;
-      const coveredByBigBlock = action.payload.coveredByBigBlock;
-      const bigBlockAnchor = action.payload.bigBlockAnchor;
-      const ids = action.payload.ids;
+      const { covered, coveredByBigBlock, bigBlockAnchor, ids } = action.payload;
       const editedSquares = state.squares.map(squs => {
         return squs.map(squ => {
           if (ids.includes(squ.id)) {
@@ -224,25 +219,18 @@ export const SquaresReducer = (state, action) => {
       };
 
     case "EDIT_INSERTED_BIGBLOCK":
-      const anchorSquare = action.payload.anchorSquare;
-      const newStretchSquares = action.payload.stretchSquares;
-      const newElementBlocksId = action.payload.elementBlocksId;
-      const newRowCol = action.payload.rowCol;
-      const newColours = action.payload.colours;
-      const newColor1 = action.payload.color1;
-      const newColor2 = action.payload.color2;
-      const newColor3 = action.payload.color3;
+      const { anchorSquare, stretchSquares, elementBlocksId, rowCol, colours, color1, color2, color3 } = action.payload;
       const updatedBigBlocks = state.insertedBigBlocks.map(block => {
         if (block.anchorSquare === anchorSquare) {
           return {
             ...block,
-            stretchSquares: newStretchSquares,
-            elementBlocksId: newElementBlocksId,
-            rowCol: newRowCol,
-            colours: newColours,
-            color1: newColor1 !== '' ? newColor1 : block.color1,
-            color2: newColor2 !== '' ? newColor2 : block.color2,
-            color3: newColor3 !== '' ? newColor3 : block.color3,
+            stretchSquares,
+            elementBlocksId,
+            rowCol,
+            colours,
+            color1: color1 !== '' ? color1 : block.color1,
+            color2: color2 !== '' ? color2 : block.color2,
+            color3: color3 !== '' ? color3 : block.color3,
           }
         }
         return block;
@@ -267,21 +255,16 @@ export const SquaresReducer = (state, action) => {
       };
 
     case "EDIT_BORDER":
-      const pos = action.payload.pos;
-      const newBackground = action.payload.background;
-      const newWidthTop = action.payload.widthTop;
-      const newWidthRight = action.payload.widthRight;
-      const newWidthBottom = action.payload.widthBottom;
-      const newWidthLeft = action.payload.widthLeft;
+      const { pos, background, widthTop, widthRight, widthBottom, widthLeft } = action.payload;
       const updatedBorders = state.borders.map(border => {
         if (border.pos === pos) {
           return {
             ...border,
-            background: newBackground,
-            widthTop: newWidthTop,
-            widthRight: newWidthRight,
-            widthBottom: newWidthBottom,
-            widthLeft: newWidthLeft,
+            background: background !== '' ? background : border.background,
+            widthTop: widthTop !== '' ? widthTop : border.widthTop,
+            widthRight: widthRight !== '' ? widthRight : border.widthRight,
+            widthBottom: widthBottom !== '' ? widthBottom : border.widthBottom,
+            widthLeft: widthLeft !== '' ? widthLeft : border.widthLeft,
           }
         }
         return border;
