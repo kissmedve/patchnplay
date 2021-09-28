@@ -17,7 +17,6 @@ const SashingRowStyler = ({ rowCol, id }) => {
   }
 
   const switchToSashing = (event) => {
-    let onSashingRows = sashingRows.map((sashRow, index) => index === id ? sashRow = true : sashRow = false);
 
     // check if any square on the row is covered by a BigBlock
     let isSquCovered = squares.map(squs => {
@@ -40,15 +39,24 @@ const SashingRowStyler = ({ rowCol, id }) => {
           }
         }
       }
+
+      let onSashingRows = sashingRows.map((sashRow, index) => {
+        return index === id ? sashRow = true : sashRow
+      });
+
       updateSashingRows(onSashingRows);
       updateSquares(squarez);
     }
   }
 
   const switchToSquares = () => {
-    let offSashingRows = sashingRows.map((sashRow, index) => index === id ? sashRow = false : sashRow = true);
+    let offSashingRows = sashingRows.map((sashRow, index) => {
+      return index === id ? sashRow = false : sashRow
+    });
 
-    let offSashingHeights = sashingHeights.map((sashHeight, index) => index === id ? sashHeight = 1 : sashHeight);
+    let offSashingHeights = sashingHeights.map((sashHeight, index) => {
+      return index === id ? sashHeight = 1 : sashHeight
+    });
 
     let squarezz = squares;
     for (let i = 0; i < squarezz.length; i++) {
@@ -73,7 +81,9 @@ const SashingRowStyler = ({ rowCol, id }) => {
   }
 
   const applySashingHeight = (event) => {
-    let onSashingHeights = sashingHeights.map((sashHeight, index) => index === id ? sashHeight = inputSashingHeight : sashHeight);
+    let onSashingHeights = sashingHeights.map((sashHeight, index) => {
+      return index === id ? sashHeight = inputSashingHeight : sashHeight
+    });
 
     let sashSquares = squares;
     for (let i = 0; i < sashSquares.length; i++) {

@@ -6,7 +6,7 @@ import { SquaresContext } from "./SquaresContext";
 const BorderStyler = () => {
 
   // global states
-  const { squareWidth, borders, updateBorders, editBorder } = useContext(SquaresContext);
+  const { squareWidth, borders, updateBorders, editBorderWidths } = useContext(SquaresContext);
   const { closeBorderStyler } = useContext(StylersContext);
 
   // local states
@@ -17,7 +17,7 @@ const BorderStyler = () => {
     widthRight: 1,
     widthBottom: 1,
     widthLeft: 1,
-    background: '',
+    background: 'purple',
   });
 
   const addBorder = (pos) => {
@@ -47,9 +47,11 @@ const BorderStyler = () => {
     });
     updateBorders(newBorders);
   };
+
   const selectBorder = (pos) => {
     setSelectedBorder(pos);
     let activeBorder = borders.find(border => border.pos === pos);
+    console.log('activeBorder.background', activeBorder.background);
     setBorderData({
       pos: activeBorder.pos,
       widthTop: activeBorder.widthTop,
@@ -61,11 +63,12 @@ const BorderStyler = () => {
   };
 
   const handleInputBorderWidth = (event) => {
+    console.log(borderData);
     setBorderData({ ...borderData, [event.target.name]: parseInt(event.target.value) });
   }
 
   useEffect(() => {
-    editBorder(borderData);
+    editBorderWidths(borderData);
   }, [borderData]);
 
   const borderHandlingDisplay = () => {

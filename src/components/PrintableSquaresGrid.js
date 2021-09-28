@@ -59,6 +59,13 @@ const PrintableSquaresGrid = () => {
     return borderTopOffsets.slice(0, i).reduce((acc, val) => acc + val, 0) * borderBaseWidth;
   });
 
+  // cumulated widths and heights squares offsets
+  const calcOffsets = (column, row) => {
+    let widthOffset = (sashingWidths.slice(0, column).reduce((acc, val) => acc + val, 0) * squareWidth) + left;
+    let heightOffset = (sashingHeights.slice(0, row).reduce((acc, val) => acc + val, 0) * squareWidth) + top;
+    return [widthOffset, heightOffset];
+  }
+
   // paths for squares and HSTs
   const pathDataSquare = (data, sizeFactor = 1, offsetLeft = 0, offsetTop = 0) => {
     let pathData = [
@@ -81,37 +88,36 @@ const PrintableSquaresGrid = () => {
     return pathData.join(' ');
   }
 
-  const writeSquare = (i, k, left, top, sashWidth, sashHeight, fillColor) => {
+  const writeSquare = (i, k, sashWidth, sashHeight, fillColor) => {
     let width = squareWidth * sashWidth;
     let height = squareWidth * sashHeight;
     let vertices = [
-      [(k * width) + left, (i * height) + top],
-      [((k + 1) * width) + left, (i * height) + top],
-      [((k + 1) * width) + left, ((i + 1) * height) + top],
-      [(k * width) + left, ((i + 1) * height) + top]
+      [0, 0],
+      [width, 0],
+      [width, height],
+      [0, height],
     ];
-
-    let pathDataSqu = pathDataSquare(vertices);
+    let pathDataSqu = pathDataSquare(vertices, 1, calcOffsets(k, i)[0], calcOffsets(k, i)[1]);
 
     return <path d={pathDataSqu} fill={fillColor} />
   }
 
-  const writeHSTUp = (i, k, left, top, sashWidth, sashHeight, fillColorLeft, fillColorRight) => {
-    let width = squareWidth * sashWidth;
-    let height = squareWidth * sashHeight;
+  const writeHSTUp = (i, k, fillColorLeft, fillColorRight) => {
+    let width = squareWidth;
+    let height = squareWidth;
     let verticesLeft = [
-      [(k * width) + left, (i * height) + top],
-      [((k + 1) * width) + left, (i * height) + top],
-      [(k * width) + left, ((i + 1) * height) + top]
+      [0, 0],
+      [width, 0],
+      [0, height],
     ];
     let verticesRight = [
-      [((k + 1) * width) + left, (i * height) + top],
-      [((k + 1) * width) + left, ((i + 1) * height) + top],
-      [(k * width) + left, ((i + 1) * height) + top]
+      [width, 0],
+      [width, height],
+      [0, height],
     ];
 
-    let pathDataLeft = pathDataTriangle(verticesLeft);
-    let pathDataRight = pathDataTriangle(verticesRight);
+    let pathDataLeft = pathDataTriangle(verticesLeft, 1, calcOffsets(k, i)[0], calcOffsets(k, i)[1]);
+    let pathDataRight = pathDataTriangle(verticesRight, 1, calcOffsets(k, i)[0], calcOffsets(k, i)[1]);
 
     return (
       <>
@@ -121,22 +127,22 @@ const PrintableSquaresGrid = () => {
     )
   }
 
-  const writeHSTDown = (i, k, left, top, sashWidth, sashHeight, fillColorLeft, fillColorRight) => {
-    let width = squareWidth * sashWidth;
-    let height = squareWidth * sashHeight;
+  const writeHSTDown = (i, k, fillColorLeft, fillColorRight) => {
+    let width = squareWidth;
+    let height = squareWidth;
     let verticesLeft = [
-      [(k * width) + left, (i * height) + top],
-      [((k + 1) * width) + left, ((i + 1) * height) + top],
-      [(k * width) + left, ((i + 1) * height) + top]
+      [0, 0],
+      [width, height],
+      [0, height],
     ];
     let verticesRight = [
-      [(k * width) + left, (i * height) + top],
-      [((k + 1) * width) + left, (i * height) + top],
-      [((k + 1) * width) + left, ((i + 1) * height) + top]
+      [0, 0],
+      [width, 0],
+      [width, height],
     ];
 
-    let pathDataLeft = pathDataTriangle(verticesLeft);
-    let pathDataRight = pathDataTriangle(verticesRight);
+    let pathDataLeft = pathDataTriangle(verticesLeft, 1, calcOffsets(k, i)[0], calcOffsets(k, i)[1]);
+    let pathDataRight = pathDataTriangle(verticesRight, 1, calcOffsets(k, i)[0], calcOffsets(k, i)[1]);
 
     return (
       <>
@@ -150,14 +156,16 @@ const PrintableSquaresGrid = () => {
   const squaresGrid = () => {
     let grid = squares.map(squs => {
       return squs.map(squ => {
-        if (squ.squareType === 'rect') {
-          return writeSquare(squ.row, squ.col, left, top, squ.sashingWidth, squ.sashingHeight, squ.fillSquare);
+
+        if (squ.squareType === 'rect' || squ.sashing === true) {
+          let fillColor = squ.sashing === true ? squ.fillSashing : squ.fillSquare;
+          return writeSquare(squ.row, squ.col, squ.sashingWidth, squ.sashingHeight, fillColor);
         }
         if (squ.squareType === 'hstUp') {
-          return writeHSTUp(squ.row, squ.col, left, top, squ.sashingWidth, squ.sashingHeight, squ.fillHstLup, squ.fillHstRUp);
+          return writeHSTUp(squ.row, squ.col, squ.fillHstLup, squ.fillHstRup);
         }
         if (squ.squareType === 'hstDown') {
-          return writeHSTDown(squ.row, squ.col, left, top, squ.sashingWidth, squ.sashingHeight, squ.fillHstLDown, squ.fillHstRDown);
+          return writeHSTDown(squ.row, squ.col, squ.fillHstLdown, squ.fillHstRdown);
         }
       })
     });

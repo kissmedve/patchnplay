@@ -3,7 +3,7 @@ import { SquaresContext } from "./SquaresContext";
 
 const AddRow = ({ rowId, squareWidth }) => {
   // global states
-  const { squares, rows, sashingCols, sashingRows, sashingHeights, updateSquares, updateRows, updateSashingRows, updateSashingHeights, insertedBigBlocks, updateInsertedBigBlocks } = useContext(SquaresContext);
+  const { squares, rows, sashingCols, sashingRows, sashingHeights, updateSquares, updateRows, updateSashingRows, updateSashingHeights, insertedBigBlocks, updateInsertedBigBlocks, sashingRowsColor, updateSashingRowsColor } = useContext(SquaresContext);
 
   // row is always added below the clicked one
   // default new row is: 
@@ -26,8 +26,9 @@ const AddRow = ({ rowId, squareWidth }) => {
       const newRows = [...rows, rows.length];
 
       // insert default values for new row
-      const newSashingRows = [...sashingRows.slice(0, rowId), false, ...sashingRows.slice(rowId)];
-      const newSashingHeights = [...sashingHeights.slice(0, rowId), 1, ...sashingHeights.slice(rowId)];
+      const newSashingRows = [...sashingRows.slice(0, rowId + 1), false, ...sashingRows.slice(rowId + 1)];
+      const newSashingHeights = [...sashingHeights.slice(0, rowId + 1), 1, ...sashingHeights.slice(rowId + 1)];
+      const newSashingRowsColor = [...sashingRowsColor.slice(0, rowId + 1), 'white', ...sashingRowsColor.slice(rowId + 1)];
 
       // prepare squares for update
 
@@ -50,7 +51,7 @@ const AddRow = ({ rowId, squareWidth }) => {
             id: `${rowId + 1}-${k}`,
             row: rowId + 1,
             col: k,
-            squareType: sashingCols[k] === true ? 'rect' : 'hstup',
+            squareType: 'rect',
             fillSquare: 'white',
             fillSashing: sashingCols[k] === true ? squares[0][k].fillSashing : 'white',
             fillHstLup: 'white',
@@ -60,8 +61,8 @@ const AddRow = ({ rowId, squareWidth }) => {
             covered: false,
             sashing: sashingCols[k] === true ? true : false,
             sashingCrossed: false,
-            sashingWidth: 1,
-            sashingHeight: sashingCols[k] === true ? squares[0][k].sashingHeight : 1,
+            sashingWidth: sashingCols[k] === true ? squares[rowId][k].sashingWidth : 1,
+            sashingHeight: 1,
           },
         )
       };
@@ -90,6 +91,7 @@ const AddRow = ({ rowId, squareWidth }) => {
       updateSashingRows(newSashingRows);
       updateSashingHeights(newSashingHeights);
       updateInsertedBigBlocks(newInsertedBigBlocks);
+      updateSashingRowsColor(newSashingRowsColor);
     }
   }
 

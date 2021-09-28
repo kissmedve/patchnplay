@@ -5,6 +5,7 @@ import BigBlockGallery from "./BigBlockGallery";
 import DownloadJSON from "./DownloadJSON";
 import UploadJSON from "./UploadJSON";
 import PrintableSquaresGrid from "./PrintableSquaresGrid";
+import CalculateFabric from "./CalculateFabric";
 
 const Navigation = () => {
 
@@ -60,6 +61,7 @@ const Navigation = () => {
         modalIsOpen={previewModalIsOpen}
         closeModal={() => setPreviewModalIsOpen(false)} >
         <PrintableSquaresGrid />
+        <CalculateFabric />
       </Modal>
       <Modal
         modalIsOpen={uploadModalIsOpen}

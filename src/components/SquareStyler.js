@@ -3,7 +3,7 @@ import { SquaresContext } from "./SquaresContext";
 import { StylersContext } from "./StylersContext";
 import Palette from './Palette';
 
-const SquareStyler = ({ id, squareType, squareWidth }) => {
+const SquareStyler = ({ id, squareType, squareWidth, sashingCrossed }) => {
 
   // global states
   const { editSquare } = useContext(SquaresContext);
@@ -46,37 +46,54 @@ const SquareStyler = ({ id, squareType, squareWidth }) => {
           <div className="card-body">
             <div className="card-title h6">Square Type</div>
             <div className="form-group">
+              {sashingCrossed === false ?
+                <>
+                  <label className="form-radio rect">
+                    <input
+                      className="square-type"
+                      type="radio"
+                      name="squareType"
+                      value="rect"
+                      onChange={selectSquareType} />
+                    <i className="form-icon"></i>
+                    <span>Full Square</span>
+                  </label>
 
-              <label className="form-radio rect">
-                <input
-                  className="square-type"
-                  type="radio"
-                  name="squareType"
-                  value="rect"
-                  onChange={selectSquareType} />
-                <i className="form-icon"></i>
-                <span>Full Square</span>
-              </label>
-              <label className="form-radio hst-up">
-                <input
-                  className="square-type"
-                  type="radio"
-                  name="squareType"
-                  value="hstUp"
-                  onChange={selectSquareType} />
-                <i className="form-icon"></i>
-                <span>HST Up</span>
-              </label>
-              <label className="form-radio hst-down">
-                <input
-                  className="square-type"
-                  type="radio"
-                  name="squareType"
-                  value="hstDown"
-                  onChange={selectSquareType} />
-                <i className="form-icon"></i>
-                <span>HST Down</span>
-              </label>
+                  <label className="form-radio hst-up">
+                    <input
+                      className="square-type"
+                      type="radio"
+                      name="squareType"
+                      value="hstUp"
+                      onChange={selectSquareType} />
+                    <i className="form-icon"></i>
+                    <span>HST Up</span>
+                  </label>
+                  <label className="form-radio hst-down">
+                    <input
+                      className="square-type"
+                      type="radio"
+                      name="squareType"
+                      value="hstDown"
+                      onChange={selectSquareType} />
+                    <i className="form-icon"></i>
+                    <span>HST Down</span>
+                  </label>
+                </>
+                :
+                <>
+                  <label className="form-radio rect">
+                    <input
+                      className="square-type"
+                      type="radio"
+                      name="squareType"
+                      value="sashing"
+                      onChange={selectSquareType} />
+                    <i className="form-icon"></i>
+                    <span>Full Square</span>
+                  </label>
+                </>
+              }
               <label className="form-radio hst-bigblock">
                 <input
                   className="square-type"

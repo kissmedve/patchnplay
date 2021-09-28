@@ -4,7 +4,7 @@ import { SquaresContext } from "./SquaresContext";
 const DeleteRow = ({ rowId, squareWidth }) => {
 
   // global states
-  const { squares, rows, sashingRows, sashingHeights, updateSquares, updateRows, updateSashingRows, updateSashingHeights, insertedBigBlocks, updateInsertedBigBlocks } = useContext(SquaresContext);
+  const { squares, rows, sashingRows, sashingHeights, updateSquares, updateRows, updateSashingRows, updateSashingHeights, insertedBigBlocks, updateInsertedBigBlocks, sashingRowsColor, updateSashingRowsColor } = useContext(SquaresContext);
 
   const deleteThisRow = (rowId) => {
 
@@ -23,6 +23,7 @@ const DeleteRow = ({ rowId, squareWidth }) => {
       // remove the indicated row
       const newSashingRows = [...sashingRows.slice(0, rowId), ...sashingRows.slice(rowId + 1)];
       const newSashingHeights = [...sashingHeights.slice(0, rowId), ...sashingHeights.slice(rowId + 1)];
+      const newSashingRowsColor = [...sashingRowsColor.slice(0, rowId), ...sashingRowsColor.slice(rowId + 1)];
 
       // prepare squares for update
 
@@ -54,6 +55,7 @@ const DeleteRow = ({ rowId, squareWidth }) => {
       updateSashingRows(newSashingRows);
       updateSashingHeights(newSashingHeights);
       updateInsertedBigBlocks(newInsertedBigBlocks);
+      updateSashingRowsColor(newSashingRowsColor);
     }
   }
 

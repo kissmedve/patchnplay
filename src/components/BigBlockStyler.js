@@ -20,6 +20,12 @@ const BigBlockStyler = ({ id, squareType, squareWidth }) => {
     anchorSquare: id,
     rowCol: 2,
     colours: '',
+    squaresColor1: 0,
+    squaresColor2: 0,
+    squaresColor3: 0,
+    trianglesColor1: 0,
+    trianglesColor2: 0,
+    trianglesColor3: 0,
   });
   const [selectedBigBlockColours, setSelectedBigBlockColours] = useState({
     color1: '',
@@ -91,6 +97,12 @@ const BigBlockStyler = ({ id, squareType, squareWidth }) => {
         elementBlocksId: selectedBigBlock.elementBlocksId,
         rowCol: selectedBigBlock.rowCol,
         colours: selectedBigBlock.colours,
+        squaresColor1: selectedBigBlock.squaresColor1,
+        squaresColor2: selectedBigBlock.squaresColor2,
+        squaresColor3: selectedBigBlock.squaresColor3,
+        trianglesColor1: selectedBigBlock.trianglesColor1,
+        trianglesColor2: selectedBigBlock.trianglesColor2,
+        trianglesColor3: selectedBigBlock.trianglesColor3,
         color1: selectedBigBlockColours.color1 !== '' ? selectedBigBlockColours.color1 : '#888',
         color2: selectedBigBlockColours.color2 !== '' ? selectedBigBlockColours.color2 : '#ddd',
         color3: selectedBigBlockColours.color3 !== '' ? selectedBigBlockColours.color3 : '#eee',
@@ -175,7 +187,7 @@ const BigBlockStyler = ({ id, squareType, squareWidth }) => {
           setMessageIsActive(true);
           return;
         }
-        if (squares[i][k].sashing === true) {
+        if (squares[i][k].sashingCrossed === false && squares[i][k].sashing === true) {
           setMessageText('A Big Block can\'t be placed on top of sashing.');
           setMessageIsActive(true);
           return;
@@ -205,7 +217,20 @@ const BigBlockStyler = ({ id, squareType, squareWidth }) => {
 
   const preselectedBlocks = elementBlocks.filter(block => selectedBigBlocks.includes(block.id)).map(block =>
     <div className={`premade 
-    ${selectedBigBlock.id === block.id ? "active" : ''}`} key={block.id} onClick={() => { setSelectedBigBlock({ ...selectedBigBlock, elementBlocksId: block.id, rowCol: block.rowCol, colours: block.colours }) }} >
+    ${selectedBigBlock.id === block.id ? "active" : ''}`} key={block.id} onClick={() => {
+        setSelectedBigBlock({
+          ...selectedBigBlock,
+          elementBlocksId: block.id,
+          rowCol: block.rowCol,
+          colours: block.colours,
+          squaresColor1: block.squaresColor1,
+          squaresColor2: block.squaresColor2,
+          squaresColor3: block.squaresColor3,
+          trianglesColor1: block.trianglesColor1,
+          trianglesColor2: block.trianglesColor2,
+          trianglesColor3: block.trianglesColor3,
+        })
+      }} >
       <img src={`svgs/${block.file}.svg`} alt={`${block.name}`} />
     </div>)
 

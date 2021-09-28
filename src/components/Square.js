@@ -22,18 +22,18 @@ const Square = ({ id, row, col, squareType, fillSquare, fillHstLdown, fillHstRdo
           viewBox={'0 0 50 50'} width="100%" height="100%" preserveAspectRatio="none" >
           <rect className="sashing" x="0" y="0"
             width="50" height="50" fill={fillSashing}
-            stroke="ddd" />
+            stroke={`${fillSashing === 'white' ? '#bbb' : 'transparent'}`} />
           <rect className="rect" x="0" y="0"
             width="50" height="50" fill={fillSquare}
-            stroke="ddd" />
-          <polygon className="hstdown ldown" points="0,0 50,50 0,50" fill={fillHstLdown} stroke="#ddd" />
-          <polygon className="hstdown rdown" points="0,0 50,0 50,50" fill={fillHstRdown} stroke="#ddd" />
-          <polygon className="hstup lup" points="0,50 0,0 50,0" fill={fillHstLup} stroke="#ddd" />
-          <polygon className="hstup rup" points="0,50 50,0 50,50" fill={fillHstRup} stroke="#ddd" />
+            stroke={`${fillSquare === 'white' ? '#bbb' : 'transparent'}`} />
+          <polygon className="hstdown ldown" points="0,0 50,50 0,50" fill={fillHstLdown} stroke={`${fillHstLdown === 'white' ? '#bbb' : 'transparent'}`} />
+          <polygon className="hstdown rdown" points="0,0 50,0 50,50" fill={fillHstRdown} stroke={`${fillHstRdown === 'white' ? '#bbb' : 'transparent'}`} />
+          <polygon className="hstup lup" points="0,50 0,0 50,0" fill={fillHstLup} stroke={`${fillHstLup === 'white' ? '#bbb' : 'transparent'}`} />
+          <polygon className="hstup rup" points="0,50 50,0 50,50" fill={fillHstRup} stroke={`${fillHstRup === 'white' ? '#bbb' : 'transparent'}`} />
         </svg>
         {squStylerIsOpen === true && sashStylerIsOpen === false && bigBlockStylerIsOpen === false && activeSquStyler === id ?
           <SquareStyler
-            id={id} key={id} squareType={squareType} squareWidth={squareWidth} />
+            id={id} key={id} squareType={squareType} squareWidth={squareWidth} sashingCrossed={sashingCrossed} />
           : null}
         {bigBlockStylerIsOpen === true && sashStylerIsOpen === false && squStylerIsOpen === false && activeBigBlockStyler === id ?
           <BigBlockStyler

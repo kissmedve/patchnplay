@@ -7,6 +7,8 @@ const initialState = {
   sashingRows: [false, false, false],
   sashingWidths: [1, 1, 1],
   sashingHeights: [1, 1, 1],
+  sashingColsColor: ['white', 'white', 'white'],
+  sashingRowsColor: ['white', 'white', 'white'],
   squares: [
     [
       { id: '0-0', row: 0, col: 0, squareType: 'rect', fillSquare: 'red', fillHstLdown: 'red', fillHstRdown: 'white', fillHstLup: 'red', fillHstRup: 'white', fillSashing: 'white', covered: false, bigBlockAnchor: '', coveredByBigBlock: '', sashing: false, sashingCrossed: false, sashingWidth: 1, sashingHeight: 1 },
@@ -202,6 +204,18 @@ export const SquaresReducer = (state, action) => {
         sashingHeights: action.payload
       };
 
+    case "UPDATE_SASHINGCOLSCOLOR":
+      return {
+        ...state,
+        sashingColsColor: action.payload
+      };
+
+    case "UPDATE_SASHINGROWSCOLOR":
+      return {
+        ...state,
+        sashingRowsColor: action.payload
+      };
+
     case "ADD_INSERTED_BIGBLOCK":
       const addedBigBlock = action.payload;
       const expandedBigBlocks = [...state.insertedBigBlocks, addedBigBlock];
@@ -254,17 +268,16 @@ export const SquaresReducer = (state, action) => {
         borders: action.payload,
       };
 
-    case "EDIT_BORDER":
-      const { pos, background, widthTop, widthRight, widthBottom, widthLeft } = action.payload;
+    case "EDIT_BORDER_WIDTHS":
+      const { pos, widthTop, widthRight, widthBottom, widthLeft } = action.payload;
       const updatedBorders = state.borders.map(border => {
         if (border.pos === pos) {
           return {
             ...border,
-            background: background !== '' ? background : border.background,
-            widthTop: widthTop !== '' ? widthTop : border.widthTop,
-            widthRight: widthRight !== '' ? widthRight : border.widthRight,
-            widthBottom: widthBottom !== '' ? widthBottom : border.widthBottom,
-            widthLeft: widthLeft !== '' ? widthLeft : border.widthLeft,
+            widthTop,
+            widthRight,
+            widthBottom,
+            widthLeft,
           }
         }
         return border;
@@ -273,6 +286,22 @@ export const SquaresReducer = (state, action) => {
       return {
         ...state,
         borders: updatedBorders,
+      };
+
+    case "EDIT_BORDER_COLOR":
+      const { bPos, background } = action.payload;
+      const updateddBorders = state.borders.map(border => {
+        if (border.pos === bPos) {
+          return {
+            ...border,
+            background: background,
+          }
+        }
+        return border;
+      });
+      return {
+        ...state,
+        borders: updateddBorders,
       };
   }
 
@@ -365,6 +394,20 @@ export const SquaresProvider = ({ children }) => {
     });
   };
 
+  const updateSashingColsColor = (colors) => {
+    dispatch({
+      type: "UPDATE_SASHINGCOLSCOLOR",
+      payload: colors
+    });
+  };
+
+  const updateSashingRowsColor = (colors) => {
+    dispatch({
+      type: "UPDATE_SASHINGROWSCOLOR",
+      payload: colors
+    });
+  };
+
   const addInsertedBigBlock = (bigBlock) => {
     dispatch({
       type: "ADD_INSERTED_BIGBLOCK",
@@ -400,10 +443,17 @@ export const SquaresProvider = ({ children }) => {
     });
   };
 
-  const editBorder = ({ pos, background, widthTop, widthRight, widthBottom, widthLeft }) => {
+  const editBorderWidths = ({ pos, widthTop, widthRight, widthBottom, widthLeft }) => {
     dispatch({
-      type: "EDIT_BORDER",
-      payload: { pos, background, widthTop, widthRight, widthBottom, widthLeft }
+      type: "EDIT_BORDER_WIDTHS",
+      payload: { pos, widthTop, widthRight, widthBottom, widthLeft },
+    });
+  };
+
+  const editBorderColor = ({ bPos, background }) => {
+    dispatch({
+      type: "EDIT_BORDER_COLOR",
+      payload: { bPos, background },
     });
   };
 
@@ -417,6 +467,8 @@ export const SquaresProvider = ({ children }) => {
         sashingRows: state.sashingRows,
         sashingWidths: state.sashingWidths,
         sashingHeights: state.sashingHeights,
+        sashingColsColor: state.sashingColsColor,
+        sashingRowsColor: state.sashingRowsColor,
         insertedBigBlocks: state.insertedBigBlocks,
         borders: state.borders,
         squareWidth: state.squareWidth,
@@ -433,12 +485,15 @@ export const SquaresProvider = ({ children }) => {
         updateSashingRows,
         updateSashingWidths,
         updateSashingHeights,
+        updateSashingColsColor,
+        updateSashingRowsColor,
         addInsertedBigBlock,
         deleteInsertedBigBlock,
         editInsertedBigBlock,
         updateInsertedBigBlocks,
         updateBorders,
-        editBorder,
+        editBorderWidths,
+        editBorderColor,
       }}
     >
       {children}

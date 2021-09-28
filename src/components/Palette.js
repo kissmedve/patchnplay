@@ -95,6 +95,15 @@ const Palette = ({ paletteType, squareId, rowColId, borderPos }) => {
       ],
     },
     {
+      type: 'sashing',
+      data: [
+        {
+          swatchesGroup: '1',
+          swatchesTitle: 'Sashing Cross',
+        }
+      ],
+    },
+    {
       type: 'border',
       data: [
         {

@@ -4,11 +4,11 @@ import { SquaresContext } from "./SquaresContext";
 const AddColumn = ({ colId, squareWidth }) => {
 
   // global states
-  const { squares, cols, sashingCols, sashingRows, sashingWidths, updateSquares, updateCols, updateSashingCols, updateSashingWidths, insertedBigBlocks, updateInsertedBigBlocks } = useContext(SquaresContext);
+  const { squares, cols, sashingCols, sashingRows, sashingWidths, updateSquares, updateCols, updateSashingCols, updateSashingWidths, insertedBigBlocks, updateInsertedBigBlocks, sashingColsColor, updateSashingColsColor } = useContext(SquaresContext);
 
   // column is always added to the right of the clicked one
   // default new column is: 
-  // individual squares (not sashing), hstUp, white
+  // individual squares (not sashing), squareType 'rect', white
 
   const addColumnRight = (colId) => {
 
@@ -30,8 +30,9 @@ const AddColumn = ({ colId, squareWidth }) => {
       const newCols = [...cols, cols.length];
 
       // insert default values for new column
-      const newSashingCols = [...sashingCols.slice(0, colId), false, ...sashingCols.slice(colId)];
-      const newSashingWidths = [...sashingWidths.slice(0, colId), 1, ...sashingWidths.slice(colId)];
+      const newSashingCols = [...sashingCols.slice(0, colId + 1), false, ...sashingCols.slice(colId + 1)];
+      const newSashingWidths = [...sashingWidths.slice(0, colId + 1), 1, ...sashingWidths.slice(colId + 1)];
+      const newSashingColsColor = [...sashingColsColor.slice(0, colId + 1), 'white', ...sashingColsColor.slice(colId + 1)];
 
       // prepare squares for update
 
@@ -55,9 +56,9 @@ const AddColumn = ({ colId, squareWidth }) => {
             id: `${i}-${colId + 1}`,
             row: i,
             col: colId + 1,
-            squareType: sashingRows[i] === true ? 'rect' : 'hstup',
+            squareType: 'rect',
             fillSquare: 'white',
-            fillSashing: sashingRows[i] === true ? squs.squ[0].fillSashing : 'white',
+            fillSashing: sashingRows[i] === true ? squarez[i][0].fillSashing : 'white',
             fillHstLup: 'white',
             fillHstRup: 'white',
             fillHstLdown: 'white',
@@ -66,7 +67,7 @@ const AddColumn = ({ colId, squareWidth }) => {
             sashing: sashingRows[i] === true ? true : false,
             sashingCrossed: false,
             sashingWidth: 1,
-            sashingHeight: sashingRows[i] === true ? squs.squ[0].sashingHeight : 1,
+            sashingHeight: sashingRows[i] === true ? squarez[i][0].sashingHeight : 1,
           },
           // squares right to new column
           squs.filter((squ) => squ.col > (colId + 1)),
@@ -90,6 +91,7 @@ const AddColumn = ({ colId, squareWidth }) => {
       updateSashingCols(newSashingCols);
       updateSashingWidths(newSashingWidths);
       updateInsertedBigBlocks(newInsertedBigBlocks);
+      updateSashingColsColor(newSashingColsColor);
     }
   }
 

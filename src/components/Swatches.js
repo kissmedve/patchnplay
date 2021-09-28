@@ -4,12 +4,8 @@ import { ColorsContext } from "./ColorsContext";
 
 const Swatches = ({ swatchesTitle, swatchesGroup, paletteType, squareId, rowColId, borderPos }) => {
 
-  // temporary solution: default palette colors 
-  // later on palette colors will come through the PaletteSettings component
-  // const paletteColors = ['red', 'blue', 'yellow', 'green', 'turquoise'];
-
   // global states
-  const { editSquare, editSquares, insertedBigBlocks, editInsertedBigBlock, editBorder } = useContext(SquaresContext);
+  const { editSquare, editSquares, insertedBigBlocks, editInsertedBigBlock, editBorderColor, sashingColsColor, sashingRowsColor, updateSashingColsColor, updateSashingRowsColor } = useContext(SquaresContext);
   const { paletteColors } = useContext(ColorsContext);
 
   // local states
@@ -36,6 +32,9 @@ const Swatches = ({ swatchesTitle, swatchesGroup, paletteType, squareId, rowColI
       setColorTarget('fillSashing');
     }
     if (paletteType === 'sashRow' && swatchesGroup === '1') {
+      setColorTarget('fillSashing');
+    }
+    if (paletteType === 'sashing' && swatchesGroup === '1') {
       setColorTarget('fillSashing');
     }
     if (paletteType === 'bigBlockCol2' && swatchesGroup === '1') {
@@ -70,6 +69,10 @@ const Swatches = ({ swatchesTitle, swatchesGroup, paletteType, squareId, rowColI
         propertyKey: colorTarget,
         propertyValue: color
       });
+      let newSashingColsColor = sashingColsColor.map((sashColor, index) => {
+        return index === rowColId ? sashColor = color : sashColor
+      });
+      updateSashingColsColor(newSashingColsColor);
     } else if (paletteType === "sashRow") {
       editSquares({
         rowCol: 'row',
@@ -77,12 +80,14 @@ const Swatches = ({ swatchesTitle, swatchesGroup, paletteType, squareId, rowColI
         propertyKey: colorTarget,
         propertyValue: color
       });
+      let newSashingRowsColor = sashingRowsColor.map((sashColor, index) => {
+        return index === rowColId ? sashColor = color : sashColor
+      });
+      updateSashingRowsColor(newSashingRowsColor);
     } else if (paletteType === "border") {
-      editBorder({
-        pos: borderPos,
+      editBorderColor({
+        bPos: borderPos,
         background: color,
-        //propertyKey: colorTarget,
-        //propertyValue: color
       });
     } else if (paletteType === "bigBlockCol2" || paletteType === "bigBlockCol3") {
       let insIndex = insertedBigBlocks.indexOf(insertedBigBlocks.find(block => block.anchorSquare === squareId));
