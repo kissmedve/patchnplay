@@ -31,7 +31,9 @@ const ColorSettingsPalette = () => {
     deleteColor(clickedColor);
     setClickedColor('transparent');
   }
-  const swatchesBorder = currentColor === 'transparent' ? 'dashed 1px #333' : 'solid 1px transparent';
+  const addSwatchesBorder = currentColor === 'transparent' ? 'dashed 1px #333' : 'solid 1px transparent';
+  const removeSwatchesBorder = clickedColor === 'transparent' ? 'dashed 1px #333' : 'solid 1px transparent';
+  const swatchesGroupStyle= paletteColors.length < 1 ? {border:'dashed 1px #333', width: '7.5rem', height: '1.25rem'} : {border: 'solid 1px transparent'};
 
   return (
     <>
@@ -48,17 +50,17 @@ const ColorSettingsPalette = () => {
 
               <div className="h6">Current Colour</div>
               <div className="swatch-action">
-                <div className="swatch current-color" style={{ background: currentColor, border: swatchesBorder }} ></div>
+                <div className="swatch current-color" style={{ background: currentColor, border: addSwatchesBorder }} ></div>
 
                 <button className="btn add-color" onClick={addToColors} >Add to Palette</button>
               </div>
 
               <div className="h6">Custom Palette</div>
-              <div className="swatches-group">
+              <div className="swatches-group" style={swatchesGroupStyle}>
                 {swatchesList}
               </div>
               <div className="swatch-action">
-                <div className="swatch remove-color" style={{ background: clickedColor, border: swatchesBorder }} ></div>
+                <div className="swatch remove-color" style={{ background: clickedColor, border: removeSwatchesBorder }} ></div>
                 <button className="btn remove-color" onClick={removeFromColors}>Remove Colour</button>
               </div>
             </div>

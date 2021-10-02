@@ -1,7 +1,7 @@
 import React, { createContext, useReducer } from "react";
 
 const initialState = {
-  paletteColors: ['']
+  paletteColors: []
 };
 
 export const ColorsContext = createContext(initialState);

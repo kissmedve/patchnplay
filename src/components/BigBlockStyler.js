@@ -6,7 +6,7 @@ import elementBlocks from "../data/elementBlocks";
 import { BigBlocksContext } from "./BigBlocksContext";
 import Message from './Message';
 
-const BigBlockStyler = ({ id, squareType, squareWidth }) => {
+const BigBlockStyler = ({ id, squareType, squareWidth, sashingCrossed, sashingWidth, covered }) => {
 
   // global states
   const { squares, insertedBigBlocks, addInsertedBigBlock, editInsertedBigBlock, deleteInsertedBigBlock, insertedBigBlockEditSquares } = useContext(SquaresContext);
@@ -229,6 +229,7 @@ const BigBlockStyler = ({ id, squareType, squareWidth }) => {
           trianglesColor1: block.trianglesColor1,
           trianglesColor2: block.trianglesColor2,
           trianglesColor3: block.trianglesColor3,
+          stretchSquares: sashingCrossed === true ? sashingWidth : 1,
         })
       }} >
       <img src={`svgs/${block.file}.svg`} alt={`${block.name}`} />
@@ -267,28 +268,37 @@ const BigBlockStyler = ({ id, squareType, squareWidth }) => {
               <Message text={messageText} closeMessage={closeMessage} />
               : ''}
 
-            <div className="form-group bigblock-size">
-              <div className="card-title h6">Stretch</div>
-              <div className="form-group bigblock-width">
-                <input
-                  type="number"
-                  min="1"
-                  step="1"
-                  name="stretchSquares"
-                  value={selectedBigBlock.stretchSquares}
-                  onChange={handleBigBlockStretch}
-                />
-                <span className="explanation">columns / rows</span>
-              </div>
+            {sashingCrossed === false ?
 
-            </div>
+              <div className="form-group bigblock-size">
+                <div className="card-title h6">Stretch</div>
+                <div className="form-group bigblock-width">
+                  <input
+                    type="number"
+                    min="1"
+                    step="1"
+                    name="stretchSquares"
+                    value={selectedBigBlock.stretchSquares}
+                    onChange={handleBigBlockStretch}
+                  />
+                  <span className="explanation">columns / rows</span>
+                </div>
+              </div>
+              :
+              ''}
+            
             <Palette squareId={id} paletteType={bigBlockColourType} />
 
+            
+            {covered === true ?
             <button
               className="btn btn-apply"
               onClick={(event) => removeBigBlock(event)}
             >Delete Big Block</button>
+            : 
+            ''}
           </div>
+
 
         </div>
       </div>

@@ -2,21 +2,21 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="11.288889mm"
    height="11.288889mm"
    viewBox="0 0 40 40"
    id="svg5061"
    version="1.1"
-   inkscape:version="0.91 r13725"
-   sodipodi:docname="icon-b-noborder-40.svg">
+   inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
+   sodipodi:docname="icon-b-noborder-40.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
   <defs
      id="defs5063">
     <pattern
@@ -43,8 +43,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="7.9195959"
-     inkscape:cx="-2.247059"
-     inkscape:cy="22.615814"
+     inkscape:cx="-2.2097087"
+     inkscape:cy="22.665298"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -52,11 +52,12 @@
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     inkscape:window-width="1325"
-     inkscape:window-height="744"
-     inkscape:window-x="41"
-     inkscape:window-y="24"
-     inkscape:window-maximized="1" />
+     inkscape:window-width="1312"
+     inkscape:window-height="704"
+     inkscape:window-x="54"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:pagecheckerboard="0" />
   <metadata
      id="metadata5066">
     <rdf:RDF>
@@ -65,7 +66,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -74,16 +75,14 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(-275.83511,-357.44675)">
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:900;font-stretch:normal;font-size:19.1657753px;line-height:125%;font-family:Roboto;-inkscape-font-specification:'Roboto Heavy';letter-spacing:0px;word-spacing:0px;fill:#4d4d4d;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="289.52762"
-       y="384.25958"
+    <g
+       aria-label="B"
        id="text4469"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan4471"
-         x="289.52762"
-         y="384.25958">B</tspan></text>
+       style="font-weight:900;line-height:0%;font-family:Roboto;-inkscape-font-specification:'Roboto Heavy';letter-spacing:0px;word-spacing:0px;fill:#4d4d4d;stroke-width:1px">
+      <path
+         d="M 290.55703,384.25958 V 370.6339 h 4.89439 q 2.62969,0 3.996,0.9639 1.37567,0.96391 1.37567,2.79813 0,1.05749 -0.48663,1.80616 -0.48664,0.74866 -1.43182,1.10428 1.06684,0.28074 1.6377,1.04812 0.57085,0.76739 0.57085,1.87166 0,2.00268 -1.27272,3.01338 -1.26337,1.00134 -3.75268,1.02005 z m 3.28477,-5.79279 v 3.26605 h 2.1524 q 0.88904,0 1.36632,-0.40241 0.47727,-0.41176 0.47727,-1.15107 0,-1.70321 -1.69385,-1.71257 z m 0,-2.1524 h 1.71256 q 1.07621,-0.009 1.53477,-0.39305 0.45855,-0.38369 0.45855,-1.13236 0,-0.86096 -0.49599,-1.23529 Q 296.5557,373.17 295.45142,373.17 h -1.60962 z"
+         style="font-size:19.1658px;line-height:1.25"
+         id="path2556" />
+    </g>
   </g>
 </svg>

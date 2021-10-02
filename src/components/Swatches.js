@@ -34,7 +34,7 @@ const Swatches = ({ swatchesTitle, swatchesGroup, paletteType, squareId, rowColI
     if (paletteType === 'sashRow' && swatchesGroup === '1') {
       setColorTarget('fillSashing');
     }
-    if (paletteType === 'sashing' && swatchesGroup === '1') {
+    if (paletteType === 'rectSashing' && swatchesGroup === '1') {
       setColorTarget('fillSashing');
     }
     if (paletteType === 'bigBlockCol2' && swatchesGroup === '1') {

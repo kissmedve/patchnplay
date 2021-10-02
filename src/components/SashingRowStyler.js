@@ -32,6 +32,7 @@ const SashingRowStyler = ({ rowCol, id }) => {
           // mark squares also belonging to sashing columns as sashing cross
           if (squarez[i][k].row === id && squarez[i][k].sashing === true) {
             squarez[i][k].sashingCrossed = true;
+            squarez[i][k].squareType = 'rectSashing';
           }
           // mark all squares of the sashing row
           if (squarez[i][k].row === id) {
@@ -71,6 +72,7 @@ const SashingRowStyler = ({ rowCol, id }) => {
         if (squarezz[i][k].row === id && squarezz[i][k].sashingCrossed === true) {
           squarezz[i][k].sashing = true;
           squarezz[i][k].sashingCrossed = false;
+          squarezz[i][k].squareType = 'rect';
         }
       }
     }

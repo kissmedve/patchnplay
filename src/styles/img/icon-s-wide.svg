@@ -2,21 +2,21 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="13.546666mm"
    height="8.4666662mm"
    viewBox="0 0 47.999998 29.999998"
    id="svg5061"
    version="1.1"
-   inkscape:version="0.91 r13725"
-   sodipodi:docname="icon-s-wide.svg">
+   inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
+   sodipodi:docname="icon-s-wide.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
   <defs
      id="defs5063">
     <pattern
@@ -43,8 +43,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="7.9195959"
-     inkscape:cx="9.3544612"
-     inkscape:cy="11.004411"
+     inkscape:cx="9.4070456"
+     inkscape:cy="11.048544"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -52,11 +52,12 @@
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     inkscape:window-width="1325"
-     inkscape:window-height="744"
-     inkscape:window-x="41"
-     inkscape:window-y="24"
-     inkscape:window-maximized="1" />
+     inkscape:window-width="1312"
+     inkscape:window-height="704"
+     inkscape:window-x="54"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:pagecheckerboard="0" />
   <metadata
      id="metadata5066">
     <rdf:RDF>
@@ -79,16 +80,14 @@
        style="fill:none;fill-opacity:1;stroke:#e3e3e3;stroke-width:2.47771955;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="m 284.98254,362.33601 c -1.64475,0 -2.96884,0.80055 -2.96884,1.79494 l 0,23.93241 c 0,0.9944 1.32409,1.79493 2.96884,1.79493 l 39.58459,0 c 1.64473,0 2.96885,-0.80053 2.96885,-1.79493 l 0,-23.93241 c 0,-0.99439 -1.32412,-1.79494 -2.96885,-1.79494 l -39.58459,0 z"
        id="path3482" />
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:900;font-stretch:normal;font-size:16.42780685px;line-height:125%;font-family:Roboto;-inkscape-font-specification:'Roboto Heavy';letter-spacing:0px;word-spacing:0px;fill:#4d4d4d;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="299.6572"
-       y="381.93674"
+    <g
+       aria-label="S"
        id="text4469"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan4471"
-         x="299.6572"
-         y="381.93674">S</tspan></text>
+       style="font-weight:900;line-height:0%;font-family:Roboto;-inkscape-font-specification:'Roboto Heavy';letter-spacing:0px;word-spacing:0px;fill:#4d4d4d;stroke-width:1px">
+      <path
+         d="m 306.56361,378.83246 q 0,-0.61765 -0.44118,-0.96257 -0.43315,-0.34492 -1.53208,-0.7139 -1.09893,-0.36898 -1.79679,-0.7139 -2.27005,-1.11498 -2.27005,-3.06417 0,-0.97059 0.56149,-1.70856 0.56952,-0.74599 1.60428,-1.15508 1.03476,-0.41711 2.3262,-0.41711 1.25936,0 2.25401,0.4492 1.00267,0.4492 1.55615,1.28342 0.55348,0.8262 0.55348,1.89305 h -2.80749 q 0,-0.71391 -0.44118,-1.10695 -0.43315,-0.39305 -1.17914,-0.39305 -0.75401,0 -1.19519,0.3369 -0.43315,0.32887 -0.43315,0.84224 0,0.4492 0.48128,0.81818 0.48129,0.36097 1.69252,0.75401 1.21122,0.38503 1.9893,0.83423 1.89305,1.09091 1.89305,3.00802 0,1.53208 -1.15508,2.40641 -1.15508,0.87433 -3.16845,0.87433 -1.41979,0 -2.57487,-0.50534 -1.14705,-0.51337 -1.73262,-1.39572 -0.57754,-0.89038 -0.57754,-2.04546 h 2.82353 q 0,0.9385 0.48129,1.3877 0.4893,0.44118 1.58021,0.44118 0.69786,0 1.09893,-0.29679 0.40909,-0.30482 0.40909,-0.85027 z"
+         style="font-size:16.4278px;line-height:1.25"
+         id="path13" />
+    </g>
   </g>
 </svg>

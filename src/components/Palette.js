@@ -95,7 +95,7 @@ const Palette = ({ paletteType, squareId, rowColId, borderPos }) => {
       ],
     },
     {
-      type: 'sashing',
+      type: 'rectSashing',
       data: [
         {
           swatchesGroup: '1',

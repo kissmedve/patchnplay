@@ -15,6 +15,8 @@ const Square = ({ id, row, col, squareType, fillSquare, fillHstLdown, fillHstRdo
     }
   }
 
+  const sashingRatioIsEven = sashingWidth / sashingHeight === 1 ? true : false;
+
   return (
     <>
       <div className={`square ${squareType.toLowerCase()} ${covered === true ? 'covered' : 'not-covered'} ${sashing === true ? 'sashing' : ''} ${sashingCrossed === true ? 'sashing-crossed' : ''} `} style={{ width: sashingWidth > 1 ? sashingWidth * squareWidth + `px` : ``, height: sashingHeight > 1 ? sashingHeight * squareWidth + `px` : '' }} key={id} onClick={openSquareStyler}>
@@ -33,11 +35,11 @@ const Square = ({ id, row, col, squareType, fillSquare, fillHstLdown, fillHstRdo
         </svg>
         {squStylerIsOpen === true && sashStylerIsOpen === false && bigBlockStylerIsOpen === false && activeSquStyler === id ?
           <SquareStyler
-            id={id} key={id} squareType={squareType} squareWidth={squareWidth} sashingCrossed={sashingCrossed} />
+            id={id} key={id} squareType={squareType} squareWidth={squareWidth} sashingCrossed={sashingCrossed} sashingRatioIsOne={sashingRatioIsEven} />
           : null}
         {bigBlockStylerIsOpen === true && sashStylerIsOpen === false && squStylerIsOpen === false && activeBigBlockStyler === id ?
           <BigBlockStyler
-            id={id} key={id} squareType={'bigBlock'} squareWidth={squareWidth} />
+            id={id} key={id} squareType={'bigBlock'} squareWidth={squareWidth} sashingCrossed={sashingCrossed} sashingWidth={sashingWidth} covered={covered} />
           : null}
       </div>
     </>
