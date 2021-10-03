@@ -5,12 +5,22 @@ import { ColorsContext } from "./ColorsContext";
 const Swatches = ({ swatchesTitle, swatchesGroup, paletteType, squareId, rowColId, borderPos }) => {
 
   // global states
-  const { editSquare, editSquares, insertedBigBlocks, editInsertedBigBlock, editBorderColor, sashingColsColor, sashingRowsColor, updateSashingColsColor, updateSashingRowsColor } = useContext(SquaresContext);
+  const { editSquare, editSquares, insertedBigBlocks, editInsertedBigBlock, borders, editBorderColor, sashingColsColor, sashingRowsColor, updateSashingColsColor, updateSashingRowsColor } = useContext(SquaresContext);
   const { paletteColors } = useContext(ColorsContext);
 
   // local states
   const [color, setColor] = useState('');
   const [colorTarget, setColorTarget] = useState('');
+
+  useEffect(() => {
+    if (borders.length === 1) {
+      setColor(borders[0].background);
+    }
+    if (borderPos && paletteType === 'border') {
+      const incomingBorder = borders.find(border => border.pos === borderPos);
+      setColor(incomingBorder.background);
+    }
+  }, []);
 
   useEffect(() => {
     if (paletteType === 'rect' && swatchesGroup === '1') {

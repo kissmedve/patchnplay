@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { SquaresContext } from "./SquaresContext";
 import { BigBlocksContext } from "./BigBlocksContext";
 import { ColorsContext } from "./ColorsContext";
+import Message from "./Message";
 
 const UploadJSON = () => {
 
@@ -12,6 +13,8 @@ const UploadJSON = () => {
 
   // local state
   const [selectedFile, setSelectedFile] = useState('');
+  const [messageIsActive, setMessageIsActive] = useState(false);
+  const [messageText, setMessageText] = useState('');
 
   const onFileChange = (event) => {
 
@@ -19,17 +22,18 @@ const UploadJSON = () => {
     if (file.type === "application/json") {
       setSelectedFile(file);
     } else {
-      console.log('File type not allowed');
+      setMessageText('File type not allowed');
+      setMessageIsActive(true);
     }
   }
 
   const onFileUpload = async (event) => {
 
     event.preventDefault();
+
+    if (selectedFile !== '') {
     const fileData = await selectedFile.text();
     let parsedData = JSON.parse(fileData);
-
-    console.log(parsedData);
 
     updateSquares(parsedData.squares);
     updateCols(parsedData.cols);
@@ -44,7 +48,16 @@ const UploadJSON = () => {
     updateBigBlocks(parsedData.selectedBigBlocks);
 
     updateColors(parsedData.paletteColors);
+  } else {
+    setMessageText('Please choose a file');
+    setMessageIsActive(true);
   }
+} 
+
+const closeMessage = (event) => {
+  setMessageIsActive(false);
+  setMessageText('');
+}
 
   return (
     <div className="card">
@@ -63,6 +76,9 @@ const UploadJSON = () => {
               ></input>
             </label>
           </div>
+          {messageIsActive ?
+              <Message text={messageText} closeMessage={closeMessage} />
+              : ''}
           <button className="btn" type="submit" name="save" >
             Upload
             </button>

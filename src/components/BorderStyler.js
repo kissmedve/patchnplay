@@ -20,6 +20,23 @@ const BorderStyler = () => {
     background: 'purple',
   });
 
+  useEffect(() => {
+      setBorderData({
+        pos: borders[0].pos,
+        widthTop: borders[0].widthTop,
+        widthRight: borders[0].widthRight,
+        widthBottom: borders[0].widthBottom,
+        widthLeft: borders[0].widthLeft,
+        background: borders[0].background,
+      })
+  }, [selectedBorder]);
+
+  useEffect(() => {
+    if (borders.length === 1) {
+      setSelectedBorder(borders[0].pos);
+    }
+  }, [borders]);
+
   const addBorder = (pos) => {
     let newBorders = [];
     borders.forEach(border => {
@@ -51,7 +68,6 @@ const BorderStyler = () => {
   const selectBorder = (pos) => {
     setSelectedBorder(pos);
     let activeBorder = borders.find(border => border.pos === pos);
-    console.log('activeBorder.background', activeBorder.background);
     setBorderData({
       pos: activeBorder.pos,
       widthTop: activeBorder.widthTop,
@@ -63,7 +79,6 @@ const BorderStyler = () => {
   };
 
   const handleInputBorderWidth = (event) => {
-    console.log(borderData);
     setBorderData({ ...borderData, [event.target.name]: parseInt(event.target.value) });
   }
 

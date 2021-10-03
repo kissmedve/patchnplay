@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { StylersContext } from "./StylersContext";
 import { SquaresContext } from "./SquaresContext";
 import Palette from './Palette';
@@ -12,6 +12,10 @@ const SashingRowStyler = ({ rowCol, id }) => {
   // local states
   const [inputSashingHeight, setInputSashingHeight] = useState(1);
 
+  useEffect(() => {
+    setInputSashingHeight(sashingHeights[id]);
+  }, []);
+
   const handleInputHeight = (event) => {
     setInputSashingHeight(Number(event.target.value));
   }
@@ -22,7 +26,6 @@ const SashingRowStyler = ({ rowCol, id }) => {
     let isSquCovered = squares.map(squs => {
       return squs.some(squ => squ.row === id && squ.covered === true)
     }).some(el => el === true);
-    console.log('isSquCovered', isSquCovered);
 
     // only switch to sashing, if not covered
     if (!isSquCovered) {

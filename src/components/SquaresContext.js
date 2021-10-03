@@ -303,6 +303,10 @@ export const SquaresReducer = (state, action) => {
         ...state,
         borders: updateddBorders,
       };
+
+    default:
+      return state;
+      
   }
 
 };

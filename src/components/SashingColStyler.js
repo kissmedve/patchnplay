@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { StylersContext } from "./StylersContext";
 import { SquaresContext } from "./SquaresContext";
 import Palette from './Palette';
+import { useEffect } from "react/cjs/react.development";
 
 const SashingColStyler = ({ rowCol, id }) => {
 
@@ -11,6 +12,10 @@ const SashingColStyler = ({ rowCol, id }) => {
 
   // local states
   const [inputSashingWidth, setInputSashingWidth] = useState(1);
+
+  useEffect(() => {
+    setInputSashingWidth(sashingWidths[id]);
+  }, []);
 
   const handleInputWidth = (event) => {
     setInputSashingWidth(Number(event.target.value));
@@ -22,7 +27,6 @@ const SashingColStyler = ({ rowCol, id }) => {
     let isSquCovered = squares.map(squs => {
       return squs.some(squ => squ.col === id && squ.covered === true)
     }).some(el => el === true);
-    console.log('isSquCovered', isSquCovered);
 
     // only switch to sashing, if not covered
     if (!isSquCovered) {
