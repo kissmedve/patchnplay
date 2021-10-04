@@ -21,6 +21,7 @@ const BorderStyler = () => {
   });
 
   useEffect(() => {
+    if (borders.length === 1) {
       setBorderData({
         pos: borders[0].pos,
         widthTop: borders[0].widthTop,
@@ -29,6 +30,7 @@ const BorderStyler = () => {
         widthLeft: borders[0].widthLeft,
         background: borders[0].background,
       })
+    } 
   }, [selectedBorder]);
 
   useEffect(() => {

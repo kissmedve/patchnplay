@@ -94,7 +94,7 @@ const Swatches = ({ swatchesTitle, swatchesGroup, paletteType, squareId, rowColI
         return index === rowColId ? sashColor = color : sashColor
       });
       updateSashingRowsColor(newSashingRowsColor);
-    } else if (paletteType === "border") {
+    } else if (paletteType === "border" && color !== '') {
       editBorderColor({
         bPos: borderPos,
         background: color,
