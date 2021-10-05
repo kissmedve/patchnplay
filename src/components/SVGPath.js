@@ -38,7 +38,7 @@ const SVGPath = ({ vertices, fillColor, color1, color2, color3 }) => {
   let pathDataJoined = pathData.join(' ');
 
   return (
-    <path className={fillColor} d={pathDataJoined} fill={newFillColor} stroke="#eeeeee" />
+    <path className={fillColor} d={pathDataJoined} fill={newFillColor} stroke="transparent" />
   )
 }
 
