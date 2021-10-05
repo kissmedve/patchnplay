@@ -68,7 +68,8 @@ const BigBlockStyler = ({ id, squareType, squareWidth, sashingCrossed, sashingWi
     return coveredIds;
   }
 
-  const coveredSquares = checkSquares(selectedBigBlock.stretchSquares);
+  // sashing cross is never more than 1 square
+  const coveredSquares = sashingCrossed === false ? checkSquares(selectedBigBlock.stretchSquares) : [id];
 
   // insert or edit when selected Big Block changes
   useEffect(() => {
