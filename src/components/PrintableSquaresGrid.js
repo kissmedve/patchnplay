@@ -1,33 +1,12 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 import { SquaresContext } from "./SquaresContext";
 import elementBlocks from "../data/elementBlocks";
-import { StylersContext } from "./StylersContext";
 
 const PrintableSquaresGrid = () => {
 
   // global states
   const { squares, insertedBigBlocks, borders, squareWidth, sashingWidths, sashingHeights, borderBaseWidth } = useContext(SquaresContext);
-  const { bigBlockStylerIsOpen } = useContext(StylersContext);
 
-  // local states
-  const [elemBlocks, setElemBlocks] = useState([]);
-
-  useEffect(() => {
-    if (insertedBigBlocks.length > 0) {
-      insertedBigBlocks.map(inserted => {
-        let elBlock = elementBlocks.find(block => inserted.elementBlocksId === block.id);
-        if (!elemBlocks.find(block => block.id === elBlock.id)) {
-          setElemBlocks([
-            ...elemBlocks,
-            {
-              id: elBlock.id,
-              rowCol: elBlock.rowCol,
-              paths: elBlock.paths,
-            }])
-        }
-      })
-    }
-  }, [bigBlockStylerIsOpen]);
 
   // offset of squares grid from outmost border
   const left = borders.map(border => border.widthLeft).reduce((acc, val) => acc + val, 0) * borderBaseWidth;
@@ -40,21 +19,27 @@ const PrintableSquaresGrid = () => {
   // cumulated widths and heights of border "boxes"
   let borderWidths = borders.map(border => (border.widthLeft + border.widthRight) * borderBaseWidth);
   borderWidths.push(squGridWith);
+
   const cumBWidths = borders.map((border, i) => {
     return borderWidths.slice(i, borderWidths.length).reduce((acc, val) => acc + val, 0)
   });
+
   let borderHeights = borders.map(border => (border.widthTop + border.widthBottom) * borderBaseWidth);
   borderHeights.push(squGridHeight);
+
   const cumBHeights = borders.map((border, i) => {
     return borderHeights.slice(i, borderHeights.length).reduce((acc, val) => acc + val, 0);
   });
 
   // cumulated width and height border offsets
   const borderLeftOffsets = borders.map(border => border.widthLeft);
+
   const cumBLeftOffsets = borderLeftOffsets.map((offset, i) => {
     return borderLeftOffsets.slice(0, i).reduce((acc, val) => acc + val, 0) * borderBaseWidth;
   });
+
   const borderTopOffsets = borders.map(border => border.widthTop);
+
   const cumBTopOffsets = borderTopOffsets.map((offset, i) => {
     return borderTopOffsets.slice(0, i).reduce((acc, val) => acc + val, 0) * borderBaseWidth;
   });
@@ -160,12 +145,12 @@ const PrintableSquaresGrid = () => {
         if (squ.squareType === 'rect' || squ.sashing === true) {
           let fillColor = squ.sashing === true ? squ.fillSashing : squ.fillSquare;
           return writeSquare(squ.row, squ.col, squ.sashingWidth, squ.sashingHeight, fillColor);
-        }
-        if (squ.squareType === 'hstUp') {
+        } else if (squ.squareType === 'hstUp') {
           return writeHSTUp(squ.row, squ.col, squ.fillHstLup, squ.fillHstRup);
-        }
-        if (squ.squareType === 'hstDown') {
+        } else if (squ.squareType === 'hstDown') {
           return writeHSTDown(squ.row, squ.col, squ.fillHstLdown, squ.fillHstRdown);
+        } else {
+          return null;
         }
       })
     });
@@ -191,13 +176,13 @@ const PrintableSquaresGrid = () => {
   // draw inserted BigBlocks
   const bigBlocks = () => {
 
-    return insertedBigBlocks.map(insBlock => {
+    return insertedBigBlocks.map((insBlock,i )=> {
       let anchor = insBlock.anchorSquare.split('-');
       let widthOffset = (sashingWidths.slice(0, anchor[1]).reduce((acc, val) => acc + val, 0) * squareWidth) + left;
       let heightOffset = (sashingHeights.slice(0, anchor[0]).reduce((acc, val) => acc + val, 0) * squareWidth) + top;
       const resizing = insBlock.stretchSquares / insBlock.rowCol;
 
-      let eleBlock = elemBlocks.find(block => block.id === insBlock.elementBlocksId);
+      let eleBlock = elementBlocks.find(block => block.id === insBlock.elementBlocksId);
 
       if (eleBlock) {
         return eleBlock.paths.map(path => {
@@ -208,13 +193,16 @@ const PrintableSquaresGrid = () => {
 
           if (path.vertices.length === 4) {
             let pathDataSqu = pathDataSquare(path.vertices, resizing, widthOffset, heightOffset);
-            return <path d={pathDataSqu} fill={fillColor}></path>
-          }
-          if (path.vertices.length === 3) {
+            return <path d={pathDataSqu} fill={fillColor} stroke={fillColor} ></path>
+          } else if (path.vertices.length === 3) {
             let pathDataTr = pathDataTriangle(path.vertices, resizing, widthOffset, heightOffset);
-            return <path d={pathDataTr} fill={fillColor}></path>
+            return <path d={pathDataTr} fill={fillColor} stroke={fillColor} ></path>
+          } else {
+            return null;
           }
         })
+      } else {
+        return null;
       }
     })
   }
