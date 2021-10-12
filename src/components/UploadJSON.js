@@ -7,7 +7,7 @@ import Message from "./Message";
 const UploadJSON = () => {
 
   // global states
-  const { updateSquares, updateCols, updateRows, updateSashingCols, updateSashingRows, updateSashingWidths, updateSashingHeights, updateInsertedBigBlocks, updateBorders } = useContext(SquaresContext);
+  const { updateSquares, updateCols, updateRows, updateSashingCols, updateSashingRows, updateSashingWidths, updateSashingHeights, updateSashingColsColor, updateSashingRowsColor, updateInsertedBigBlocks, updateBorders } = useContext(SquaresContext);
   const { updateBigBlocks } = useContext(BigBlocksContext);
   const { updateColors } = useContext(ColorsContext);
 
@@ -42,6 +42,8 @@ const UploadJSON = () => {
     updateSashingRows(parsedData.sashingRows);
     updateSashingWidths(parsedData.sashingWidths);
     updateSashingHeights(parsedData.sashingHeights);
+    updateSashingColsColor(parsedData.sashingColsColor);
+    updateSashingRowsColor(parsedData.sashingRowsColor);
     updateInsertedBigBlocks(parsedData.insertedBigBlocks);
     updateBorders(parsedData.borders);
 

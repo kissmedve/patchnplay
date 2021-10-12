@@ -6,7 +6,7 @@ import { ColorsContext } from "./ColorsContext";
 const DownloadJSON = () => {
 
   // global states
-  const { cols, rows, sashingCols, sashingRows, sashingWidths, sashingHeights, squares, insertedBigBlocks, borders, squareWidth, borderBaseWidth } = useContext(SquaresContext);
+  const { cols, rows, sashingCols, sashingRows, sashingWidths, sashingHeights, sashingColsColor, sashingRowsColor, squares, insertedBigBlocks, borders, squareWidth, borderBaseWidth } = useContext(SquaresContext);
   const { selectedBigBlocks } = useContext(BigBlocksContext);
   const { paletteColors } = useContext(ColorsContext);
 
@@ -17,6 +17,8 @@ const DownloadJSON = () => {
     sashingRows,
     sashingWidths,
     sashingHeights,
+    sashingColsColor,
+    sashingRowsColor,
     squares,
     insertedBigBlocks,
     borders,
