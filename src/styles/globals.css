@@ -2,7 +2,7 @@
 @import url('variables.css');
 
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 /* Square */
@@ -47,7 +47,6 @@ body {
 .square.sashing svg .hstdown {
   display: none;
 }
-
 
 .slider ul {
   display: flex;
@@ -138,7 +137,7 @@ body {
 .add-border > span,
 .delete-border > span,
 .border-styler > span,
-.calc-styler >span {
+.calc-styler > span {
   width: 0;
   height: 0;
   position: absolute;
@@ -200,7 +199,7 @@ button.squares-settings,
 }
 .popup {
   padding: 18px;
-  background: rgba(240, 240, 240, 0.8); 
+  background: rgba(240, 240, 240, 0.8);
 }
 .styling-dropdown .card {
   position: relative;
@@ -215,18 +214,27 @@ button.squares-settings,
 }
 .styling-dropdown span,
 .styling-dropdown .swatches-title {
- white-space: nowrap;
- font-size: var(--font_14px);
- margin-left: 2px;
+  white-space: nowrap;
+  font-size: var(--font_14px);
+  margin-left: 2px;
 }
 .styling-dropdown input.square-type,
 .styling-dropdown input.square-type:focus,
-.styling-dropdown input.square-type:checked {
+.styling-dropdown input.square-type:checked,
+.calculate-fabrics input.fabric-width,
+.calculate-fabrics input.fabric-width:focus,
+.calculate-fabrics input.fabric-width:checked,
+.calculate-fabrics input.square-size,
+.calculate-fabrics input.square-size:focus,
+.calculate-fabrics input.square-size:checked,
+.calculate-fabrics input.seam-allowance,
+.calculate-fabrics input.seam-allowance:focus,
+.calculate-fabrics input.seam-allowance:checked {
   width: 1px;
   height: 1px;
   opacity: 0;
 }
-.form-radio input:checked + .form-icon::before  {
+.form-radio input:checked + .form-icon::before {
   content: none;
 }
 .styling-dropdown .form-icon {
@@ -235,9 +243,23 @@ button.squares-settings,
   border-radius: 20%;
   border: 0.2rem solid transparent;
 }
-.styling-dropdown .form-radio input.square-type:checked + .form-icon, 
-.styling-dropdown .form-radio input.square-type:focus + .form-icon {
+.styling-dropdown .form-radio input.square-type:checked + .form-icon,
+.styling-dropdown .form-radio input.square-type:focus + .form-icon,
+.calculate-fabrics .form-radio input.fabric-width:checked + .form-icon,
+.calculate-fabrics .form-radio input.fabric-width:focus + .form-icon,
+.calculate-fabrics .form-radio input.square-size:checked + .form-icon,
+.calculate-fabrics .form-radio input.square-size:focus + .form-icon,
+.calculate-fabrics .form-radio input.seam-allowance:checked + .form-icon,
+.calculate-fabrics .form-radio input.seam-allowance:focus + .form-icon {
   border-color: hsla(91, 99%, 42%, 0.6);
+}
+.calculate-fabrics .form-radio input.fabric-width:checked + .form-icon,
+.calculate-fabrics .form-radio input.fabric-width:focus + .form-icon,
+.calculate-fabrics .form-radio input.square-size:checked + .form-icon,
+.calculate-fabrics .form-radio input.square-size:focus + .form-icon,
+.calculate-fabrics .form-radio input.seam-allowance:checked + .form-icon,
+.calculate-fabrics .form-radio input.seam-allowance:focus + .form-icon {
+  border-width: 0.25rem;
 }
 .styling-dropdown .form-radio.rect .form-icon,
 .styling-dropdown .form-radio.rect input:focus + .form-icon,
@@ -247,7 +269,7 @@ button.squares-settings,
 .styling-dropdown .form-radio.hst-down .form-icon,
 .styling-dropdown .form-radio.hst-down input:focus + .form-icon,
 .styling-dropdown .form-radio.hst-down input:checked + .form-icon {
-  background: hsl(0, 0%, 60%)url(img/hst-down.svg) no-repeat center center;
+  background: hsl(0, 0%, 60%) url(img/hst-down.svg) no-repeat center center;
 }
 .styling-dropdown .form-radio.hst-up .form-icon,
 .styling-dropdown .form-radio.hst-up input.square-type:focus + .form-icon,
@@ -256,8 +278,74 @@ button.squares-settings,
 }
 .styling-dropdown .form-radio.hst-bigblock .form-icon,
 .styling-dropdown .form-radio.hst-bigblock input.square-type:focus + .form-icon,
-.styling-dropdown .form-radio.hst-bigblock input.square-type:checked + .form-icon {
+.styling-dropdown
+  .form-radio.hst-bigblock
+  input.square-type:checked
+  + .form-icon {
   background: hsl(0, 0%, 60%) url(img/hst-bigblock.svg) no-repeat center center;
+}
+.calculate-fabrics .form-table {
+  margin-bottom: 1.5rem;
+}
+.calculate-fabrics .form-radio.fabric-width .form-icon,
+.calculate-fabrics .form-radio.fabric-width input:focus + .form-icon,
+.calculate-fabrics .form-radio.fabric-width input:checked + .form-icon,
+.calculate-fabrics .form-radio.square-size .form-icon,
+.calculate-fabrics .form-radio.square-size input:focus + .form-icon,
+.calculate-fabrics .form-radio.square-size input:checked + .form-icon,
+.calculate-fabrics .form-radio.seam-allowance .form-icon,
+.calculate-fabrics .form-radio.seam-allowance input:focus + .form-icon,
+.calculate-fabrics .form-radio.seam-allowance input:checked + .form-icon {
+  background: hsl(0, 0%, 60%) url(img/radio.svg) no-repeat center center;
+}
+.calculate-fabrics .form-radio.fabric-width .form-icon,
+.calculate-fabrics .form-radio.square-size .form-icon,
+.calculate-fabrics .form-radio.seam-allowance .form-icon {
+  border-radius: 50%;
+  width: 0.8rem;
+  height: 0.8rem;
+  top: 0.15rem;
+}
+.calculate-fabrics .form-radio.fabric-width .form-icon {
+  left: 2rem;
+}
+.calculate-fabrics .form-radio.fabric-width,
+.calculate-fabrics .form-radio.square-size,
+.calculate-fabrics .form-radio.seam-allowance {
+  padding: 0 0.4rem 0 1.2rem;
+  line-height: 1.1rem;
+  min-height: 1.1rem;
+}
+.calculate-fabrics .form-header,
+.calculate-fabrics .form-row,
+.calculate-fabrics .row-header,
+.calculate-fabrics .row-body {
+  display: flex;
+}
+.calculate-fabrics .form-row,
+.calculate-fabrics .col,
+.calculate-fabrics .colorname,
+.calculate-fabrics .colorbg {
+  margin: 0.1rem 0;
+  column-gap: 0.2rem;
+}
+.calculate-fabrics .col {
+  min-width: 5rem;
+  text-align: center;
+}
+.calculate-fabrics .colorname {
+  min-width: 3.5rem;
+  text-align: left;
+}
+.calculate-fabrics .colorbg {
+  min-width: 2rem;
+  text-align: left;
+}
+.calculate-fabrics .form-row span {
+  display: block;
+  text-indent: -9999rem;
+  width: 0;
+  height: 0;
 }
 .form-group.sashing-number,
 .form-group.border-width {
@@ -323,12 +411,14 @@ button.border-add {
   width: 9rem;
 }
 .styling-dropdown .h5,
-.colors .h5 {
+.colors .h5,
+.calculate-fabrics .h5 {
   font-size: var(--font_18px);
   text-transform: uppercase;
 }
 .styling-dropdown .h6,
-.colors .h6 {
+.colors .h6,
+.calculate-fabrics .h6 {
   font-size: var(--font_13px);
   font-weight: 700;
   text-transform: uppercase;
@@ -343,7 +433,7 @@ button.border-add {
   display: flex;
   padding: 0.3rem 0;
 }
-.bigblock-width  input {
+.bigblock-width input {
   width: 3.5rem;
   margin-right: 0.25rem;
 }
@@ -353,7 +443,8 @@ button.border-add {
 .btn.add-color,
 .btn.remove-color {
   font-size: var(--font_14px);
-  background: #dadada linear-gradient(60deg, #cecccc 0%, #ddd 40%, #dadada 100%) no-repeat;
+  background: #dadada linear-gradient(60deg, #cecccc 0%, #ddd 40%, #dadada 100%)
+    no-repeat;
   border: 2px solid #c0c0c0;
   color: #2f2f2f;
 }
@@ -390,7 +481,6 @@ button.border-add {
   margin-right: 8px;
 } */
 
-
 /* Toast */
 .toast {
   position: relative;
@@ -411,18 +501,18 @@ button.border-add {
   position: fixed;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.1);
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 /* SquareStyler */
-
 
 /* Navigation */
 .nav {
   display: flex;
   flex-direction: row;
 }
-.nav .btn.btn-link, .nav a {
+.nav .btn.btn-link,
+.nav a {
   color: #3b4351;
   font-size: var(--font_14px);
   /*font-weight: 700;*/
@@ -443,7 +533,7 @@ button.border-add {
 .selected-gallery .premade {
   width: 50px;
   margin: 5px;
-  font-size: 0; 
+  font-size: 0;
 }
 .selected-gallery .premade.active {
   transform: scale(1.2);
@@ -467,7 +557,7 @@ button.border-add {
   margin-bottom: 0.25rem;
 }
 .border {
-  padding:20px;
+  padding: 20px;
 }
 .borders-underlay {
   display: inline-block;
@@ -475,4 +565,3 @@ button.border-add {
   top: 90px;
   left: 90px;
 }
-

@@ -5,39 +5,60 @@ import BigBlockGallery from "./BigBlockGallery";
 import DownloadJSON from "./DownloadJSON";
 import UploadJSON from "./UploadJSON";
 import PrintableSquaresGrid from "./PrintableSquaresGrid";
-import CalculateFabric from "./CalculateFabric";
+import CalculateFabricForm from "./CalculateFabricForm";
 
 const Navigation = () => {
-
   // local states
   const [colorsModalIsOpen, setColorsModalIsOpen] = useState(false);
   const [premadesModalIsOpen, setPremadesModalIsOpen] = useState(false);
   const [previewModalIsOpen, setPreviewModalIsOpen] = useState(false);
+  const [calcFabricModalIsOpen, setCalcFabricModalIsOpen] = useState(false);
   const [uploadModalIsOpen, setUploadModalIsOpen] = useState(false);
 
   return (
     <>
       <ul className="nav">
         <li className="nav-item">
-          <button className="btn btn-link" onClick={() => setColorsModalIsOpen(!colorsModalIsOpen)}>
+          <button
+            className="btn btn-link"
+            onClick={() => setColorsModalIsOpen(!colorsModalIsOpen)}
+          >
             <img src="icon-colors.svg" alt="Colors" />
             <span>Colors</span>
           </button>
         </li>
         <li className="nav-item">
-          <button className="btn btn-link" onClick={() => setPremadesModalIsOpen(!premadesModalIsOpen)}>
+          <button
+            className="btn btn-link"
+            onClick={() => setPremadesModalIsOpen(!premadesModalIsOpen)}
+          >
             <img src="icon-premades.svg" alt="Premades" />
             <span>Premades</span>
           </button>
         </li>
         <li className="nav-item">
-          <button className="btn btn-link" onClick={() => setPreviewModalIsOpen(!previewModalIsOpen)}>
+          <button
+            className="btn btn-link"
+            onClick={() => setPreviewModalIsOpen(!previewModalIsOpen)}
+          >
             <img src="icon-preview.svg" alt="Preview" />
             <span>Preview</span>
           </button>
         </li>
         <li className="nav-item">
-          <button className="btn btn-link" onClick={() => setUploadModalIsOpen(!uploadModalIsOpen)}>
+          <button
+            className="btn btn-link"
+            onClick={() => setCalcFabricModalIsOpen(!calcFabricModalIsOpen)}
+          >
+            <img src="icon-calc.svg" alt="Calculate" />
+            <span>Calculate</span>
+          </button>
+        </li>
+        <li className="nav-item">
+          <button
+            className="btn btn-link"
+            onClick={() => setUploadModalIsOpen(!uploadModalIsOpen)}
+          >
             <img src="icon-upload.svg" alt="Upload" />
             <span>Upload</span>
           </button>
@@ -45,31 +66,39 @@ const Navigation = () => {
         <li className="nav-item">
           <DownloadJSON />
         </li>
-
       </ul>
       <Modal
         modalIsOpen={colorsModalIsOpen}
-        closeModal={() => setColorsModalIsOpen(false)} >
+        closeModal={() => setColorsModalIsOpen(false)}
+      >
         <ColorSettingsPalette />
       </Modal>
       <Modal
         modalIsOpen={premadesModalIsOpen}
-        closeModal={() => setPremadesModalIsOpen(false)} >
+        closeModal={() => setPremadesModalIsOpen(false)}
+      >
         <BigBlockGallery />
       </Modal>
       <Modal
         modalIsOpen={previewModalIsOpen}
-        closeModal={() => setPreviewModalIsOpen(false)} >
+        closeModal={() => setPreviewModalIsOpen(false)}
+      >
         <PrintableSquaresGrid />
-        <CalculateFabric />
+      </Modal>
+      <Modal
+        modalIsOpen={calcFabricModalIsOpen}
+        closeModal={() => setCalcFabricModalIsOpen(false)}
+      >
+        <CalculateFabricForm />
       </Modal>
       <Modal
         modalIsOpen={uploadModalIsOpen}
-        closeModal={() => setUploadModalIsOpen(false)} >
+        closeModal={() => setUploadModalIsOpen(false)}
+      >
         <UploadJSON />
       </Modal>
     </>
-  )
-}
+  );
+};
 
 export default Navigation;

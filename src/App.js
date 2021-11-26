@@ -3,6 +3,7 @@ import { ColorsProvider } from "./components/ColorsContext";
 import { BigBlocksProvider } from "./components/BigBlocksContext";
 import { SquaresProvider } from "./components/SquaresContext";
 import { StylersProvider } from "./components/StylersContext";
+import { FabricsProvider } from "./components/FabricsContext";
 import Header from "./components/Header";
 import Navigation from "./components/Navigation";
 import Squares from "./components/Squares";
@@ -14,16 +15,18 @@ function App() {
         <BigBlocksProvider>
           <SquaresProvider>
             <StylersProvider>
-              <div className="app">
-                <Header>
-                  <Navigation />
-                </Header>
-                <div id="main">
-                  <Squares />
-                </div>
+              <FabricsProvider>
+                <div className="app">
+                  <Header>
+                    <Navigation />
+                  </Header>
+                  <div id="main">
+                    <Squares />
+                  </div>
 
-                <footer></footer>
-              </div>
+                  <footer></footer>
+                </div>
+              </FabricsProvider>
             </StylersProvider>
           </SquaresProvider>
         </BigBlocksProvider>

@@ -31,7 +31,7 @@ const BorderStyler = () => {
         background: borders[0].background,
       })
     } 
-  }, [selectedBorder]);
+  }, [selectedBorder]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (borders.length === 1) {
@@ -86,7 +86,7 @@ const BorderStyler = () => {
 
   useEffect(() => {
     editBorderWidths(borderData);
-  }, [borderData]);
+  }, [borderData]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const borderHandlingDisplay = () => {
     const widthCore = 40;

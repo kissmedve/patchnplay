@@ -98,9 +98,10 @@ const Squares = () => {
 
     // left top corner with buttons
     let topLeftCorner = <div className="rowhead colhead" key={0} >
-      <button className="calc-styler" onClick={openCalcStyler}>
+      <button className="calc-styler">
         <span>Calculate </span>
       </button>
+
       <button className="border-styler" onClick={openBorderStyler}>
         <span>Border</span>
       </button>

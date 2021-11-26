@@ -1,7 +1,7 @@
 import React, { createContext, useReducer } from "react";
 
 const initialState = {
-  paletteColors: []
+  paletteColors: [],
 };
 
 export const ColorsContext = createContext(initialState);
@@ -12,21 +12,22 @@ export const ColorsReducer = (state, action) => {
     const expandedColors = [...state.paletteColors, addedColor];
     return {
       ...state,
-      paletteColors: expandedColors
+      paletteColors: expandedColors,
     };
   }
   if (action.type === "DELETE_COLOR") {
-    const deletedColor = action.payload;
-    const remainingColors = state.paletteColors.filter(color => color !== action.payload);
+    const remainingColors = state.paletteColors.filter(
+      (color) => color !== action.payload
+    );
     return {
       ...state,
-      paletteColors: remainingColors
+      paletteColors: remainingColors,
     };
-  };
+  }
   if (action.type === "UPDATE_COLORS") {
     return {
       ...state,
-      paletteColors: action.payload
+      paletteColors: action.payload,
     };
   }
 };
@@ -37,20 +38,20 @@ export const ColorsProvider = ({ children }) => {
   const addColor = (color) => {
     dispatch({
       type: "ADD_COLOR",
-      payload: color
+      payload: color,
     });
-  }
+  };
   const deleteColor = (color) => {
     dispatch({
       type: "DELETE_COLOR",
-      payload: color
+      payload: color,
     });
-  }
+  };
   // update all colors (e.g. uploading)
   const updateColors = (colors) => {
     dispatch({
       type: "UPDATE_COLORS",
-      payload: colors
+      payload: colors,
     });
   };
 
@@ -60,7 +61,7 @@ export const ColorsProvider = ({ children }) => {
         paletteColors: state.paletteColors,
         addColor,
         deleteColor,
-        updateColors
+        updateColors,
       }}
     >
       {children}
