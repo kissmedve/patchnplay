@@ -1,31 +1,52 @@
 import React, { useContext, useState, useEffect } from "react";
 import { StylersContext } from "./StylersContext";
 import { SquaresContext } from "./SquaresContext";
-import Palette from './Palette';
+import Palette from "./Palette";
 
 const SashingRowStyler = ({ rowCol, id }) => {
-
   // global states
   const { closeSashStyler } = useContext(StylersContext);
-  const { cols, squares, sashingRows, updateSashingRows, updateSquares, sashingHeights, updateSashingHeights } = useContext(SquaresContext);
+  const {
+    cols,
+    squares,
+    sashingRows,
+    sashingRowsColor,
+    updateSashingRows,
+    updateSashingRowsColor,
+    updateSquares,
+    sashingHeights,
+    updateSashingHeights,
+  } = useContext(SquaresContext);
 
   // local states
   const [inputSashingHeight, setInputSashingHeight] = useState(1);
 
   useEffect(() => {
+    // stabilise color of sashing row to prevent it from vanishing upon clicking on styler
+    const existingSashColor = squares.find((squs) => {
+      return squs.find((squ) => squ.row === id);
+    })[0].fillSashing;
+    const newSashingRowsColor = [
+      ...sashingRowsColor.slice(0, id),
+      existingSashColor,
+      ...sashingRowsColor.slice(id + 1),
+    ];
+    updateSashingRowsColor(newSashingRowsColor);
+
     setInputSashingHeight(sashingHeights[id]);
   }, []);
 
   const handleInputHeight = (event) => {
     setInputSashingHeight(Number(event.target.value));
-  }
+  };
 
   const switchToSashing = (event) => {
-
     // check if any square on the row is covered by a BigBlock
-    let isSquCovered = squares.map(squs => {
-      return squs.some(squ => squ.row === id && squ.covered === true)
-    }).some(el => el === true);
+    let isSquCovered = squares
+      .map((squs) => {
+        return squs.some((squ) => squ.row === id && squ.covered === true);
+      })
+      .some((el) => el === true);
 
     // only switch to sashing, if not covered
     if (!isSquCovered) {
@@ -35,7 +56,7 @@ const SashingRowStyler = ({ rowCol, id }) => {
           // mark squares also belonging to sashing columns as sashing cross
           if (squarez[i][k].row === id && squarez[i][k].sashing === true) {
             squarez[i][k].sashingCrossed = true;
-            squarez[i][k].squareType = 'rectSashing';
+            squarez[i][k].squareType = "rectSashing";
           }
           // mark all squares of the sashing row
           if (squarez[i][k].row === id) {
@@ -45,21 +66,21 @@ const SashingRowStyler = ({ rowCol, id }) => {
       }
 
       let onSashingRows = sashingRows.map((sashRow, index) => {
-        return index === id ? sashRow = true : sashRow
+        return index === id ? (sashRow = true) : sashRow;
       });
 
       updateSashingRows(onSashingRows);
       updateSquares(squarez);
     }
-  }
+  };
 
   const switchToSquares = () => {
     let offSashingRows = sashingRows.map((sashRow, index) => {
-      return index === id ? sashRow = false : sashRow
+      return index === id ? (sashRow = false) : sashRow;
     });
 
     let offSashingHeights = sashingHeights.map((sashHeight, index) => {
-      return index === id ? sashHeight = 1 : sashHeight
+      return index === id ? (sashHeight = 1) : sashHeight;
     });
 
     let squarezz = squares;
@@ -72,22 +93,24 @@ const SashingRowStyler = ({ rowCol, id }) => {
           squarezz[i][k].sashingHeight = 1;
         }
         // square that was sashing cross still remains sashing
-        if (squarezz[i][k].row === id && squarezz[i][k].sashingCrossed === true) {
+        if (
+          squarezz[i][k].row === id &&
+          squarezz[i][k].sashingCrossed === true
+        ) {
           squarezz[i][k].sashing = true;
           squarezz[i][k].sashingCrossed = false;
-          squarezz[i][k].squareType = 'rect';
+          squarezz[i][k].squareType = "rect";
         }
       }
     }
     updateSashingRows(offSashingRows);
     updateSashingHeights(offSashingHeights);
     updateSquares(squarezz);
-
-  }
+  };
 
   const applySashingHeight = (event) => {
     let onSashingHeights = sashingHeights.map((sashHeight, index) => {
-      return index === id ? sashHeight = inputSashingHeight : sashHeight
+      return index === id ? (sashHeight = inputSashingHeight) : sashHeight;
     });
 
     let sashSquares = squares;
@@ -101,38 +124,31 @@ const SashingRowStyler = ({ rowCol, id }) => {
 
     updateSashingHeights(onSashingHeights);
     updateSquares(sashSquares);
-  }
+  };
 
   return (
     <>
       <div className="styling-dropdown sashing popup active">
-
         <div className="card ">
-
-          <button className="btn btn-clear" aria-label="Close" onClick={closeSashStyler} ></button>
+          <button
+            className="btn btn-clear"
+            aria-label="Close"
+            onClick={closeSashStyler}
+          ></button>
 
           <div className="card-body">
-            <div className="form-title h6">
-              Sashing
-            </div>
-            {sashingRows[id] === false ?
-              <button
-                className="btn sashing-switch"
-                onClick={switchToSashing}
-              >
+            <div className="form-title h6">Sashing</div>
+            {sashingRows[id] === false ? (
+              <button className="btn sashing-switch" onClick={switchToSashing}>
                 Switch to Sashing
-              </button> :
-              <button
-                className="btn sashing-switch"
-                onClick={switchToSquares}
-              >
+              </button>
+            ) : (
+              <button className="btn sashing-switch" onClick={switchToSquares}>
                 Switch to Squares
               </button>
-            }
+            )}
 
-            <div className="form-title h6">
-              Height
-            </div>
+            <div className="form-title h6">Height</div>
             <div className="explanation">(square units)</div>
             <div className="form-group sashing-number">
               <input
@@ -144,21 +160,16 @@ const SashingRowStyler = ({ rowCol, id }) => {
                 onChange={handleInputHeight}
                 disabled={sashingRows[id] === false ? true : false}
               />
-              <button
-                className="btn btn-apply"
-                onClick={applySashingHeight}
-              >Apply</button>
+              <button className="btn btn-apply" onClick={applySashingHeight}>
+                Apply
+              </button>
             </div>
-
           </div>
-          <Palette paletteType={'sashRow'} rowColId={id} />
+          <Palette paletteType={"sashRow"} rowColId={id} />
         </div>
-
       </div>
-
     </>
-  )
-
-}
+  );
+};
 
 export default SashingRowStyler;
