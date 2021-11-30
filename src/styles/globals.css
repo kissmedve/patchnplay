@@ -3,6 +3,19 @@
 
 body {
   font-family: 'Roboto', sans-serif;
+  background: #edebe0;
+}
+#header {
+  position: fixed;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.7);
+  z-index: 100;
+}
+#main {
+  display: flex;
+  justify-content: center;
+  padding: 3.5rem 1rem;
+  background: #efede0;
 }
 
 /* Square */
@@ -94,23 +107,24 @@ body {
 .rowhead.colhead {
   position: relative;
 }
-.calc-styler,
+.info-button,
 .border-styler {
   position: absolute;
   width: 45px;
   height: 45px;
-  border: 2px solid #e3e3e3;
+  border: 2px solid #d3d1d1;
   border-radius: 3px;
 }
-.calc-styler {
+.info-button {
   top: 0;
   left: 0;
-  background: url(img/icon-c-noborder-40.svg) 0 0 no-repeat;
+  background: url(img/icon-i-noborder-40-c.svg) 0 0 no-repeat;
+  border-radius: 50%;
 }
 .border-styler {
   top: 45px;
   left: 45px;
-  background: url(img/icon-b-noborder-40.svg) 0 0 no-repeat;
+  background: #f5f3e6 url(img/icon-b-noborder-40.svg) 0 0 no-repeat;
 }
 .colhead .squares-settings {
   height: 30px;
@@ -123,7 +137,7 @@ body {
 .styling-dropdown .delete-border {
   width: 30px;
   height: 30px;
-  border: 2px solid #e3e3e3;
+  border: 2px solid #d3d1d1;
   border-radius: 3px;
 }
 .styling-dropdown .border-icon {
@@ -137,7 +151,7 @@ body {
 .add-border > span,
 .delete-border > span,
 .border-styler > span,
-.calc-styler > span {
+.info-button > span {
   width: 0;
   height: 0;
   position: absolute;
@@ -145,7 +159,7 @@ body {
 }
 button.squares-settings,
 .squares-settings > button {
-  border: 2px solid #e3e3e3;
+  border: 2px solid #d3d1d1;
   border-radius: 3px;
 }
 .squares-settings.col-sashing,
@@ -153,26 +167,30 @@ button.squares-settings,
   position: relative;
 }
 .squares-settings.col-sashing .switch-sashing {
-  background: url(img/icon-s-wide-noborder.svg) no-repeat center center;
+  background: #f5f3e6 url(img/icon-s-wide-noborder.svg) no-repeat center center;
   width: 100%;
   height: 100%;
 }
 .squares-settings.row-sashing .switch-sashing {
-  background: url(img/icon-s-high-noborder.svg) no-repeat center center;
+  background: #f5f3e6 url(img/icon-s-high-noborder.svg) no-repeat center center;
   width: 100%;
   height: 100%;
 }
 .squares-settings.add-column {
-  background: url(img/icon-plus-wide-noborder.svg) no-repeat center center;
+  background: #f5f3e6 url(img/icon-plus-wide-noborder.svg) no-repeat center
+    center;
 }
 .squares-settings.add-row {
-  background: url(img/icon-plus-high-noborder.svg) no-repeat center center;
+  background: #f5f3e6 url(img/icon-plus-high-noborder.svg) no-repeat center
+    center;
 }
 .squares-settings.delete-column {
-  background: url(img/icon-minus-wide-noborder.svg) no-repeat center center;
+  background: #f5f3e6 url(img/icon-minus-wide-noborder.svg) no-repeat center
+    center;
 }
 .squares-settings.delete-row {
-  background: url(img/icon-minus-high-noborder.svg) no-repeat center center;
+  background: #f5f3e6 url(img/icon-minus-high-noborder.svg) no-repeat center
+    center;
 }
 .styling-dropdown .edit-border {
   background: url(img/icon-edit-noborder.svg) no-repeat center center;
@@ -496,6 +514,9 @@ button.border-add {
 }
 
 /* Modal */
+.modal-container {
+  max-height: 90vh;
+}
 .modal:before {
   content: '';
   position: fixed;
@@ -506,7 +527,16 @@ button.border-add {
 
 /* SquareStyler */
 
+/* Logo */
+#logo a {
+  display: block;
+  margin-top: 0.25rem;
+}
+
 /* Navigation */
+.navbar {
+  padding: 0 1.75rem;
+}
 .nav {
   display: flex;
   flex-direction: row;
