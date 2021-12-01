@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { FabricsContext } from "./FabricsContext";
 import CollectPieces from "./CollectPieces";
+import DrawFabrics from "./DrawFabrics";
 
 const CalculateFabrics = () => {
   // global states
@@ -8,11 +9,12 @@ const CalculateFabrics = () => {
 
   // fabricWidth assigned to the color of the current row
   const findFabricWidth = (col) => {
+    let currentFW = 110; // standard width for quilt fabrics
     if (fabricWidths.length > 0) {
       let currentFW = fabricWidths.find((fw) => fw.color === col);
       return currentFW.fabricWidth;
     }
-    return 110; // standard width for quilt fabrics
+    return currentFW;
   };
 
   const objects = CollectPieces();
@@ -178,54 +180,11 @@ const CalculateFabrics = () => {
     return [color, svgHeight, piecesToDraw, currentFabricWidth];
   });
 
-  const drawAll = drawPacks.map((pack, index) => {
-    return (
-      <>
-        <div key={index}>
-          <div style={{ marginTop: "1.5rem" }}>
-            <span
-              style={{
-                height: "1.4rem",
-                width: "4rem",
-                background: `${pack[0]}`,
-                display: "inline-block",
-                marginRight: "0.5rem",
-              }}
-            ></span>
-          </div>
-          <div style={{ marginBottom: "0.5rem" }}>
-            Color: {pack[0]} <br />
-            Fabric width: {pack[3]} cm <br />
-            Required height: {pack[1]} cm
-          </div>
-
-          <svg viewBox={`0 0 140 ${pack[1]}`}>
-            <g>
-              <path
-                d={`M 0 0 L ${pack[3]} 0 L ${pack[3]} ${pack[1]} L 0 ${pack[1]} Z`}
-                stroke="#666"
-                strokeWidth="0.2"
-                fill="#eee"
-              />
-              {pack[2].map((p, i) => {
-                return (
-                  <path
-                    d={p}
-                    stroke="black"
-                    fill="white"
-                    strokeWidth="0.2"
-                    key={i}
-                  />
-                );
-              })}
-            </g>
-          </svg>
-        </div>
-      </>
-    );
-  });
-
-  return <>{drawAll}</>;
+  return (
+    <>
+      <DrawFabrics drawPacks={drawPacks} />
+    </>
+  );
 };
 
 export default CalculateFabrics;

@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { FabricsContext } from "./FabricsContext";
 import CalculateFabrics from "./CalculateFabrics";
+import DrawFabrics from "./DrawFabrics";
 
 const CalculateFabricForm = () => {
   // global states
@@ -51,10 +52,10 @@ const CalculateFabricForm = () => {
                 <div className="colorbg"></div>
               </div>
               <div className="row-body">
-                <div className="col">140 cm / 55"</div>
-                <div className="col">110 cm / 44"</div>
-                <div className="col">90 cm / 35"</div>
                 <div className="col">55 cm / 22"</div>
+                <div className="col">90 cm / 35"</div>
+                <div className="col">110 cm / 44"</div>
+                <div className="col">140 cm / 55"</div>
               </div>
             </div>
 
@@ -68,6 +69,51 @@ const CalculateFabricForm = () => {
                       style={{ background: `${fabrWidth.color}` }}
                     ></div>
                   </div>
+
+                  <label className="form-radio fabric-width col">
+                    <input
+                      className="fabric-width"
+                      type="radio"
+                      name={fabrWidth.color}
+                      value="55"
+                      checked={fabrWidth.fabricWidth === "55" ? true : false}
+                      onChange={(event) =>
+                        selectFabricWidth(fabrWidth.color, event.target.value)
+                      }
+                    />
+                    <i className="form-icon"></i>
+                    <span>55 cm / 22"</span>
+                  </label>
+
+                  <label className="form-radio fabric-width col">
+                    <input
+                      className="fabric-width"
+                      type="radio"
+                      name={fabrWidth.color}
+                      value="90"
+                      checked={fabrWidth.fabricWidth === "90" ? true : false}
+                      onChange={(event) =>
+                        selectFabricWidth(fabrWidth.color, event.target.value)
+                      }
+                    />
+                    <i className="form-icon"></i>
+                    <span>90 cm / 35"</span>
+                  </label>
+
+                  <label className="form-radio fabric-width col">
+                    <input
+                      className="fabric-width"
+                      type="radio"
+                      name={fabrWidth.color}
+                      value="110"
+                      checked={fabrWidth.fabricWidth === "110" ? true : false}
+                      onChange={(event) =>
+                        selectFabricWidth(fabrWidth.color, event.target.value)
+                      }
+                    />
+                    <i className="form-icon"></i>
+                    <span>110 cm / 44"</span>
+                  </label>
 
                   <div className="form-group row-body">
                     <label className="form-radio fabric-width col">
@@ -83,51 +129,6 @@ const CalculateFabricForm = () => {
                       />
                       <i className="form-icon"></i>
                       <span>140 cm / 55"</span>
-                    </label>
-
-                    <label className="form-radio fabric-width col">
-                      <input
-                        className="fabric-width"
-                        type="radio"
-                        name={fabrWidth.color}
-                        value="110"
-                        checked={fabrWidth.fabricWidth === "110" ? true : false}
-                        onChange={(event) =>
-                          selectFabricWidth(fabrWidth.color, event.target.value)
-                        }
-                      />
-                      <i className="form-icon"></i>
-                      <span>110 cm / 44"</span>
-                    </label>
-
-                    <label className="form-radio fabric-width col">
-                      <input
-                        className="fabric-width"
-                        type="radio"
-                        name={fabrWidth.color}
-                        value="90"
-                        checked={fabrWidth.fabricWidth === "90" ? true : false}
-                        onChange={(event) =>
-                          selectFabricWidth(fabrWidth.color, event.target.value)
-                        }
-                      />
-                      <i className="form-icon"></i>
-                      <span>90 cm / 35"</span>
-                    </label>
-
-                    <label className="form-radio fabric-width col">
-                      <input
-                        className="fabric-width"
-                        type="radio"
-                        name={fabrWidth.color}
-                        value="55"
-                        checked={fabrWidth.fabricWidth === "55" ? true : false}
-                        onChange={(event) =>
-                          selectFabricWidth(fabrWidth.color, event.target.value)
-                        }
-                      />
-                      <i className="form-icon"></i>
-                      <span>55 cm / 22"</span>
                     </label>
                   </div>
                 </div>
@@ -257,20 +258,23 @@ const CalculateFabricForm = () => {
       <button className="calculate btn" onClick={calculateFabrics}>
         Calculate Fabric Requirements
       </button>
-      {isCalculateFabricsActive ? (
-        <>
-          <div className="card calculate-fabrics fabrics-result">
-            <div className="card-header">
-              <div className="card-title h5">Fabric Requirements</div>
-            </div>
-            <div className="card-body">
-              <div className="content">
-                <CalculateFabrics />
+      <div className="print-fabrics print">
+        {isCalculateFabricsActive ? (
+          <>
+            <div className="card calculate-fabrics fabrics-result">
+              <div className="card-header">
+                <div className="card-title h5">Fabric Requirements</div>
+              </div>
+              <div className="card-body">
+                <div className="content">
+                  <CalculateFabrics />
+                  <DrawFabrics />
+                </div>
               </div>
             </div>
-          </div>
-        </>
-      ) : null}
+          </>
+        ) : null}
+      </div>
     </>
   );
 };
