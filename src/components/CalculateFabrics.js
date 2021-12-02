@@ -9,12 +9,11 @@ const CalculateFabrics = () => {
 
   // fabricWidth assigned to the color of the current row
   const findFabricWidth = (col) => {
-    let currentFW = 110; // standard width for quilt fabrics
     if (fabricWidths.length > 0) {
       let currentFW = fabricWidths.find((fw) => fw.color === col);
       return currentFW.fabricWidth;
     }
-    return currentFW;
+    return 110; // standard width for quilt fabrics
   };
 
   const objects = CollectPieces();
