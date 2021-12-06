@@ -1,7 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { FabricsContext } from "./FabricsContext";
 import CalculateFabrics from "./CalculateFabrics";
-import DrawFabrics from "./DrawFabrics";
 
 const CalculateFabricForm = () => {
   // global states
@@ -10,6 +9,7 @@ const CalculateFabricForm = () => {
     fabricSquareWidth,
     seamAllowance,
     editFabricWidth,
+    calcFabricModalIsOpen,
     updateFabricSquareWidth,
     updateSeamAllowance,
   } = useContext(FabricsContext);
@@ -17,6 +17,17 @@ const CalculateFabricForm = () => {
   // local states
   const [isCalculateFabricsActive, setIsCalculateFabricsActive] =
     useState(false);
+
+  // close down calculate function when calculate modal closes
+  useEffect(() => {
+    if (isCalculateFabricsActive === true && calcFabricModalIsOpen === false) {
+      setIsCalculateFabricsActive(false);
+    }
+  }, [calcFabricModalIsOpen]);
+
+  useEffect(() => {
+    setIsCalculateFabricsActive(false);
+  }, [fabricWidths, fabricSquareWidth, seamAllowance]);
 
   const selectFabricWidth = (color, width) => {
     editFabricWidth({
@@ -255,7 +266,7 @@ const CalculateFabricForm = () => {
         </div>
       </div>
 
-      <button className="calculate btn" onClick={calculateFabrics}>
+      <button className="calculate btn styler-btn" onClick={calculateFabrics}>
         Calculate Fabric Requirements
       </button>
       <div className="print-fabrics print">
@@ -268,7 +279,6 @@ const CalculateFabricForm = () => {
               <div className="card-body">
                 <div className="content">
                   <CalculateFabrics />
-                  <DrawFabrics />
                 </div>
               </div>
             </div>
