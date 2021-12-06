@@ -53,10 +53,11 @@ const DrawFabrics = ({ drawPacks }) => {
             );
           })
         : null}
-
-      <PDFDownloadLink document={<PdfDocument drawPacks={drawPacks} />}>
-        Download Fabric Requirements
-      </PDFDownloadLink>
+      <button className="btn styler-btn">
+        <PDFDownloadLink document={<PdfDocument drawPacks={drawPacks} />}>
+          Download Fabric Requirements
+        </PDFDownloadLink>
+      </button>
     </>
   );
 };

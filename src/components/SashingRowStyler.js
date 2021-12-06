@@ -139,11 +139,11 @@ const SashingRowStyler = ({ rowCol, id }) => {
           <div className="card-body">
             <div className="form-title h6">Sashing</div>
             {sashingRows[id] === false ? (
-              <button className="btn sashing-switch" onClick={switchToSashing}>
+              <button className="btn styler-btn" onClick={switchToSashing}>
                 Switch to Sashing
               </button>
             ) : (
-              <button className="btn sashing-switch" onClick={switchToSquares}>
+              <button className="btn styler-btn" onClick={switchToSquares}>
                 Switch to Squares
               </button>
             )}
@@ -160,12 +160,13 @@ const SashingRowStyler = ({ rowCol, id }) => {
                 onChange={handleInputHeight}
                 disabled={sashingRows[id] === false ? true : false}
               />
-              <button className="btn btn-apply" onClick={applySashingHeight}>
+              <button className="btn styler-btn" onClick={applySashingHeight}>
                 Apply
               </button>
             </div>
+
+            <Palette paletteType={"sashRow"} rowColId={id} />
           </div>
-          <Palette paletteType={"sashRow"} rowColId={id} />
         </div>
       </div>
     </>

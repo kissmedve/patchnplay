@@ -27,8 +27,6 @@ body {
   position: relative;
 }
 .square.covered {
-  /* background-image: linear-gradient(135deg, #ffffff 36.36%, #666666 36.36%, #666666 50%, #ffffff 50%, #ffffff 86.36%, #666666 86.36%, #666666 100%);
-  background-size: 15.56px 15.56px; */
   background-color: transparent;
 }
 .square.covered .rect,
@@ -36,12 +34,6 @@ body {
 .square.covered .hstup {
   display: none;
 }
-/* .square.sashing .rect {
-  stroke: transparent !important;
-}
-.square.sashing.sashing-crossed .rect {
-  stroke: #ddd !important;
-} */
 
 .square.rect svg .hstdown,
 .square.rect svg .hstup {
@@ -96,13 +88,9 @@ body {
 .colhead {
   display: flex;
   flex-direction: column;
-  /* justify-content: center;
-  margin-bottom: 5px; */
 }
 .rowhead {
   display: flex;
-  /* justify-content: center;
-  margin-right: 5px; */
 }
 .rowhead.colhead {
   position: relative;
@@ -419,10 +407,14 @@ button.border-add {
   justify-content: flex-start;
   flex-wrap: wrap;
   width: 6.25rem;
+  margin-top: 0.2rem;
+}
+.styling-dropdown .color-swatches {
+  margin: 0.75rem 0 0.5rem;
 }
 .styling-dropdown .swatches-group,
 .colors .swatches-group {
-  margin: 0.3rem 0;
+  margin-bottom: 0.2rem;
 }
 .styling-dropdown .selected-gallery {
   margin: 0.5rem 0;
@@ -458,13 +450,17 @@ button.border-add {
 .bigblock-size {
   margin-top: 1.25rem;
 }
-.btn.add-color,
-.btn.remove-color {
+.styler-btn {
   font-size: var(--font_14px);
-  background: #dadada linear-gradient(60deg, #cecccc 0%, #ddd 40%, #dadada 100%)
-    no-repeat;
-  border: 2px solid #c0c0c0;
+  background: #f5f5f5;
+  border: 2px solid #9ac997;
+  border-radius: 6px;
   color: #2f2f2f;
+}
+.styler-btn:hover,
+.styler-btn:focus {
+  border: 2px solid #8cbd89;
+  background: #e4e3e3;
 }
 .swatch-action {
   padding: 0.3rem 0;
@@ -474,33 +470,8 @@ button.border-add {
   display: flex;
 }
 
-/* .styling-dropdown .border-select .form-radio {
-  display: flex;
-  line-height: 1rem;
-  margin: 0;
-  min-height: 1rem; 
-  padding: 0; 
-  position: relative;
-}
-.styling-dropdown .border-select .form-radio input {
-  clip: none;
-  width: .7rem;
-  height: .7rem; 
-  margin: 0.2rem 0 0 0; 
-  overflow: visible;
-  position: relative;  
-}
-.styling-dropdown .border-select .border-icon {
-  width: 1rem;
-  height: 1rem;
-  border-radius: 0;
-  border: 0.2rem solid transparent;
-  background: #ccc;
-  margin-right: 8px;
-} */
-
 /* Toast */
-.toast {
+/* .toast {
   position: relative;
   padding-top: 1.25rem;
 }
@@ -511,7 +482,7 @@ button.border-add {
   font-size: --font_14px;
   font-weight: 700;
   text-align: center;
-}
+} */
 
 /* Modal */
 .modal-container {
@@ -545,7 +516,6 @@ button.border-add {
 .nav a {
   color: #3b4351;
   font-size: var(--font_14px);
-  /*font-weight: 700;*/
   text-transform: uppercase;
 }
 .nav .btn.btn-link span {

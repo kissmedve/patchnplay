@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Modal from "./Modal";
 import ColorSettingsPalette from "./ColorSettingsPalette";
 import BigBlockGallery from "./BigBlockGallery";
@@ -6,13 +6,16 @@ import DownloadJSON from "./DownloadJSON";
 import UploadJSON from "./UploadJSON";
 import PrintableSquaresGrid from "./PrintableSquaresGrid";
 import CalculateFabricForm from "./CalculateFabricForm";
+import { FabricsContext } from "./FabricsContext";
 
 const Navigation = () => {
+  // global states
+  const { calcFabricModalIsOpen, setCalcFabricModalIsOpen } =
+    useContext(FabricsContext);
   // local states
   const [colorsModalIsOpen, setColorsModalIsOpen] = useState(false);
   const [premadesModalIsOpen, setPremadesModalIsOpen] = useState(false);
   const [previewModalIsOpen, setPreviewModalIsOpen] = useState(false);
-  const [calcFabricModalIsOpen, setCalcFabricModalIsOpen] = useState(false);
   const [uploadModalIsOpen, setUploadModalIsOpen] = useState(false);
 
   return (
@@ -48,7 +51,7 @@ const Navigation = () => {
         <li className="nav-item">
           <button
             className="btn btn-link"
-            onClick={() => setCalcFabricModalIsOpen(!calcFabricModalIsOpen)}
+            onClick={() => setCalcFabricModalIsOpen(true)}
           >
             <img src="icon-calc.svg" alt="Calculate" />
             <span>Calculate</span>

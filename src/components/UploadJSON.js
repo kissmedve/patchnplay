@@ -98,7 +98,7 @@ const UploadJSON = () => {
           ) : (
             ""
           )}
-          <button className="btn" type="submit" name="save">
+          <button className="btn styler-btn" type="submit" name="save">
             Upload
           </button>
         </form>

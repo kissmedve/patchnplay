@@ -73,7 +73,10 @@ const ColorSettingsPalette = () => {
                   }}
                 ></div>
 
-                <button className="btn add-color" onClick={addToColors}>
+                <button
+                  className="btn styler-btn add-color"
+                  onClick={addToColors}
+                >
                   Add to Palette
                 </button>
               </div>
@@ -84,13 +87,16 @@ const ColorSettingsPalette = () => {
               </div>
               <div className="swatch-action">
                 <div
-                  className="swatch remove-color"
+                  className="swatch styler-btn remove-color"
                   style={{
                     background: clickedColor,
                     border: removeSwatchesBorder,
                   }}
                 ></div>
-                <button className="btn remove-color" onClick={removeFromColors}>
+                <button
+                  className="btn styler-btn remove-color"
+                  onClick={removeFromColors}
+                >
                   Remove Colour
                 </button>
               </div>
