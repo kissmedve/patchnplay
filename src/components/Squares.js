@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { SquaresContext } from "./SquaresContext";
 import { StylersContext } from "./StylersContext";
 import Square from "./Square";
@@ -11,6 +11,8 @@ import SashingRowStyler from "./SashingRowStyler";
 import SVGBlock from "./SVGBlock";
 import Border from "./Border";
 import BorderStyler from "./BorderStyler";
+import Modal from "./Modal";
+import InfoModal from "./InfoModal";
 
 const Squares = () => {
   // global states
@@ -32,6 +34,9 @@ const Squares = () => {
     openBorderStyler,
     borderStylerIsOpen,
   } = useContext(StylersContext);
+
+  // local states
+  const [infoModalIsOpen, setInfoModalIsOpen] = useState(false);
 
   // summed up widths of borders
   let bordersTopWidth = borders
@@ -148,7 +153,10 @@ const Squares = () => {
     // left top corner with buttons
     let topLeftCorner = (
       <div className="rowhead colhead" key={0}>
-        <button className="info-button">
+        <button
+          className="info-button"
+          onClick={() => setInfoModalIsOpen(!infoModalIsOpen)}
+        >
           <span>Info</span>
         </button>
 
@@ -256,6 +264,12 @@ const Squares = () => {
         {allSquaresGrid()}
         {insertedBlocksOverlay()}
       </div>
+      <Modal
+        modalIsOpen={infoModalIsOpen}
+        closeModal={() => setInfoModalIsOpen(false)}
+      >
+        <InfoModal />
+      </Modal>
     </>
   );
 };
