@@ -4,6 +4,7 @@ const initialState = {
   fabricWidths: [],
   fabricSquareWidth: "8.89",
   seamAllowance: "0.7",
+  calcFabricModalIsOpen: false,
 };
 
 export const FabricsContext = createContext(initialState);
@@ -67,6 +68,12 @@ export const FabricsReducer = (state, action) => {
         seamAllowance: action.payload,
       };
 
+    case "SET_CALC_FABRIC_MODAL_IS_OPEN":
+      return {
+        ...state,
+        calcFabricModalIsOpen: action.payload,
+      };
+
     default:
       return state;
   }
@@ -111,6 +118,12 @@ export const FabricsProvider = ({ children }) => {
       payload: seamAllowance,
     });
   };
+  const setCalcFabricModalIsOpen = (calcFabricModalIsOpen) => {
+    dispatch({
+      type: "SET_CALC_FABRIC_MODAL_IS_OPEN",
+      payload: calcFabricModalIsOpen,
+    });
+  };
 
   return (
     <FabricsContext.Provider
@@ -118,12 +131,15 @@ export const FabricsProvider = ({ children }) => {
         fabricWidths: state.fabricWidths,
         fabricSquareWidth: state.fabricSquareWidth,
         seamAllowance: state.seamAllowance,
+        calcFabricModalIsOpen: state.calcFabricModalIsOpen,
+        calculatedPieces: state.calculatedPieces,
         addFabricWidth,
         deleteFabricWidth,
         editFabricWidth,
         updateFabricWidths,
         updateFabricSquareWidth,
         updateSeamAllowance,
+        setCalcFabricModalIsOpen,
       }}
     >
       {children}
