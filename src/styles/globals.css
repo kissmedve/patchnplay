@@ -13,7 +13,7 @@ body {
 }
 #main {
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   padding: 3.5rem 1rem;
   background: #efede0;
 }
@@ -220,6 +220,7 @@ body {
   height: 45px;
   border: 2px solid #d3d1d1;
   border-radius: 3px;
+  cursor: pointer;
 }
 .info-button {
   top: 0;
@@ -267,6 +268,7 @@ button.squares-settings,
 .squares-settings > button {
   border: 2px solid #d3d1d1;
   border-radius: 3px;
+  cursor: pointer;
 }
 .squares-settings.col-sashing,
 .squares-settings.row-sashing {
@@ -506,6 +508,9 @@ button.border-add {
   opacity: 1;
   border: 2px solid transparent;
 }
+.styling-dropdown button.swatch {
+  cursor: pointer;
+}
 .colors .swatch.current-color,
 .colors .swatch.remove-color {
   margin-right: 0.5rem;
@@ -614,6 +619,7 @@ button.border-add {
   width: 50px;
   margin: 5px;
   font-size: 0;
+  cursor: pointer;
 }
 .selected-gallery .premade.active {
   transform: scale(1.2);
