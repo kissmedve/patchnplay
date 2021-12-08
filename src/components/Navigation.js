@@ -17,59 +17,75 @@ const Navigation = () => {
   const [premadesModalIsOpen, setPremadesModalIsOpen] = useState(false);
   const [previewModalIsOpen, setPreviewModalIsOpen] = useState(false);
   const [uploadModalIsOpen, setUploadModalIsOpen] = useState(false);
+  const [openMobileMenu, setOpenMobileMenu] = useState(false);
 
   return (
     <>
-      <ul className="nav">
-        <li className="nav-item">
-          <button
-            className="btn btn-link"
-            onClick={() => setColorsModalIsOpen(!colorsModalIsOpen)}
-          >
-            <img src="icon-colors.svg" alt="Colors" />
-            <span>Colors</span>
+      <section
+        id="topnav"
+        className={openMobileMenu === true ? `active` : null}
+      >
+        <div
+          id="toggler"
+          className={openMobileMenu === true ? `toggled` : null}
+        >
+          <button onClick={() => setOpenMobileMenu(!openMobileMenu)}>
+            <span></span>
+            <span></span>
+            <span></span>
           </button>
-        </li>
-        <li className="nav-item">
-          <button
-            className="btn btn-link"
-            onClick={() => setPremadesModalIsOpen(!premadesModalIsOpen)}
-          >
-            <img src="icon-premades.svg" alt="Premades" />
-            <span>Premades</span>
-          </button>
-        </li>
-        <li className="nav-item">
-          <button
-            className="btn btn-link"
-            onClick={() => setPreviewModalIsOpen(!previewModalIsOpen)}
-          >
-            <img src="icon-preview.svg" alt="Preview" />
-            <span>Preview</span>
-          </button>
-        </li>
-        <li className="nav-item">
-          <button
-            className="btn btn-link"
-            onClick={() => setCalcFabricModalIsOpen(true)}
-          >
-            <img src="icon-calc.svg" alt="Calculate" />
-            <span>Calculate</span>
-          </button>
-        </li>
-        <li className="nav-item">
-          <button
-            className="btn btn-link"
-            onClick={() => setUploadModalIsOpen(!uploadModalIsOpen)}
-          >
-            <img src="icon-upload.svg" alt="Upload" />
-            <span>Upload</span>
-          </button>
-        </li>
-        <li className="nav-item">
-          <DownloadJSON />
-        </li>
-      </ul>
+        </div>
+        <ul className="nav">
+          <li className="nav-item">
+            <button
+              className="btn btn-link"
+              onClick={() => setColorsModalIsOpen(!colorsModalIsOpen)}
+            >
+              <img src="icon-colors.svg" alt="Colors" />
+              <span>Colors</span>
+            </button>
+          </li>
+          <li className="nav-item">
+            <button
+              className="btn btn-link"
+              onClick={() => setPremadesModalIsOpen(!premadesModalIsOpen)}
+            >
+              <img src="icon-premades.svg" alt="Premades" />
+              <span>Premades</span>
+            </button>
+          </li>
+          <li className="nav-item">
+            <button
+              className="btn btn-link"
+              onClick={() => setPreviewModalIsOpen(!previewModalIsOpen)}
+            >
+              <img src="icon-preview.svg" alt="Preview" />
+              <span>Preview</span>
+            </button>
+          </li>
+          <li className="nav-item">
+            <button
+              className="btn btn-link"
+              onClick={() => setCalcFabricModalIsOpen(true)}
+            >
+              <img src="icon-calc.svg" alt="Calculate" />
+              <span>Calculate</span>
+            </button>
+          </li>
+          <li className="nav-item">
+            <button
+              className="btn btn-link"
+              onClick={() => setUploadModalIsOpen(!uploadModalIsOpen)}
+            >
+              <img src="icon-upload.svg" alt="Upload" />
+              <span>Upload</span>
+            </button>
+          </li>
+          <li className="nav-item">
+            <DownloadJSON />
+          </li>
+        </ul>
+      </section>
       <Modal
         modalIsOpen={colorsModalIsOpen}
         closeModal={() => setColorsModalIsOpen(false)}

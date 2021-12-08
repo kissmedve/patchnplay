@@ -18,6 +18,124 @@ body {
   background: #efede0;
 }
 
+/* Logo */
+
+#logo {
+  padding-left: 1rem;
+}
+#logo a {
+  display: block;
+  margin-top: 0.25rem;
+}
+
+/* Navigation */
+
+.navbar {
+  position: relative;
+}
+#topnav {
+  padding-right: 1rem;
+  padding-left: 0.75rem;
+  height: 100vh;
+  position: absolute;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.9);
+  overflow-y: scroll;
+  overflow: visible;
+}
+
+.nav {
+  display: flex;
+}
+.nav .btn.btn-link,
+.nav a {
+  color: #3b4351;
+  font-size: var(--font_14px);
+  text-transform: uppercase;
+}
+.nav .btn.btn-link span {
+  margin-left: 6px;
+}
+#toggler {
+  margin-top: 9px;
+  position: relative;
+}
+#toggler button {
+  border-color: transparent;
+  background-color: transparent;
+  cursor: pointer;
+  position: absolute;
+}
+#toggler span {
+  display: block;
+  height: 3px;
+  width: 20px;
+  margin: 5px 0;
+  background-color: #4d4d4d;
+}
+
+@media (min-width: 0) and (max-width: 979px) {
+  #topnav {
+    transform: translate(100%, 0);
+    transition: transform 0.3s ease-in-out;
+  }
+  .nav {
+    flex-direction: column;
+    padding-top: 50px;
+  }
+  #toggler button {
+    left: -3rem;
+    transition: transform 0.3s ease-in-out;
+  }
+  #toggler span {
+    transform: translateY(0) rotate(0);
+    transition: transform 0.3s ease-in-out;
+  }
+  #toggler.toggled span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+    transition: transform 0.3s ease-in-out;
+    transition-delay: 0.3s;
+    transition-property: transform;
+  }
+  #toggler.toggled span:nth-child(2) {
+    background-color: transparent;
+    transition: transform 0.3s ease-in-out;
+    transition-delay: 0.3s;
+    transition-property: transform;
+  }
+  #toggler.toggled span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+    transition: transform 0.3s ease-in-out;
+    transition-delay: 0.3s;
+    transition-property: transform;
+  }
+  #topnav.active {
+    transform: translate(0, 0);
+    transition: transform 0.3s ease-in-out;
+  }
+  #topnav.active button {
+    left: 0;
+    right: 1.5rem;
+    transition-delay: 6s;
+  }
+}
+
+@media (min-width: 980px) {
+  #toggler {
+    display: none;
+  }
+  #topnav {
+    height: auto;
+    position: static;
+    background-color: transparent;
+    overflow-y: auto;
+  }
+  .nav {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
 /* Square */
 
 .square {
@@ -470,20 +588,6 @@ button.border-add {
   display: flex;
 }
 
-/* Toast */
-/* .toast {
-  position: relative;
-  padding-top: 1.25rem;
-}
-.bigblock.styling-dropdown .toast {
-  margin-top: 1rem;
-}
-.toast p {
-  font-size: --font_14px;
-  font-weight: 700;
-  text-align: center;
-} */
-
 /* Modal */
 .modal-container {
   max-height: 90vh;
@@ -497,30 +601,6 @@ button.border-add {
 }
 
 /* SquareStyler */
-
-/* Logo */
-#logo a {
-  display: block;
-  margin-top: 0.25rem;
-}
-
-/* Navigation */
-.navbar {
-  padding: 0 1.75rem;
-}
-.nav {
-  display: flex;
-  flex-direction: row;
-}
-.nav .btn.btn-link,
-.nav a {
-  color: #3b4351;
-  font-size: var(--font_14px);
-  text-transform: uppercase;
-}
-.nav .btn.btn-link span {
-  margin-left: 6px;
-}
 
 /* Premades Gallery */
 .big-blocks,
