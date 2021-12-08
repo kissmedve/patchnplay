@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { SquaresContext } from "./SquaresContext";
 import { StylersContext } from "./StylersContext";
 import Square from "./Square";
@@ -37,6 +37,23 @@ const Squares = () => {
 
   // local states
   const [infoModalIsOpen, setInfoModalIsOpen] = useState(false);
+  const [windowWidth, setWindowWidth] = useState();
+
+  // check window width upon resizing
+  // TODO: add debounce funtion
+  useEffect(() => {
+    let currentClientWidth = document.body.clientWidth;
+
+    const handleResize = () => {
+      setWindowWidth(currentClientWidth);
+    };
+    window.addEventListener("resize", handleResize);
+
+    // clean up
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  });
 
   // summed up widths of borders
   let bordersTopWidth = borders
@@ -59,11 +76,25 @@ const Squares = () => {
   // sashingWidths / sashingHeights have 1 as base value for every regular width (= squares) column or regular height row
   sashingWidths.map((width) => gridColumns.push(width * squareWidth));
 
-  let containerWidth =
+  let containerWidthNumber =
     gridColumns.reduce((prev, curr) => prev + curr) +
-    bordersRightWidth * borderBaseWidth +
-    "px";
+    bordersRightWidth * borderBaseWidth;
+  let containerWidth = containerWidthNumber + "px";
   let gridColumnsStyle = gridColumns.map((col) => col + "px").join(" ");
+
+  // =======================
+
+  // check window size initially,
+  // and every time the gridcontainer width changes
+  // depending on which one is wider,
+  // the grid will be centered or get a scrollbar
+
+  useEffect(() => {
+    let currentClientWidth = document.body.clientWidth;
+    setWindowWidth(currentClientWidth);
+  }, [containerWidthNumber]);
+
+  // =========================
 
   // calculate grid rows height
   let gridRows = [90]; // starting value for row heads' heights
@@ -259,10 +290,19 @@ const Squares = () => {
 
   return (
     <>
-      <div className="grid-container">
-        {bordersUnderlay()}
-        {allSquaresGrid()}
-        {insertedBlocksOverlay()}
+      <div
+        id="main"
+        style={
+          windowWidth > containerWidthNumber
+            ? { justifyContent: "center" }
+            : { overflowX: "scroll" }
+        }
+      >
+        <div className="grid-container">
+          {bordersUnderlay()}
+          {allSquaresGrid()}
+          {insertedBlocksOverlay()}
+        </div>
       </div>
       <Modal
         modalIsOpen={infoModalIsOpen}

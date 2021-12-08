@@ -20,10 +20,7 @@ function App() {
                   <Header>
                     <Navigation />
                   </Header>
-                  <div id="main">
-                    <Squares />
-                  </div>
-
+                  <Squares />
                   <footer></footer>
                 </div>
               </FabricsProvider>
