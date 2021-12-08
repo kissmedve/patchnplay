@@ -645,3 +645,39 @@ button.border-add {
   top: 90px;
   left: 90px;
 }
+
+/* InfoModal */
+
+.figure img {
+  border: 1px solid #c1c1c1;
+  margin: 1.5rem 0;
+}
+.info-wrapper .info-number {
+  display: inline-block;
+  margin-right: 0.5rem;
+  line-height: 1.5rem;
+  position: relative;
+  top: 0px;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 3px solid #66c229;
+  border-radius: 50%;
+  font-size: var(--font_12px);
+  font-weight: 700;
+  text-align: center;
+}
+.info-wrapper .h6 {
+  font-size: var(--font_14px);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.info-wrapper p {
+  margin-left: 2rem;
+}
+.info-wrapper ol {
+  list-style-type: lower-latin;
+  margin: 0 2rem 1.2rem;
+}
+.info-wrapper li {
+  list-style-position: outside;
+}
