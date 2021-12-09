@@ -138,6 +138,9 @@ body {
 
 /* Square */
 
+#squares-container .square {
+  cursor: pointer;
+}
 .square {
   width: 50px;
   height: 50px;
@@ -314,18 +317,12 @@ button.squares-settings,
   ================================= */
 .styling-dropdown {
   position: absolute;
-  /* top: 60%;
-  left: 60%; */
   z-index: 100;
   border-radius: 8px;
   display: none;
 }
 .styling-dropdown.active {
   display: block;
-}
-.popup {
-  padding: 18px;
-  background: rgba(240, 240, 240, 0.8);
 }
 .styling-dropdown .card {
   position: relative;
@@ -585,12 +582,23 @@ button.border-add {
   border: 2px solid #8cbd89;
   background: #e4e3e3;
 }
+.calculate.styler-btn,
+.print.styler-btn {
+  margin: 1.5rem 0;
+}
+.print.styler-btn a {
+  color: var(--grey_text);
+  text-decoration: none;
+}
 .swatch-action {
   padding: 0.3rem 0;
   margin-bottom: 1rem;
 }
 .border-button-group {
   display: flex;
+}
+.calculate-fabrics .form-table {
+  overflow-x: auto;
 }
 
 /* Modal */
@@ -686,4 +694,20 @@ button.border-add {
 }
 .info-wrapper li {
   list-style-position: outside;
+}
+
+/* Toast (messages) */
+
+.toast {
+  position: relative;
+  padding-top: 1.25rem;
+}
+.bigblock.styling-dropdown .toast,
+.swatch-action .toast {
+  margin-top: 1rem;
+}
+.toast p {
+  font-size: --font_14px;
+  font-weight: 700;
+  text-align: center;
 }

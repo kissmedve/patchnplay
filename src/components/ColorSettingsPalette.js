@@ -2,6 +2,8 @@ import React, { useContext, useState } from "react";
 import { ColorsContext } from "./ColorsContext";
 import { ChromePicker } from "react-color";
 import { FabricsContext } from "./FabricsContext";
+import CollectPieces from "./CollectPieces";
+import Message from "./Message";
 
 const ColorSettingsPalette = () => {
   // global states
@@ -11,6 +13,13 @@ const ColorSettingsPalette = () => {
   // local states
   const [currentColor, setCurrentColor] = useState("transparent");
   const [clickedColor, setClickedColor] = useState("transparent");
+  const [messageIsActive, setMessageIsActive] = useState(false);
+  const [messageText, setMessageText] = useState("");
+
+  // extract colors in use to check against later
+  const objects = CollectPieces();
+  const allColors = objects.map((obj) => obj.color);
+  const distinctColorsInUse = [...new Set(allColors)];
 
   const swatchesList = paletteColors.map((pcolor, index) => (
     <button
@@ -31,9 +40,16 @@ const ColorSettingsPalette = () => {
     }
   };
   const removeFromColors = (event) => {
-    deleteColor(clickedColor);
-    deleteFabricWidth(clickedColor);
-    setClickedColor("transparent");
+    if (distinctColorsInUse.indexOf(clickedColor) > -1) {
+      setMessageText(
+        "This colour is still in use. Therefore it can't be removed from the palette."
+      );
+      setMessageIsActive(true);
+    } else {
+      deleteColor(clickedColor);
+      deleteFabricWidth(clickedColor);
+      setClickedColor("transparent");
+    }
   };
   const addSwatchesBorder =
     currentColor === "transparent"
@@ -47,6 +63,10 @@ const ColorSettingsPalette = () => {
     paletteColors.length < 1
       ? { border: "dashed 1px #333", width: "7.5rem", height: "1.25rem" }
       : { border: "solid 1px transparent" };
+
+  const closeMessage = (event) => {
+    setMessageIsActive(false);
+  };
 
   return (
     <>
@@ -99,6 +119,11 @@ const ColorSettingsPalette = () => {
                 >
                   Remove Colour
                 </button>
+                {messageIsActive ? (
+                  <Message text={messageText} closeMessage={closeMessage} />
+                ) : (
+                  ""
+                )}
               </div>
             </div>
           </div>
