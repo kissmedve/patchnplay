@@ -6,7 +6,7 @@ const InfoModal = () => {
       <div className="quick-guide">
         {/* overview image */}
         <div className="h5">Quick Guide</div>
-        <div className="explanation">Find more information on xxxxxx</div>
+        {/* <div className="explanation">Find more information in the documentation.</div> */}
 
         <figure className="figure">
           <img
@@ -36,7 +36,7 @@ const InfoModal = () => {
 
         <div className="info-wrapper">
           <div className="h6">
-            <span className="info-number">3</span>Sashing
+            <span className="info-number">3</span>Sashing Styler
           </div>
           <p>
             Style a column / row of squares as sashing (or revert to squares).
@@ -45,10 +45,28 @@ const InfoModal = () => {
 
         <div className="info-wrapper">
           <div className="h6">
-            <span className="info-number">4</span>Borders
+            <span className="info-number">4</span>Border Styler
           </div>
           <p>Add, delete, or style borders.</p>
         </div>
+
+        <div className="info-wrapper">
+          <div className="h6">
+            <span className="info-number">5</span>Square Styler
+          </div>
+          <ol>
+            <li>
+              Switch between full square, upwards half square triangles,
+              downwards half square triangles, and color each shape
+              individually.
+            </li>
+            <li>
+              Replace squares with premade BigBlocks (1 square, 2 x 2 squares, 3
+              x 3 squares, etc.). Color your BigBlock as provided.
+            </li>
+          </ol>
+        </div>
+
         {/* overview nav image */}
         <figure className="figure">
           <img
@@ -94,14 +112,13 @@ const InfoModal = () => {
             depending on your measurements of choice: fabric width for each
             color, plus (basic) block size, and seam allowance.
           </p>
-          <p>
-            <span className="info-number">a</span>
-            Get a list of all your fabric requirements along with schematic
-            drawings of the pieces.
-          </p>
-          <p>
-            <span className="info-number">b</span>Download the list as pdf file.
-          </p>
+          <ol>
+            <li>
+              Get a list of all your fabric requirements along with schematic
+              drawings of the pieces.
+            </li>
+            <li>Download the list as pdf file.</li>
+          </ol>
         </div>
 
         <div className="info-wrapper">
