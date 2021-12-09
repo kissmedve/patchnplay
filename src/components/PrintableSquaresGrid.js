@@ -270,7 +270,7 @@ const PrintableSquaresGrid = () => {
         "Z",
       ].join(" ");
       let bg = border.background;
-      return <path d={path} fill={bg}></path>;
+      return <path key={border.index} d={path} fill={bg}></path>;
     });
     return pathData;
   };
@@ -310,7 +310,12 @@ const PrintableSquaresGrid = () => {
               heightOffset
             );
             return (
-              <path d={pathDataSqu} fill={fillColor} stroke={fillColor}></path>
+              <path
+                key={path.index}
+                d={pathDataSqu}
+                fill={fillColor}
+                stroke={fillColor}
+              ></path>
             );
           } else if (path.vertices.length === 3) {
             let pathDataTr = pathDataTriangle(
@@ -320,7 +325,12 @@ const PrintableSquaresGrid = () => {
               heightOffset
             );
             return (
-              <path d={pathDataTr} fill={fillColor} stroke={fillColor}></path>
+              <path
+                key={path.index}
+                d={pathDataTr}
+                fill={fillColor}
+                stroke={fillColor}
+              ></path>
             );
           } else {
             return null;

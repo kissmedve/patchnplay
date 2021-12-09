@@ -74,7 +74,9 @@ const CalculateFabricForm = () => {
               return (
                 <div className="form-row">
                   <div className="row-header">
-                    <div className="col colorname">{fabrWidth.color}</div>
+                    <div key={fabrWidth.color} className="col colorname">
+                      {fabrWidth.color}
+                    </div>
                     <div
                       className="col colorbg"
                       style={{ background: `${fabrWidth.color}` }}
