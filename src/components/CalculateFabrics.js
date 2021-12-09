@@ -11,7 +11,7 @@ const CalculateFabrics = () => {
   const findFabricWidth = (col) => {
     if (fabricWidths.length > 0) {
       let currentFW = fabricWidths.find((fw) => fw.color === col);
-      return currentFW.fabricWidth;
+      if (currentFW) return currentFW.fabricWidth;
     }
     return 110; // standard width for quilt fabrics
   };
