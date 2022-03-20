@@ -13,9 +13,9 @@ body {
 }
 #main {
   display: flex;
-  /* justify-content: center; */
-  padding: 3.5rem 1rem;
+  padding: 70px 20px;
   background: #efede0;
+  height: 100vh;
 }
 
 /* Logo */
@@ -319,10 +319,6 @@ button.squares-settings,
   position: absolute;
   z-index: 100;
   border-radius: 8px;
-  display: none;
-}
-.styling-dropdown.active {
-  display: block;
 }
 .styling-dropdown .card {
   position: relative;
@@ -538,7 +534,7 @@ button.border-add {
 }
 .styling-dropdown .selected-gallery {
   margin: 0.5rem 0;
-  width: 9rem;
+  width: 9.5rem;
 }
 .styling-dropdown .h5,
 .colors .h5,
@@ -568,7 +564,7 @@ button.border-add {
   margin-right: 0.25rem;
 }
 .bigblock-size {
-  margin-top: 1.25rem;
+  margin-top: 1rem;
 }
 .styler-btn {
   font-size: var(--font_14px);
@@ -600,6 +596,42 @@ button.border-add {
 .calculate-fabrics .form-table {
   overflow-x: auto;
 }
+.popup {
+  /* glassy border on styler */
+  padding: 0.85rem;
+  background: rgba(209, 209, 209, 0.8);
+}
+.styling-dropdown .pointer {
+  content: '';
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 100;
+}
+.styling-dropdown .pointer.top-left {
+  border-top: 8px solid transparent;
+  border-right: 8px solid #fff;
+  border-bottom: 8px solid transparent;
+  transform: rotate(45deg);
+}
+.styling-dropdown .pointer.top-right {
+  border-top: 8px solid transparent;
+  border-right: 8px solid #fff;
+  border-bottom: 8px solid transparent;
+  transform: rotate(135deg);
+}
+.styling-dropdown .pointer.left {
+  border-top: 8px solid transparent;
+  border-right: 8px solid #fff;
+  border-bottom: 8px solid transparent;
+}
+.styling-dropdown .pointer.right {
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 8px solid #fff;
+}
 
 /* Modal */
 .modal-container {
@@ -613,8 +645,6 @@ button.border-add {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
-/* SquareStyler */
-
 /* Premades Gallery */
 .big-blocks,
 .selected-blocks,
@@ -622,10 +652,15 @@ button.border-add {
   display: flex;
   flex-wrap: wrap;
 }
-.gallery .premade,
-.selected-gallery .premade {
+.gallery .premade {
   width: 50px;
   margin: 5px;
+  font-size: 0;
+  cursor: pointer;
+}
+.selected-gallery .premade {
+  width: 33px;
+  margin: 2px;
   font-size: 0;
   cursor: pointer;
 }

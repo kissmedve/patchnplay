@@ -1,10 +1,19 @@
 import React, { useState, useContext, useEffect } from "react";
 import { SquaresContext } from "./SquaresContext";
 import { StylersContext } from "./StylersContext";
+import { ColorsContext } from "./ColorsContext";
 import Palette from "./Palette";
 import elementBlocks from "../data/elementBlocks";
 import { BigBlocksContext } from "./BigBlocksContext";
 import Message from "./Message";
+import { bottomDistance, rightDistance } from "../utils/stylerDistance";
+import {
+  topOffset,
+  leftOffset,
+  pointerVerticalPosition,
+  pointerHorizontalPosition,
+  pointerClass,
+} from "../utils/stylerPosition";
 
 const BigBlockStyler = ({
   id,
@@ -17,6 +26,10 @@ const BigBlockStyler = ({
   // global states
   const {
     squares,
+    borders,
+    sashingHeights,
+    sashingWidths,
+    borderBaseWidth,
     insertedBigBlocks,
     addInsertedBigBlock,
     editInsertedBigBlock,
@@ -25,6 +38,7 @@ const BigBlockStyler = ({
   } = useContext(SquaresContext);
   const { closeBigBlockStyler } = useContext(StylersContext);
   const { selectedBigBlocks } = useContext(BigBlocksContext);
+  const { paletteColors } = useContext(ColorsContext);
 
   // local states
   const [selectedBigBlock, setSelectedBigBlock] = useState({
@@ -32,7 +46,7 @@ const BigBlockStyler = ({
     stretchSquares: 1,
     anchorSquare: id,
     rowCol: 2,
-    colours: "",
+    colours: 2,
     squaresColor1: 0,
     squaresColor2: 0,
     squaresColor3: 0,
@@ -47,8 +61,24 @@ const BigBlockStyler = ({
   });
   const [messageIsActive, setMessageIsActive] = useState(false);
   const [messageText, setMessageText] = useState("");
+  const [stylerBottomDistance, setStylerBottomDistance] = useState(null);
+  const [stylerRightDistance, setStylerRightDistance] = useState(null);
 
-  // first, check if a BigBlock is set, and if so, transfer its properties to local state
+  // adjust position when BigBlockStyler initially pops up
+  // (without colour bars, if no block is selected/active)
+  useEffect(() => {
+    setDistanceValues();
+  }, []);
+
+  useEffect(() => {
+    setDistanceValues();
+  }, [
+    selectedBigBlock.elementBlocksId,
+    selectedBigBlock.stretchSquares,
+    selectedBigBlock.colours,
+  ]);
+
+  // check if a BigBlock is set, and if so, transfer its properties to local state
   useEffect(() => {
     if (insertedBigBlocks && insertedBigBlocks.length > 0) {
       let activeBlock = insertedBigBlocks.find(
@@ -104,7 +134,8 @@ const BigBlockStyler = ({
       let insIndex = insertedBigBlocks.indexOf(
         insertedBigBlocks.find((block) => block.anchorSquare === id)
       );
-      // just change id of inserted block
+
+      // block changes, so change id of inserted block
       editInsertedBigBlock({
         ...insertedBigBlocks[insIndex],
         elementBlocksId: selectedBigBlock.elementBlocksId,
@@ -290,6 +321,19 @@ const BigBlockStyler = ({
         covered: false,
         bigBlockAnchor: "",
       });
+      setSelectedBigBlock({
+        elementBlocksId: "",
+        stretchSquares: 1,
+        anchorSquare: id,
+        rowCol: 2,
+        colours: 2,
+        squaresColor1: 0,
+        squaresColor2: 0,
+        squaresColor3: 0,
+        trianglesColor1: 0,
+        trianglesColor2: 0,
+        trianglesColor3: 0,
+      });
     }
   };
 
@@ -304,6 +348,7 @@ const BigBlockStyler = ({
           setSelectedBigBlock({
             ...selectedBigBlock,
             elementBlocksId: block.id,
+            anchorSquare: id,
             rowCol: block.rowCol,
             colours: block.colours,
             squaresColor1: block.squaresColor1,
@@ -312,7 +357,12 @@ const BigBlockStyler = ({
             trianglesColor1: block.trianglesColor1,
             trianglesColor2: block.trianglesColor2,
             trianglesColor3: block.trianglesColor3,
-            stretchSquares: sashingCrossed === true ? sashingWidth : 1,
+            stretchSquares:
+              sashingCrossed === true
+                ? sashingWidth
+                : selectedBigBlock.stretchSquares > 1
+                ? selectedBigBlock.stretchSquares
+                : 1,
           });
         }}
       >
@@ -333,10 +383,59 @@ const BigBlockStyler = ({
     preselectedBlocks.length === 0
       ? "dashed 1px #333"
       : "solid 1px transparent";
-  const selectedMargin = preselectedBlocks.length === 0 ? "15px 0 25px" : "0";
+  const selectedMargin = preselectedBlocks.length === 0 ? "10px 0 20px" : "0";
 
   const closeMessage = (event) => {
     setMessageIsActive(false);
+  };
+
+  // measurements height
+  const stylerInitialHeight = 327; // measured w/o blocks applied + w/o colour bars
+  const stylerAppliedBlock2ColorsHeight = 371; // measured w/o colour bars
+  const stylerAppliedBlock3ColorsHeight = 387; // measured w/o colour bars (TODO: confirm colour block height)
+
+  let blockRows = Math.ceil(selectedBigBlocks.length / 5);
+  let paletteRows = Math.ceil(paletteColors.length / 5);
+
+  let stylerHeight1 = covered === false ? stylerInitialHeight : null;
+  let stylerHeight2 =
+    covered === true && selectedBigBlock.colours === 2
+      ? stylerAppliedBlock2ColorsHeight
+      : null;
+  let stylerHeight3 =
+    covered === true && selectedBigBlock.colours === 3
+      ? stylerAppliedBlock3ColorsHeight
+      : null;
+
+  // measurements width
+  const stylerWidth = 258;
+
+  const setDistanceValues = () => {
+    let stylBottomDistance = bottomDistance(
+      id,
+      stylerHeight1,
+      stylerHeight2,
+      stylerHeight3,
+      squareWidth,
+      paletteRows,
+      blockRows,
+      selectedBigBlock.stretchSquares,
+      sashingHeights,
+      borders,
+      borderBaseWidth
+    );
+    setStylerBottomDistance(stylBottomDistance);
+
+    let stylRightDistance = rightDistance(
+      id,
+      stylerWidth,
+      squareWidth,
+      sashingWidths,
+      selectedBigBlock.stretchSquares,
+      borders,
+      borderBaseWidth
+    );
+    setStylerRightDistance(stylRightDistance);
   };
 
   return (
@@ -344,8 +443,21 @@ const BigBlockStyler = ({
       <div
         className="bigblock styling-dropdown popup active"
         style={{
-          left: squareWidth * selectedBigBlock.stretchSquares - 1 - 18 + `px`,
-          top: squareWidth * selectedBigBlock.stretchSquares - 1 - 18 + `px`,
+          left:
+            covered === true
+              ? squareWidth * selectedBigBlock.stretchSquares - 18 + `px`
+              : squareWidth - 18 + `px`,
+          top:
+            covered === true
+              ? squareWidth * selectedBigBlock.stretchSquares - 18 + `px`
+              : squareWidth - 18 + `px`,
+          transform: `translate(${leftOffset(
+            stylerRightDistance,
+            stylerWidth,
+            selectedBigBlock.stretchSquares,
+            squareWidth
+          )}px, ${topOffset(stylerBottomDistance)}px)`,
+          transition: "transform 0.3s ease-in-out",
         }}
       >
         <div className="card ">
@@ -361,8 +473,8 @@ const BigBlockStyler = ({
             <div
               className="selected-gallery"
               style={{
-                minHeight: "50px",
-                minWidth: "50px",
+                minHeight: "35px",
+                minWidth: "35px",
                 border: selectedBorder,
                 margin: selectedMargin,
               }}
@@ -409,6 +521,20 @@ const BigBlockStyler = ({
             )}
           </div>
         </div>
+        <span
+          className={`pointer ${pointerClass(
+            stylerBottomDistance,
+            stylerRightDistance,
+            stylerWidth
+          )}`}
+          style={{
+            top: `${pointerVerticalPosition(stylerBottomDistance)}px`,
+            left: `${pointerHorizontalPosition(
+              stylerRightDistance,
+              stylerWidth
+            )}px`,
+          }}
+        ></span>
       </div>
     </>
   );
