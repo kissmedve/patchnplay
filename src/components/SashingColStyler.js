@@ -1,8 +1,13 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { StylersContext } from "./StylersContext";
 import { SquaresContext } from "./SquaresContext";
 import Palette from "./Palette";
-import { useEffect } from "react/cjs/react.development";
+import { rightDistance } from "../utils/stylerDistance";
+import {
+  leftOffset,
+  pointerHorizontalPosition,
+  pointerClass,
+} from "../utils/stylerPosition";
 
 const SashingColStyler = ({ rowCol, id }) => {
   // global states
@@ -17,10 +22,37 @@ const SashingColStyler = ({ rowCol, id }) => {
     updateSquares,
     sashingWidths,
     updateSashingWidths,
+    squareWidth,
+    borders,
+    borderBaseWidth,
   } = useContext(SquaresContext);
 
   // local states
   const [inputSashingWidth, setInputSashingWidth] = useState(1);
+  const [stylerRightDistance, setStylerRightDistance] = useState(null);
+  const [stylerLeftDistance, setStylerLeftDistance] = useState(null);
+
+  // measurements width
+  const stylerWidth = 208;
+
+  const setDistanceValue = () => {
+    let stylRightDistance = rightDistance(
+      null,
+      id,
+      stylerWidth,
+      squareWidth,
+      sashingWidths,
+      null,
+      borders,
+      borderBaseWidth
+    );
+    setStylerRightDistance(stylRightDistance[1]);
+    setStylerLeftDistance(stylRightDistance[0]);
+  };
+
+  useEffect(() => {
+    setDistanceValue();
+  }, [squares[0][id]]);
 
   useEffect(() => {
     // stabilise color of sashing column to prevent it from vanishing upon clicking on styler
@@ -129,7 +161,23 @@ const SashingColStyler = ({ rowCol, id }) => {
 
   return (
     <>
-      <div className="styling-dropdown sashing popup active">
+      <div
+        className="styling-dropdown sashing popup active"
+        style={{
+          top: `20px`,
+          left: `${(inputSashingWidth - 1) * squareWidth + 40}px`,
+          transform: `translateX(${leftOffset(
+            stylerRightDistance,
+            stylerLeftDistance,
+            stylerWidth,
+            null,
+            sashingWidths[id],
+            null,
+            squareWidth
+          )}px`,
+          transition: "transform 0.3s ease-in-out",
+        }}
+      >
         <div className="card ">
           <button
             className="btn btn-clear"
@@ -169,6 +217,22 @@ const SashingColStyler = ({ rowCol, id }) => {
             <Palette paletteType={"sashColumn"} rowColId={id} />
           </div>
         </div>
+        <span
+          className={`pointer ${pointerClass(
+            null,
+            stylerRightDistance,
+            null,
+            stylerWidth,
+            null
+          )}`}
+          style={{
+            top: `8px`,
+            left: `${pointerHorizontalPosition(
+              stylerRightDistance,
+              stylerWidth
+            )}px`,
+          }}
+        ></span>
       </div>
     </>
   );

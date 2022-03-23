@@ -1,13 +1,14 @@
 export function bottomDistance(
   id,
+  sashingStylerId,
   stylerHeight1,
   stylerHeight2,
   stylerHeight3,
   squareWidth,
   paletteRows,
   blockRows,
-  stretch,
   sashingHeights,
+  stretch,
   borders,
   borderBaseWidth
 ) {
@@ -21,7 +22,7 @@ export function bottomDistance(
     .map((border) => border.widthTop * borderBaseWidth)
     .reduce((acc, curr) => acc + curr, 0);
   // sum of square rows above, times width respectively (sashing!)
-  const currentRow = Number(id.split("-")[0]);
+  const currentRow = id ? Number(id.split("-")[0]) : sashingStylerId;
   const sumRowHeights = sashingHeights
     .slice(0, currentRow)
     .reduce((acc, curr) => acc + curr * squareWidth, 0);
@@ -29,11 +30,6 @@ export function bottomDistance(
   const distanceToTop = 70 + 90 + sumTopBorderHeights + sumRowHeights;
 
   const colourBarHeight = 25;
-  // no palette rows on initial bigBlockStyler
-  // let palettesHeight =
-  //   blockRows !== null && stylerHeight1 !== null
-  //     ? 0
-  //     : paletteRows * colourBarHeight;
   let palettesHeight = paletteRows * colourBarHeight;
 
   const blockRowHeight = 37;
@@ -41,6 +37,7 @@ export function bottomDistance(
     blockRows !== null && blockRows > 0 ? (blockRows - 1) * blockRowHeight : 0;
 
   const stretchHeight = stretch !== null ? (stretch - 1) * squareWidth : 0;
+  const sashingHeight = (sashingHeights[currentRow] - 1) * squareWidth;
 
   let stylerHeight =
     stylerHeight1 !== null
@@ -53,13 +50,18 @@ export function bottomDistance(
 
   // stylerBottomDistance
   let bottomDistance =
-    windowHeight - distanceToTop - stylerHeight - stretchHeight - 32;
-
-  return bottomDistance;
+    windowHeight -
+    distanceToTop -
+    stylerHeight -
+    stretchHeight -
+    sashingHeight -
+    32;
+  return [distanceToTop, bottomDistance];
 }
 
 export function rightDistance(
   id,
+  sashingStylerId,
   stylerWidth,
   squareWidth,
   sashingWidths,
@@ -79,7 +81,7 @@ export function rightDistance(
     .map((border) => border.widthLeft * borderBaseWidth)
     .reduce((acc, curr) => acc + curr, 0);
   // sum of square cols left, times width respectively (sashing!)
-  const currentCol = Number(id.split("-")[1]);
+  const currentCol = id ? Number(id.split("-")[1]) : sashingStylerId;
   const sumColWidths = sashingWidths
     .slice(0, currentCol)
     .reduce((acc, curr) => acc + curr * squareWidth, 0);
@@ -120,5 +122,5 @@ export function rightDistance(
   // stylerRightDistance
   let rightDistance = windowWidth - distanceToLeft() - 32 - stretchWidth;
 
-  return rightDistance;
+  return [distanceToLeft, rightDistance];
 }

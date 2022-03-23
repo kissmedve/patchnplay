@@ -63,6 +63,7 @@ const BigBlockStyler = ({
   const [messageText, setMessageText] = useState("");
   const [stylerBottomDistance, setStylerBottomDistance] = useState(null);
   const [stylerRightDistance, setStylerRightDistance] = useState(null);
+  const [stylerLeftDistance, setStylerLeftDistance] = useState(null);
 
   // adjust position when BigBlockStyler initially pops up
   // (without colour bars, if no block is selected/active)
@@ -413,21 +414,23 @@ const BigBlockStyler = ({
   const setDistanceValues = () => {
     let stylBottomDistance = bottomDistance(
       id,
+      null,
       stylerHeight1,
       stylerHeight2,
       stylerHeight3,
       squareWidth,
       paletteRows,
       blockRows,
-      selectedBigBlock.stretchSquares,
       sashingHeights,
+      selectedBigBlock.stretchSquares,
       borders,
       borderBaseWidth
     );
-    setStylerBottomDistance(stylBottomDistance);
+    setStylerBottomDistance(stylBottomDistance[1]);
 
     let stylRightDistance = rightDistance(
       id,
+      null,
       stylerWidth,
       squareWidth,
       sashingWidths,
@@ -435,8 +438,12 @@ const BigBlockStyler = ({
       borders,
       borderBaseWidth
     );
-    setStylerRightDistance(stylRightDistance);
+    setStylerRightDistance(stylRightDistance[1]);
+    setStylerLeftDistance(stylRightDistance[0]);
   };
+
+  const sashingWidthStretch = sashingWidths[Number(id.split("-")[1])];
+  const sashingHeightStretch = sashingHeights[Number(id.split("-")[0])];
 
   return (
     <>
@@ -446,17 +453,32 @@ const BigBlockStyler = ({
           left:
             covered === true
               ? squareWidth * selectedBigBlock.stretchSquares - 18 + `px`
-              : squareWidth - 18 + `px`,
+              : sashingWidths[Number(id.split("-")[1])] * squareWidth -
+                18 +
+                `px`,
           top:
             covered === true
               ? squareWidth * selectedBigBlock.stretchSquares - 18 + `px`
-              : squareWidth - 18 + `px`,
+              : sashingHeights[Number(id.split("-")[0])] * squareWidth -
+                18 +
+                `px`,
           transform: `translate(${leftOffset(
             stylerRightDistance,
+            stylerLeftDistance,
             stylerWidth,
             selectedBigBlock.stretchSquares,
+            null,
+            sashingWidthStretch,
             squareWidth
-          )}px, ${topOffset(stylerBottomDistance)}px)`,
+          )}px, ${topOffset(
+            stylerBottomDistance,
+            null,
+            null,
+            selectedBigBlock.stretchSquares,
+            null,
+            sashingHeightStretch,
+            squareWidth
+          )}px)`,
           transition: "transform 0.3s ease-in-out",
         }}
       >
@@ -525,13 +547,20 @@ const BigBlockStyler = ({
           className={`pointer ${pointerClass(
             stylerBottomDistance,
             stylerRightDistance,
-            stylerWidth
+            null,
+            stylerWidth,
+            null
           )}`}
           style={{
-            top: `${pointerVerticalPosition(stylerBottomDistance)}px`,
+            top: `${pointerVerticalPosition(
+              stylerBottomDistance,
+              null,
+              null
+            )}px`,
             left: `${pointerHorizontalPosition(
               stylerRightDistance,
-              stylerWidth
+              stylerWidth,
+              null
             )}px`,
           }}
         ></span>

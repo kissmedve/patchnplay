@@ -1,12 +1,31 @@
-export function topOffset(stylerBottomDistance) {
+export function topOffset(
+  stylerBottomDistance,
+  distanceToTop,
+  stylerHeight,
+  stretch, // BigBlockStyler
+  sashingStretch, // SashingRowStyler
+  sashingCrossStretch, // SquareStyler, BigBlockStyler
+  squareWidth
+) {
   if (stylerBottomDistance) {
-    if (stylerBottomDistance <= -16) {
+    if (
+      // flip SashingRowStyler
+      sashingStretch &&
+      stylerBottomDistance < stylerHeight &&
+      distanceToTop >= stylerHeight
+    ) {
+      return -stylerHeight - 30;
+    } else if (
+      // else SashingRowStyler sticks fully to bottom
+      sashingStretch &&
+      distanceToTop < stylerHeight
+    ) {
+      return 0;
+    } else if (stylerBottomDistance <= -16) {
       return stylerBottomDistance;
-    }
-    if (stylerBottomDistance > -16 && stylerBottomDistance < 0) {
+    } else if (stylerBottomDistance > -16 && stylerBottomDistance < 0) {
       return -16;
-    }
-    if (stylerBottomDistance >= 0) {
+    } else if (stylerBottomDistance >= 0) {
       return 0;
     }
   }
@@ -14,23 +33,68 @@ export function topOffset(stylerBottomDistance) {
 
 export function leftOffset(
   stylerRightDistance,
+  stylerLeftDistance,
   stylerWidth,
-  stretch,
+  stretch, // BigBlockStyler
+  sashingStretch, // SashingColStyler
+  sashingCrossStretch, // SquareStyler, BigBlockStyler
   squareWidth
 ) {
   if (stylerRightDistance) {
-    if (stretch && squareWidth && stylerRightDistance <= stylerWidth) {
-      return -stylerWidth + 18 - 32 - (stretch - 1) * squareWidth;
-    } else if (stylerRightDistance <= stylerWidth) {
-      return -stylerWidth + 18 - 32;
-    } else {
+    // flip BigBlockStyler
+    if (
+      stretch &&
+      sashingCrossStretch &&
+      squareWidth &&
+      stylerRightDistance <= stylerWidth &&
+      stylerLeftDistance > stylerWidth
+    ) {
+      let actualStretch =
+        stretch > sashingCrossStretch ? stretch : sashingCrossStretch;
+      return -stylerWidth + 18 - 32 - (actualStretch - 1) * squareWidth;
+    }
+    // flip SashingColStyler
+    else if (
+      sashingStretch &&
+      squareWidth &&
+      stylerRightDistance <= stylerWidth &&
+      stylerLeftDistance > stylerWidth
+    ) {
+      return -stylerWidth + 10 - 40 - (sashingStretch - 1) * squareWidth;
+    }
+    // flip SquareStyler at sashingCross
+    else if (
+      sashingCrossStretch &&
+      squareWidth &&
+      stylerRightDistance <= stylerWidth &&
+      stylerLeftDistance > stylerWidth
+    ) {
+      return -stylerWidth + 18 - 32 - (sashingCrossStretch - 1) * squareWidth;
+    }
+    // no flip
+    else {
       return 0;
     }
   }
 }
 
-export function pointerVerticalPosition(stylerBottomDistance) {
+export function pointerVerticalPosition(
+  stylerBottomDistance,
+  stylerTopDistance,
+  stylerHeight
+) {
   // 32: offset from square top; 25: half squareWidth; 8: pointer half height;
+  if (stylerBottomDistance && stylerTopDistance) {
+    if (
+      stylerBottomDistance < stylerHeight &&
+      stylerTopDistance > stylerHeight
+    ) {
+      return stylerHeight - 18 - 7;
+    }
+    if (stylerTopDistance < stylerHeight) {
+      return 7;
+    }
+  }
   if (stylerBottomDistance) {
     if (stylerBottomDistance <= -16) {
       return -stylerBottomDistance + 18 - 25 - 8;
@@ -47,7 +111,7 @@ export function pointerVerticalPosition(stylerBottomDistance) {
 
 export function pointerHorizontalPosition(stylerRightDistance, stylerWidth) {
   if (stylerRightDistance) {
-    if (stylerRightDistance < stylerWidth) {
+    if (stylerRightDistance <= stylerWidth) {
       return stylerWidth - 21;
     } else {
       return 8;
@@ -58,9 +122,24 @@ export function pointerHorizontalPosition(stylerRightDistance, stylerWidth) {
 export function pointerClass(
   stylerBottomDistance,
   stylerRightDistance,
-  stylerWidth
+  stylerTopDistance,
+  stylerWidth,
+  stylerHeight
 ) {
-  if (stylerBottomDistance) {
+  // SashingRowStyler
+  if (stylerBottomDistance && stylerTopDistance) {
+    if (
+      stylerBottomDistance <= stylerHeight &&
+      stylerTopDistance > stylerHeight
+    ) {
+      return "bottom-left";
+    }
+    if (stylerTopDistance < stylerHeight) {
+      return "top-left";
+    }
+  }
+  // SquareStyler, BigBlockStyler
+  else if (stylerBottomDistance) {
     if (stylerBottomDistance > 0 && stylerRightDistance > stylerWidth) {
       return "top-left";
     }
@@ -72,6 +151,15 @@ export function pointerClass(
     }
     if (stylerBottomDistance <= 0 && stylerRightDistance <= stylerWidth) {
       return "right";
+    }
+  }
+  // SashingColStyler
+  else if (stylerBottomDistance === null) {
+    if (stylerRightDistance > stylerWidth) {
+      return "top-left";
+    }
+    if (stylerRightDistance <= stylerWidth) {
+      return "top-right";
     }
   }
 }

@@ -1,7 +1,14 @@
 import React, { useContext, useState, useEffect } from "react";
 import { StylersContext } from "./StylersContext";
 import { SquaresContext } from "./SquaresContext";
+import { ColorsContext } from "./ColorsContext";
 import Palette from "./Palette";
+import { bottomDistance } from "../utils/stylerDistance";
+import {
+  topOffset,
+  pointerVerticalPosition,
+  pointerClass,
+} from "../utils/stylerPosition";
 
 const SashingRowStyler = ({ rowCol, id }) => {
   // global states
@@ -16,10 +23,45 @@ const SashingRowStyler = ({ rowCol, id }) => {
     updateSquares,
     sashingHeights,
     updateSashingHeights,
+    squareWidth,
+    borders,
+    borderBaseWidth,
   } = useContext(SquaresContext);
+  const { paletteColors } = useContext(ColorsContext);
 
   // local states
   const [inputSashingHeight, setInputSashingHeight] = useState(1);
+  const [stylerBottomDistance, setStylerBottomDistance] = useState(null);
+  const [stylerTopDistance, setStylerTopDistance] = useState(null);
+
+  // measurements height
+  const sashingStylerHeight = 296; // measured w/o colour bar
+  let paletteRows = Math.ceil(paletteColors.length / 5);
+
+  let stylerHeight1 = sashingStylerHeight;
+
+  const setDistanceValue = () => {
+    let stylBottomDistance = bottomDistance(
+      null,
+      id,
+      stylerHeight1,
+      null,
+      null,
+      squareWidth,
+      paletteRows,
+      null,
+      sashingHeights,
+      null,
+      borders,
+      borderBaseWidth
+    );
+    setStylerBottomDistance(stylBottomDistance[1]);
+    setStylerTopDistance(stylBottomDistance[0]);
+  };
+
+  useEffect(() => {
+    setDistanceValue();
+  }, [sashingHeights]);
 
   useEffect(() => {
     // stabilise color of sashing row to prevent it from vanishing upon clicking on styler
@@ -128,7 +170,23 @@ const SashingRowStyler = ({ rowCol, id }) => {
 
   return (
     <>
-      <div className="styling-dropdown sashing popup active">
+      <div
+        className="styling-dropdown sashing popup active"
+        style={{
+          top: `40px`,
+          left: `20px`,
+          transform: `translateY(${topOffset(
+            stylerBottomDistance,
+            stylerTopDistance,
+            stylerHeight1,
+            null,
+            sashingHeights[id],
+            null,
+            squareWidth
+          )}px`,
+          transition: "transform 0.3s ease-in-out",
+        }}
+      >
         <div className="card ">
           <button
             className="btn btn-clear"
@@ -168,6 +226,23 @@ const SashingRowStyler = ({ rowCol, id }) => {
             <Palette paletteType={"sashRow"} rowColId={id} />
           </div>
         </div>
+        <span
+          className={`pointer ${pointerClass(
+            stylerBottomDistance,
+            null,
+            stylerTopDistance,
+            null,
+            stylerHeight1
+          )}`}
+          style={{
+            top: `${pointerVerticalPosition(
+              stylerBottomDistance,
+              stylerTopDistance,
+              stylerHeight1
+            )}px`,
+            left: `8px`,
+          }}
+        ></span>
       </div>
     </>
   );

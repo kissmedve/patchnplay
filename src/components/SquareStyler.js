@@ -35,13 +35,17 @@ const SquareStyler = ({
   const [newSquareType, setNewSquareType] = useState(squareType);
   const [stylerBottomDistance, setStylerBottomDistance] = useState(null);
   const [stylerRightDistance, setStylerRightDistance] = useState(null);
+  const [stylerLeftDistance, setStylerLeftDistance] = useState(null);
 
   // measurements height
   const stylerFullSquHeight = 299; // measured w/o colour bar
   const stylerHstsHeight = 328; // measured w/o colour bars
   let paletteRows = Math.ceil(paletteColors.length / 5);
 
-  let stylerHeight1 = newSquareType === "rect" ? stylerFullSquHeight : null;
+  let stylerHeight1 =
+    newSquareType === "rect" || newSquareType === "rectSashing"
+      ? stylerFullSquHeight
+      : null;
   let stylerHeight2 =
     newSquareType === "hstUp" || newSquareType === "hstDown"
       ? stylerHstsHeight
@@ -53,21 +57,23 @@ const SquareStyler = ({
   const setDistanceValues = () => {
     let stylBottomDistance = bottomDistance(
       id,
+      null,
       stylerHeight1,
       stylerHeight2,
       null,
       squareWidth,
       paletteRows,
       null,
-      null,
       sashingHeights,
+      null,
       borders,
       borderBaseWidth
     );
-    setStylerBottomDistance(stylBottomDistance);
+    setStylerBottomDistance(stylBottomDistance[1]);
 
     let stylRightDistance = rightDistance(
       id,
+      null,
       stylerWidth,
       squareWidth,
       sashingWidths,
@@ -75,7 +81,8 @@ const SquareStyler = ({
       borders,
       borderBaseWidth
     );
-    setStylerRightDistance(stylRightDistance);
+    setStylerRightDistance(stylRightDistance[1]);
+    setStylerLeftDistance(stylRightDistance[0]);
   };
 
   const selectSquareType = (event) => {
@@ -108,6 +115,9 @@ const SquareStyler = ({
     }
   }, [newSquareType]);
 
+  const sashingWidthStretch = sashingWidths[Number(id.split("-")[1])];
+  const sashingHeightStretch = sashingHeights[Number(id.split("-")[0])];
+
   return (
     <>
       <div
@@ -116,14 +126,25 @@ const SquareStyler = ({
         }
         `}
         style={{
-          top: `32px`,
-          left: `32px`,
+          top: `${(sashingHeightStretch - 1) * squareWidth + 32}px`,
+          left: `${(sashingWidthStretch - 1) * squareWidth + 32}px`,
           transform: `translate(${leftOffset(
             stylerRightDistance,
+            stylerLeftDistance,
             stylerWidth,
             null,
-            null
-          )}px, ${topOffset(stylerBottomDistance)}px)`,
+            null,
+            sashingWidthStretch,
+            squareWidth
+          )}px, ${topOffset(
+            stylerBottomDistance,
+            null,
+            null,
+            null,
+            null,
+            sashingHeightStretch,
+            squareWidth
+          )}px)`,
           transition: "transform 0.3s ease-in-out",
         }}
       >
@@ -257,13 +278,20 @@ const SquareStyler = ({
           className={`pointer ${pointerClass(
             stylerBottomDistance,
             stylerRightDistance,
-            stylerWidth
+            null,
+            stylerWidth,
+            null
           )}`}
           style={{
-            top: `${pointerVerticalPosition(stylerBottomDistance)}px`,
+            top: `${pointerVerticalPosition(
+              stylerBottomDistance,
+              null,
+              null
+            )}px`,
             left: `${pointerHorizontalPosition(
               stylerRightDistance,
-              stylerWidth
+              stylerWidth,
+              null
             )}px`,
           }}
         ></span>
