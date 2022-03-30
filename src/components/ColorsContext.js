@@ -1,7 +1,15 @@
 import React, { createContext, useReducer } from "react";
 
 const initialState = {
-  paletteColors: [],
+  paletteColors: [
+    "#e30e0e",
+    "#1212d5",
+    "#ffe000",
+    "#e302e3",
+    "#008080",
+    "#ff9900",
+    "#40e0d0",
+  ],
 };
 
 export const ColorsContext = createContext(initialState);

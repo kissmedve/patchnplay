@@ -19,12 +19,7 @@ const ColorSettingsPalette = () => {
   const [messageIsActive, setMessageIsActive] = useState(false);
   const [messageText, setMessageText] = useState("");
 
-  // extract colors in use to check against later
-
-  // const objects = collectPieces(  );
-  // const allColors = objects.map((obj) => obj.color);
-  // const distinctColorsInUse = [...new Set(allColors)];
-
+  // colors in use to check against later
   const distinctColorsInUse = checkColors(squares, insertedBigBlocks, borders);
 
   const swatchesList = paletteColors.map((pcolor, index) => (
