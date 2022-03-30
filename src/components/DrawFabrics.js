@@ -10,6 +10,7 @@ const DrawFabrics = ({ drawPacks }) => {
             return (
               <>
                 <div key={index}>
+                  {/* colour heading */}
                   <div style={{ marginTop: "1.5rem" }}>
                     <span
                       style={{
@@ -21,6 +22,7 @@ const DrawFabrics = ({ drawPacks }) => {
                       }}
                     ></span>
                   </div>
+                  {/* pack details */}
                   <div style={{ marginBottom: "0.5rem" }}>
                     Color: {pack[0]} <br />
                     Fabric width: {pack[3]} cm <br />
@@ -29,12 +31,15 @@ const DrawFabrics = ({ drawPacks }) => {
 
                   <svg viewBox={`0 0 140 ${pack[1]}`}>
                     <g>
+                      {/* fabric total width x height */}
                       <path
                         d={`M 0 0 L ${pack[3]} 0 L ${pack[3]} ${pack[1]} L 0 ${pack[1]} Z`}
                         stroke="#666"
                         strokeWidth="0.2"
                         fill="#eee"
+                        key="background"
                       />
+                      {/* collection pieces */}
                       {pack[2].map((p, i) => {
                         return (
                           <path

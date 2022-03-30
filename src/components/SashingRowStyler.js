@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useCallback } from "react";
 import { StylersContext } from "./StylersContext";
 import { SquaresContext } from "./SquaresContext";
 import { ColorsContext } from "./ColorsContext";
@@ -17,9 +17,9 @@ const SashingRowStyler = ({ rowCol, id }) => {
     cols,
     squares,
     sashingRows,
-    sashingRowsColor,
     updateSashingRows,
-    updateSashingRowsColor,
+    // sashingRowsColor,
+    // updateSashingRowsColor,
     updateSquares,
     sashingHeights,
     updateSashingHeights,
@@ -30,7 +30,12 @@ const SashingRowStyler = ({ rowCol, id }) => {
   const { paletteColors } = useContext(ColorsContext);
 
   // local states
-  const [inputSashingHeight, setInputSashingHeight] = useState(1);
+  const [inputSashingHeight, setInputSashingHeight] = useState(
+    sashingHeights[id]
+  );
+  const [appliedSashingHeight, setAppliedSashingHeight] = useState(
+    sashingHeights[id]
+  );
   const [stylerBottomDistance, setStylerBottomDistance] = useState(null);
   const [stylerTopDistance, setStylerTopDistance] = useState(null);
 
@@ -40,7 +45,7 @@ const SashingRowStyler = ({ rowCol, id }) => {
 
   let stylerHeight1 = sashingStylerHeight;
 
-  const setDistanceValue = () => {
+  const setDistanceValue = useCallback(() => {
     let stylBottomDistance = bottomDistance(
       null,
       id,
@@ -57,26 +62,34 @@ const SashingRowStyler = ({ rowCol, id }) => {
     );
     setStylerBottomDistance(stylBottomDistance[1]);
     setStylerTopDistance(stylBottomDistance[0]);
-  };
+  }, [
+    id,
+    stylerHeight1,
+    squareWidth,
+    paletteRows,
+    sashingHeights,
+    borders,
+    borderBaseWidth,
+  ]);
 
   useEffect(() => {
     setDistanceValue();
-  }, [sashingHeights]);
+  }, [appliedSashingHeight, setDistanceValue]);
 
-  useEffect(() => {
-    // stabilise color of sashing row to prevent it from vanishing upon clicking on styler
-    const existingSashColor = squares.find((squs) => {
-      return squs.find((squ) => squ.row === id);
-    })[0].fillSashing;
-    const newSashingRowsColor = [
-      ...sashingRowsColor.slice(0, id),
-      existingSashColor,
-      ...sashingRowsColor.slice(id + 1),
-    ];
-    updateSashingRowsColor(newSashingRowsColor);
+  // useEffect(() => {
+  //   // stabilise color of sashing row to prevent it from vanishing upon clicking on styler
+  //   const existingSashColor = squares.find((squs) => {
+  //     return squs.find((squ) => squ.row === id);
+  //   })[0].fillSashing;
+  //   const newSashingRowsColor = [
+  //     ...sashingRowsColor.slice(0, id),
+  //     existingSashColor,
+  //     ...sashingRowsColor.slice(id + 1),
+  //   ];
+  //   updateSashingRowsColor(newSashingRowsColor);
 
-    setInputSashingHeight(sashingHeights[id]);
-  }, []);
+  //   setInputSashingHeight(sashingHeights[id]);
+  // }, []);
 
   const handleInputHeight = (event) => {
     setInputSashingHeight(Number(event.target.value));
@@ -166,6 +179,7 @@ const SashingRowStyler = ({ rowCol, id }) => {
 
     updateSashingHeights(onSashingHeights);
     updateSquares(sashSquares);
+    setAppliedSashingHeight(inputSashingHeight);
   };
 
   return (
@@ -173,7 +187,7 @@ const SashingRowStyler = ({ rowCol, id }) => {
       <div
         className="styling-dropdown sashing popup active"
         style={{
-          top: `40px`,
+          top: `${(appliedSashingHeight - 1) * squareWidth + 40}px`,
           left: `20px`,
           transform: `translateY(${topOffset(
             stylerBottomDistance,

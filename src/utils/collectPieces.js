@@ -1,35 +1,19 @@
-import React, { useContext } from "react";
-import { SquaresContext } from "./SquaresContext";
-import { FabricsContext } from "./FabricsContext";
-
-const CollectPieces = () => {
-  // global states
-  const {
-    squares,
-    insertedBigBlocks,
-    sashingCols,
-    sashingRows,
-    borders,
-    sashingWidths,
-    sashingHeights,
-    sashingColsColor,
-    sashingRowsColor,
-  } = useContext(SquaresContext);
-  const { fabricWidths, fabricSquareWidth, seamAllowance } =
-    useContext(FabricsContext);
-
-  const fColors = fabricWidths.map((fabricW) => fabricW.color);
-  const fabricColors = [...new Set(fColors)];
-
-  const seamAllowance90deg = parseFloat(seamAllowance);
-  // seamAllowance90deg : 0.7 -> seamAllowance45deg: 1.0
-  // seamAllowance90deg : 1.0 -> seamAllowance45deg: 1.4
-  const seamAllowance45deg = seamAllowance === 0.7 ? 1 : 1.4;
-
-  const fabrSquareWidth = parseFloat(fabricSquareWidth);
-
-  const fabricBorderBaseWidth = fabrSquareWidth / 5;
-
+export default function collectPieces(
+  squares,
+  insertedBigBlocks,
+  sashingCols,
+  sashingRows,
+  fabrSquareWidth,
+  seamAllowance90deg,
+  seamAllowance45deg,
+  sashingWidths,
+  sashingHeights,
+  sashingColsColor,
+  sashingRowsColor,
+  borders,
+  fabricBorderBaseWidth,
+  fabricColors
+) {
   // collect pieces by type
 
   // collect all regular size squares
@@ -664,10 +648,10 @@ const CollectPieces = () => {
       a.width > b.width
     ) {
       return 0;
+    } else {
+      return 0;
     }
   });
 
   return colorPacks;
-};
-
-export default CollectPieces;
+}

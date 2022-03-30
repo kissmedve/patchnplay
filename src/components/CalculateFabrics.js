@@ -1,11 +1,36 @@
 import React, { useContext } from "react";
+import { SquaresContext } from "./SquaresContext";
 import { FabricsContext } from "./FabricsContext";
-import CollectPieces from "./CollectPieces";
+import collectPieces from "../utils/collectPieces";
 import DrawFabrics from "./DrawFabrics";
 
 const CalculateFabrics = () => {
   // global states
-  const { fabricWidths } = useContext(FabricsContext);
+  const {
+    squares,
+    insertedBigBlocks,
+    sashingCols,
+    sashingRows,
+    borders,
+    sashingWidths,
+    sashingHeights,
+    sashingColsColor,
+    sashingRowsColor,
+  } = useContext(SquaresContext);
+  const { fabricWidths, fabricSquareWidth, seamAllowance } =
+    useContext(FabricsContext);
+
+  const fColors = fabricWidths.map((fabricW) => fabricW.color);
+  const fabricColors = [...new Set(fColors)];
+
+  const seamAllowance90deg = parseFloat(seamAllowance);
+  // seamAllowance90deg : 0.7 -> seamAllowance45deg: 1.0
+  // seamAllowance90deg : 1.0 -> seamAllowance45deg: 1.4
+  const seamAllowance45deg = seamAllowance === 0.7 ? 1 : 1.4;
+
+  const fabrSquareWidth = parseFloat(fabricSquareWidth);
+
+  const fabricBorderBaseWidth = fabrSquareWidth / 5;
 
   // fabricWidth assigned to the color of the current row
   const findFabricWidth = (col) => {
@@ -16,7 +41,22 @@ const CalculateFabrics = () => {
     return 110; // standard width for quilt fabrics
   };
 
-  const objects = CollectPieces();
+  const objects = collectPieces(
+    squares,
+    insertedBigBlocks,
+    sashingCols,
+    sashingRows,
+    fabrSquareWidth,
+    seamAllowance90deg,
+    seamAllowance45deg,
+    sashingWidths,
+    sashingHeights,
+    sashingColsColor,
+    sashingRowsColor,
+    borders,
+    fabricBorderBaseWidth,
+    fabricColors
+  );
 
   let widthSum = 0;
   let heightStart = 0;
@@ -161,7 +201,7 @@ const CalculateFabrics = () => {
     });
   });
 
-  const drawPacks = allDistinctColors.map((color, index) => {
+  const drawPacks = allDistinctColors.map((color) => {
     const drawnObjectsByColor = drawnObjects.filter(
       (obj) => obj.color === color
     );

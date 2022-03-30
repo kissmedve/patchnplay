@@ -20,7 +20,7 @@ const Modal = ({ closeModal, modalIsOpen, children }) => {
     return () => {
       document.removeEventListener("mousedown", checkOutsideClick);
     };
-  }, [modalIsOpen]);
+  }, [modalIsOpen, closeModal]);
 
   return ReactDom.createPortal(
     <>

@@ -58,22 +58,20 @@ const Squares = () => {
   // summed up widths of borders
   let bordersTopWidth = borders
     .map((border) => border.widthTop)
-    .reduce((acc, curr) => acc + curr);
+    .reduce((acc, curr) => acc + curr, 0);
   let bordersRightWidth = borders
     .map((border) => border.widthRight)
-    .reduce((acc, curr) => acc + curr);
-  let bordersBottomWidth = borders
-    .map((border) => border.widthBottom)
-    .reduce((acc, curr) => acc + curr);
+    .reduce((acc, curr) => acc + curr, 0);
   let bordersLeftWidth = borders
     .map((border) => border.widthLeft)
-    .reduce((acc, curr) => acc + curr);
+    .reduce((acc, curr) => acc + curr, 0);
 
   // calculate grid columns width
   let gridColumns = [90]; // starting value for column heads' widths
   gridColumns[0] += bordersLeftWidth * borderBaseWidth;
 
   // sashingWidths / sashingHeights have 1 as base value for every regular width (= squares) column or regular height row
+  //sashingWidths.map((width) => gridColumns.push(width * squareWidth));
   sashingWidths.map((width) => gridColumns.push(width * squareWidth));
 
   let containerWidthNumber =
@@ -101,7 +99,6 @@ const Squares = () => {
   gridRows[0] += bordersTopWidth * borderBaseWidth;
 
   sashingHeights.map((height) => gridRows.push(height * squareWidth));
-  let containerHeight = gridRows.reduce((prev, curr) => prev + curr) + "px";
   let gridRowsStyle = gridRows.map((row) => row + "px").join(" ");
 
   // build squares grid container
@@ -121,7 +118,7 @@ const Squares = () => {
 
   // define offsets of inserted BigBlocks related to squares grid, build them
   const insertedBlocksOverlay = () => {
-    let overlayBlocks = insertedBigBlocks.map((block, index) => {
+    let overlayBlocks = insertedBigBlocks.map((block) => {
       let anchor = block.anchorSquare.split("-");
       let widthOffset =
         sashingWidths.slice(0, anchor[1]).reduce((acc, val) => acc + val, 0) *
@@ -138,7 +135,7 @@ const Squares = () => {
         <>
           <div
             className="bigblock"
-            key={block.anchorSquare}
+            key={block.anchorSquare + "-bb"}
             style={{
               position: "absolute",
               left: widthOffset + "px",
@@ -157,6 +154,7 @@ const Squares = () => {
               color2={block.color2}
               color3={block.color3}
               squareWidth={squareWidth}
+              key={block.anchorSquare + "-svg"}
             />
           </div>
         </>
@@ -213,11 +211,23 @@ const Squares = () => {
           {sashStylerIsOpen === true &&
           activeSashStyler.rowCol === "col" &&
           activeSashStyler.id === index ? (
-            <SashingColStyler rowCol={"col"} id={index} />
+            <SashingColStyler
+              rowCol={"col"}
+              id={index}
+              key={col + "-sashcol"}
+            />
           ) : null}
         </div>
-        <AddColumn colId={col} squareWidth={squareWidth} />
-        <DeleteColumn colId={col} squareWidth={squareWidth} />
+        <AddColumn
+          colId={col}
+          squareWidth={squareWidth}
+          key={col + "-addcol"}
+        />
+        <DeleteColumn
+          colId={col}
+          squareWidth={squareWidth}
+          key={col + "-delcol"}
+        />
       </div>
     ));
     gridItems.push(gridColheads);
@@ -238,11 +248,11 @@ const Squares = () => {
             {sashStylerIsOpen === true &&
             activeSashStyler.rowCol === "row" &&
             activeSashStyler.id === i ? (
-              <SashingRowStyler rowCol={"row"} id={i} />
+              <SashingRowStyler rowCol={"row"} id={i} key={i + "-sashrow"} />
             ) : null}
           </div>
-          <AddRow rowId={i} squareWidth={squareWidth} />
-          <DeleteRow rowId={i} squareWidth={squareWidth} />
+          <AddRow rowId={i} squareWidth={squareWidth} key={i + "-addrow"} />
+          <DeleteRow rowId={i} squareWidth={squareWidth} key={i + "-delrow"} />
         </div>
       );
 

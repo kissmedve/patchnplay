@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useCallback } from "react";
 import { StylersContext } from "./StylersContext";
 import { SquaresContext } from "./SquaresContext";
 import Palette from "./Palette";
@@ -17,8 +17,8 @@ const SashingColStyler = ({ rowCol, id }) => {
     squares,
     sashingCols,
     updateSashingCols,
-    sashingColsColor,
-    updateSashingColsColor,
+    // sashingColsColor,
+    // updateSashingColsColor,
     updateSquares,
     sashingWidths,
     updateSashingWidths,
@@ -28,14 +28,17 @@ const SashingColStyler = ({ rowCol, id }) => {
   } = useContext(SquaresContext);
 
   // local states
-  const [inputSashingWidth, setInputSashingWidth] = useState(1);
+  const [inputSashingWidth, setInputSashingWidth] = useState(sashingWidths[id]);
+  const [appliedSashingWidth, setAppliedSashingWidth] = useState(
+    sashingWidths[id]
+  );
   const [stylerRightDistance, setStylerRightDistance] = useState(null);
   const [stylerLeftDistance, setStylerLeftDistance] = useState(null);
 
   // measurements width
   const stylerWidth = 208;
 
-  const setDistanceValue = () => {
+  const setDistanceValue = useCallback(() => {
     let stylRightDistance = rightDistance(
       null,
       id,
@@ -48,26 +51,26 @@ const SashingColStyler = ({ rowCol, id }) => {
     );
     setStylerRightDistance(stylRightDistance[1]);
     setStylerLeftDistance(stylRightDistance[0]);
-  };
+  }, [id, stylerWidth, squareWidth, sashingWidths, borders, borderBaseWidth]);
 
   useEffect(() => {
     setDistanceValue();
-  }, [squares[0][id]]);
+  }, [appliedSashingWidth, setDistanceValue]);
 
-  useEffect(() => {
-    // stabilise color of sashing column to prevent it from vanishing upon clicking on styler
-    const existingSashColor = squares.map((squs) => {
-      return squs.find((squ) => squ.col === id);
-    })[0].fillSashing;
-    const newSashingColsColor = [
-      ...sashingColsColor.slice(0, id),
-      existingSashColor,
-      ...sashingColsColor.slice(id + 1),
-    ];
-    updateSashingColsColor(newSashingColsColor);
+  // useEffect(() => {
+  //   // stabilise color of sashing column to prevent it from vanishing upon clicking on styler
+  //   const existingSashColor = squares.map((squs) => {
+  //     return squs.find((squ) => squ.col === id);
+  //   })[0].fillSashing;
+  //   const newSashingColsColor = [
+  //     ...sashingColsColor.slice(0, id),
+  //     existingSashColor,
+  //     ...sashingColsColor.slice(id + 1),
+  //   ];
+  //   updateSashingColsColor(newSashingColsColor);
 
-    setInputSashingWidth(sashingWidths[id]);
-  }, []);
+  //   setInputSashingWidth(sashingWidths[id]);
+  // }, []);
 
   const handleInputWidth = (event) => {
     setInputSashingWidth(Number(event.target.value));
@@ -157,6 +160,7 @@ const SashingColStyler = ({ rowCol, id }) => {
 
     updateSashingWidths(onSashingWidths);
     updateSquares(sashSquares);
+    setAppliedSashingWidth(inputSashingWidth);
   };
 
   return (
@@ -165,7 +169,7 @@ const SashingColStyler = ({ rowCol, id }) => {
         className="styling-dropdown sashing popup active"
         style={{
           top: `20px`,
-          left: `${(inputSashingWidth - 1) * squareWidth + 40}px`,
+          left: `${(appliedSashingWidth - 1) * squareWidth + 40}px`,
           transform: `translateX(${leftOffset(
             stylerRightDistance,
             stylerLeftDistance,

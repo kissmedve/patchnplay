@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useCallback } from "react";
 import { SquaresContext } from "./SquaresContext";
 import { StylersContext } from "./StylersContext";
 import { ColorsContext } from "./ColorsContext";
@@ -54,7 +54,7 @@ const SquareStyler = ({
   // measurements width
   const stylerWidth = 209;
 
-  const setDistanceValues = () => {
+  const setDistanceValues = useCallback(() => {
     let stylBottomDistance = bottomDistance(
       id,
       null,
@@ -83,11 +83,36 @@ const SquareStyler = ({
     );
     setStylerRightDistance(stylRightDistance[1]);
     setStylerLeftDistance(stylRightDistance[0]);
-  };
+  }, [
+    id,
+    stylerHeight1,
+    stylerHeight2,
+    squareWidth,
+    paletteRows,
+    sashingHeights,
+    borders,
+    borderBaseWidth,
+    stylerWidth,
+    sashingWidths,
+  ]);
 
   const selectSquareType = (event) => {
     event.stopPropagation();
-    setNewSquareType(event.target.value);
+    let selectedSquareType = event.target.value;
+    setNewSquareType(selectedSquareType);
+    if (selectedSquareType === "bigBlockAnchor") {
+      closeSquStyler();
+      openBigBlockStyler(id);
+    } else {
+      editSquare({
+        id: id,
+        propertyKey: "squareType",
+        propertyValue: selectedSquareType,
+      });
+    }
+    if (stylerBottomDistance !== null && stylerRightDistance !== null) {
+      setDistanceValues();
+    }
   };
 
   const closeSquareStyler = (event) => {
@@ -97,23 +122,7 @@ const SquareStyler = ({
 
   useEffect(() => {
     setDistanceValues();
-  }, []);
-
-  useEffect(() => {
-    if (newSquareType === "bigBlockAnchor") {
-      closeSquStyler();
-      openBigBlockStyler(id);
-    } else {
-      editSquare({
-        id: id,
-        propertyKey: "squareType",
-        propertyValue: newSquareType,
-      });
-    }
-    if (stylerBottomDistance !== null && stylerRightDistance !== null) {
-      setDistanceValues();
-    }
-  }, [newSquareType]);
+  }, [setDistanceValues]);
 
   const sashingWidthStretch = sashingWidths[Number(id.split("-")[1])];
   const sashingHeightStretch = sashingHeights[Number(id.split("-")[0])];

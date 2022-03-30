@@ -23,7 +23,7 @@ const CalculateFabricForm = () => {
     if (isCalculateFabricsActive === true && calcFabricModalIsOpen === false) {
       setIsCalculateFabricsActive(false);
     }
-  }, [calcFabricModalIsOpen]);
+  }, [calcFabricModalIsOpen, isCalculateFabricsActive]);
 
   useEffect(() => {
     setIsCalculateFabricsActive(false);

@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useCallback } from "react";
 import { SquaresContext } from "./SquaresContext";
 import { StylersContext } from "./StylersContext";
 import { ColorsContext } from "./ColorsContext";
@@ -41,67 +41,119 @@ const BigBlockStyler = ({
   const { paletteColors } = useContext(ColorsContext);
 
   // local states
-  const [selectedBigBlock, setSelectedBigBlock] = useState({
-    elementBlocksId: "",
-    stretchSquares: 1,
-    anchorSquare: id,
-    rowCol: 2,
-    colours: 2,
-    squaresColor1: 0,
-    squaresColor2: 0,
-    squaresColor3: 0,
-    trianglesColor1: 0,
-    trianglesColor2: 0,
-    trianglesColor3: 0,
-  });
-  const [selectedBigBlockColours, setSelectedBigBlockColours] = useState({
-    color1: "",
-    color2: "",
-    color3: "",
-  });
+  // identify selectedBlock
+  const [selectedBigBlockId, setSelectedBigBlockId] = useState(null);
+  // data for rendering purposes:
+  // covered squares horizontally/vertically
+  const [selectedBigBlockStretchSquares, setSelectedBigBlockStretchSquares] =
+    useState(1);
+  // amount of colour palettes
+  const [selectedBigBlockColours, setSelectedBigBlockColours] = useState(2);
+
   const [messageIsActive, setMessageIsActive] = useState(false);
   const [messageText, setMessageText] = useState("");
+
   const [stylerBottomDistance, setStylerBottomDistance] = useState(null);
   const [stylerRightDistance, setStylerRightDistance] = useState(null);
   const [stylerLeftDistance, setStylerLeftDistance] = useState(null);
 
-  // adjust position when BigBlockStyler initially pops up
-  // (without colour bars, if no block is selected/active)
-  useEffect(() => {
-    setDistanceValues();
-  }, []);
+  // measurements
+  // measurements height
+  const stylerInitialHeight = 327; // measured w/o blocks applied + w/o colour bars
+  const stylerAppliedBlock2ColorsHeight = 371; // measured w/o colour bars
+  const stylerAppliedBlock3ColorsHeight = 387; // measured w/o colour bars (TODO: confirm colour block height)
 
-  useEffect(() => {
-    setDistanceValues();
+  let blockRows = Math.ceil(selectedBigBlocks.length / 5);
+  let paletteRows = Math.ceil(paletteColors.length / 5);
+
+  let stylerHeight1 = covered === false ? stylerInitialHeight : null;
+  let stylerHeight2 =
+    covered === true && selectedBigBlockColours === 2
+      ? stylerAppliedBlock2ColorsHeight
+      : null;
+  let stylerHeight3 =
+    covered === true && selectedBigBlockColours === 3
+      ? stylerAppliedBlock3ColorsHeight
+      : null;
+
+  // measurements width
+  const stylerWidth = 258;
+
+  const setDistanceValues = useCallback(() => {
+    let stylBottomDistance = bottomDistance(
+      id,
+      null,
+      stylerHeight1,
+      stylerHeight2,
+      stylerHeight3,
+      squareWidth,
+      paletteRows,
+      blockRows,
+      sashingHeights,
+      selectedBigBlockStretchSquares,
+      borders,
+      borderBaseWidth
+    );
+    setStylerBottomDistance(stylBottomDistance[1]);
+
+    let stylRightDistance = rightDistance(
+      id,
+      null,
+      stylerWidth,
+      squareWidth,
+      sashingWidths,
+      selectedBigBlockStretchSquares,
+      borders,
+      borderBaseWidth
+    );
+    setStylerRightDistance(stylRightDistance[1]);
+    setStylerLeftDistance(stylRightDistance[0]);
   }, [
-    selectedBigBlock.elementBlocksId,
-    selectedBigBlock.stretchSquares,
-    selectedBigBlock.colours,
+    id,
+    stylerHeight1,
+    stylerHeight2,
+    stylerHeight3,
+    squareWidth,
+    paletteRows,
+    blockRows,
+    sashingHeights,
+    selectedBigBlockStretchSquares,
+    borders,
+    borderBaseWidth,
+    stylerWidth,
+    sashingWidths,
   ]);
 
-  // check if a BigBlock is set, and if so, transfer its properties to local state
+  // check if a BigBlock is set, and if so, transfer its id and data to local state
   useEffect(() => {
     if (insertedBigBlocks && insertedBigBlocks.length > 0) {
       let activeBlock = insertedBigBlocks.find(
         (block) => block.anchorSquare === id
       );
       if (activeBlock) {
-        setSelectedBigBlock({
-          elementBlocksId: activeBlock.elementBlocksId,
-          stretchSquares: activeBlock.stretchSquares,
-          anchorSquare: activeBlock.anchorSquare,
-          rowCol: activeBlock.rowCol,
-          colours: activeBlock.colours,
-        });
-        setSelectedBigBlockColours({
-          color1: activeBlock.color1,
-          color2: activeBlock.color2,
-          color3: activeBlock.color3,
-        });
+        setSelectedBigBlockId(activeBlock.elementBlocksId);
+        setSelectedBigBlockStretchSquares(activeBlock.stretchSquares);
+        setSelectedBigBlockColours(activeBlock.colours);
       }
     }
-  }, []);
+  }, [insertedBigBlocks, id]);
 
+  // adjust position of BigBlockStyler when it initially pops up
+  // (without colour bars, if no block is selected/active)
+  useEffect(() => {
+    setDistanceValues();
+  }, [setDistanceValues]);
+
+  // adjust position of BigBlockStyler when stretch or number of palettes change
+  useEffect(() => {
+    setDistanceValues();
+  }, [
+    selectedBigBlockStretchSquares,
+    selectedBigBlockColours,
+    setDistanceValues,
+  ]);
+
+  // helper function / expression as to covered squares
   const checkSquares = (stretch) => {
     let arrayedIds = [];
     let anchorRowCol = id.split("-");
@@ -117,17 +169,20 @@ const BigBlockStyler = ({
     return coveredIds;
   };
 
-  // sashing cross is never more than 1 square
-  const coveredSquares =
-    sashingCrossed === false
-      ? checkSquares(selectedBigBlock.stretchSquares)
-      : [id];
+  // // sashing cross is never more than 1 square
+  // let coveredSquares =
+  // sashingCrossed === false
+  //   ? checkSquares(activeStretch)
+  //   : [id];
 
-  // insert or edit when selected Big Block changes
-  useEffect(() => {
-    if (!selectedBigBlock.elementBlocksId) {
-      return;
-    }
+  // insert or edit selected Big Block
+  const selectBigBlock = (blockId) => {
+    let newBigBlockId = blockId;
+    setSelectedBigBlockId(newBigBlockId);
+    // get new BigBlock
+    let newBigBlock = elementBlocks.find((block) => block.id === newBigBlockId);
+
+    // identify previous BigBlock
     if (
       insertedBigBlocks &&
       insertedBigBlocks.find((block) => block.anchorSquare === id)
@@ -135,140 +190,59 @@ const BigBlockStyler = ({
       let insIndex = insertedBigBlocks.indexOf(
         insertedBigBlocks.find((block) => block.anchorSquare === id)
       );
+      let activeStretch = insertedBigBlocks[insIndex].stretchSquares;
+      let coveredSquares = checkSquares(activeStretch);
 
-      // block changes, so change id of inserted block
+      // change data of inserted BigBlock
       editInsertedBigBlock({
         ...insertedBigBlocks[insIndex],
-        elementBlocksId: selectedBigBlock.elementBlocksId,
-        rowCol: selectedBigBlock.rowCol,
-        colours: selectedBigBlock.colours,
+        elementBlocksId: newBigBlockId,
+        rowCol: newBigBlock.rowCol,
+        colours: newBigBlock.colours,
       });
+      // change associated squares
+
       insertedBigBlockEditSquares({
         ids: coveredSquares,
         covered: true,
         bigBlockAnchor: id,
       });
-    } else {
-      // initial settings of inserted block
+    }
+    // if no previous BigBlock,
+    // initial settings of inserted block
+    else {
       addInsertedBigBlock({
         anchorSquare: id,
-        stretchSquares:
-          selectedBigBlock.stretchSquares !== ""
-            ? selectedBigBlock.stretchSquares
-            : 1,
-        elementBlocksId: selectedBigBlock.elementBlocksId,
-        rowCol: selectedBigBlock.rowCol,
-        colours: selectedBigBlock.colours,
-        squaresColor1: selectedBigBlock.squaresColor1,
-        squaresColor2: selectedBigBlock.squaresColor2,
-        squaresColor3: selectedBigBlock.squaresColor3,
-        trianglesColor1: selectedBigBlock.trianglesColor1,
-        trianglesColor2: selectedBigBlock.trianglesColor2,
-        trianglesColor3: selectedBigBlock.trianglesColor3,
-        color1:
-          selectedBigBlockColours.color1 !== ""
-            ? selectedBigBlockColours.color1
-            : "#888",
-        color2:
-          selectedBigBlockColours.color2 !== ""
-            ? selectedBigBlockColours.color2
-            : "#ddd",
-        color3:
-          selectedBigBlockColours.color3 !== ""
-            ? selectedBigBlockColours.color3
-            : "#eee",
+        stretchSquares: selectedBigBlockStretchSquares,
+        elementBlocksId: newBigBlockId,
+        rowCol: newBigBlock.rowCol,
+        colours: newBigBlock.colours,
+        squaresColor1: newBigBlock.squaresColor1,
+        squaresColor2: newBigBlock.squaresColor2,
+        squaresColor3: newBigBlock.squaresColor3,
+        trianglesColor1: newBigBlock.trianglesColor1,
+        trianglesColor2: newBigBlock.trianglesColor2,
+        trianglesColor3: newBigBlock.trianglesColor3,
+        color1: "#888",
+        color2: "#ddd",
+        color3: "#eee",
       });
       insertedBigBlockEditSquares({
-        ids: coveredSquares,
+        ids: [id],
         covered: true,
         bigBlockAnchor: id,
       });
     }
-  }, [selectedBigBlock.elementBlocksId]);
-
-  // edit when stretch (covered squares) changes
-  useEffect(() => {
-    if (
-      !selectedBigBlock.stretchSquares ||
-      selectedBigBlock.stretchSquares < 1
-    ) {
-      return;
-    }
-    if (
-      insertedBigBlocks.length > 0 &&
-      insertedBigBlocks.find((block) => block.anchorSquare === id)
-    ) {
-      let insIndex = insertedBigBlocks.indexOf(
-        insertedBigBlocks.find((block) => block.anchorSquare === id)
-      );
-      // check previous stretch value
-      let previousStretch = insertedBigBlocks[insIndex].stretchSquares;
-
-      editInsertedBigBlock({
-        stretchSquares:
-          selectedBigBlock.stretchSquares !== ""
-            ? selectedBigBlock.stretchSquares
-            : 1,
-        anchorSquare: id,
-        elementBlocksId: selectedBigBlock.elementBlocksId,
-        rowCol: selectedBigBlock.rowCol,
-        colours: selectedBigBlock.colours,
-        color1:
-          selectedBigBlockColours.color1 !== ""
-            ? selectedBigBlockColours.color1
-            : "#888",
-        color2:
-          selectedBigBlockColours.color2 !== ""
-            ? selectedBigBlockColours.color2
-            : "#ddd",
-        color3:
-          selectedBigBlockColours.color3 !== ""
-            ? selectedBigBlockColours.color3
-            : "#eee",
-      });
-
-      if (selectedBigBlock.stretchSquares > previousStretch) {
-        // stretch increased
-        insertedBigBlockEditSquares({
-          ids: coveredSquares,
-          covered: true,
-          bigBlockAnchor: id,
-        });
-      }
-      if (selectedBigBlock.stretchSquares < previousStretch) {
-        // stretch decreased
-        let previousAnchorSqus = squares.map((squs) => {
-          return squs.filter((squ) => squ.bigBlockAnchor === id);
-        });
-        let obsoleteAnchorSqus = previousAnchorSqus
-          .reduce((acc, val) => acc.concat(val), [])
-          .map((squ) => squ.id)
-          .filter((squ) => !coveredSquares.includes(squ));
-
-        // remaining covered squares
-        insertedBigBlockEditSquares({
-          ids: coveredSquares,
-          covered: true,
-          bigBlockAnchor: id,
-        });
-        // no longer covered squares
-        insertedBigBlockEditSquares({
-          ids: obsoleteAnchorSqus,
-          covered: false,
-          bigBlockAnchor: "",
-        });
-      }
-    }
-  }, [selectedBigBlock.stretchSquares]);
+  };
 
   const handleBigBlockStretch = (event) => {
     event.stopPropagation();
     // evaluate BigBlock placement conflicts
-    let evalStretch = parseInt(event.target.value);
+    let newStretch = parseInt(event.target.value);
     const startRow = parseInt(id.split("-")[0]);
     const startCol = parseInt(id.split("-")[1]);
-    for (let i = startRow; i < startRow + evalStretch; i++) {
-      for (let k = startCol; k < startCol + evalStretch; k++) {
+    for (let i = startRow; i < startRow + newStretch; i++) {
+      for (let k = startCol; k < startCol + newStretch; k++) {
         if (squares[i] === undefined) {
           setMessageText(
             "A Big Block can't be placed outside of the Squares Grid."
@@ -293,7 +267,8 @@ const BigBlockStyler = ({
         }
         if (
           squares[i][k].covered === true &&
-          squares[i][k].bigBlockAnchor !== selectedBigBlock.anchorSquare
+          //squares[i][k].bigBlockAnchor !== selectedBigBlock.anchorSquare
+          squares[i][k].bigBlockAnchor !== id
         ) {
           setMessageText("Big Blocks can't overlap.");
           setMessageIsActive(true);
@@ -301,10 +276,59 @@ const BigBlockStyler = ({
         }
       }
     }
-    setSelectedBigBlock({
-      ...selectedBigBlock,
-      stretchSquares: event.target.value,
-    });
+
+    if (
+      insertedBigBlocks.length > 0 &&
+      insertedBigBlocks.find((block) => block.anchorSquare === id)
+    ) {
+      let insIndex = insertedBigBlocks.indexOf(
+        insertedBigBlocks.find((block) => block.anchorSquare === id)
+      );
+      // check previous stretch value
+      let previousStretch = insertedBigBlocks[insIndex].stretchSquares;
+
+      // sashing cross is never more than 1 square
+      let coveredSquares =
+        sashingCrossed === false ? checkSquares(newStretch) : [id];
+
+      editInsertedBigBlock({
+        ...insertedBigBlocks[insIndex],
+        stretchSquares: newStretch,
+      });
+
+      if (newStretch > previousStretch) {
+        // stretch increased
+        insertedBigBlockEditSquares({
+          ids: coveredSquares,
+          covered: true,
+          bigBlockAnchor: id,
+        });
+      }
+      if (newStretch < previousStretch) {
+        // stretch decreased
+        let previousAnchorSqus = squares.map((squs) => {
+          return squs.filter((squ) => squ.bigBlockAnchor === id);
+        });
+        let obsoleteAnchorSqus = previousAnchorSqus
+          .reduce((acc, val) => acc.concat(val), [])
+          .map((squ) => squ.id)
+          .filter((squ) => !coveredSquares.includes(squ));
+
+        // remaining covered squares
+        insertedBigBlockEditSquares({
+          ids: coveredSquares,
+          covered: true,
+          bigBlockAnchor: id,
+        });
+        // no longer covered squares
+        insertedBigBlockEditSquares({
+          ids: obsoleteAnchorSqus,
+          covered: false,
+          bigBlockAnchor: "",
+        });
+      }
+    }
+    setSelectedBigBlockStretchSquares(newStretch);
   };
 
   const removeBigBlock = (event) => {
@@ -316,69 +340,38 @@ const BigBlockStyler = ({
       let blockToRemove = insertedBigBlocks.find(
         (block) => block.anchorSquare === id
       );
+      let coveredSquares = checkSquares(blockToRemove.stretchSquares);
       deleteInsertedBigBlock(blockToRemove.anchorSquare);
       insertedBigBlockEditSquares({
         ids: coveredSquares,
         covered: false,
         bigBlockAnchor: "",
       });
-      setSelectedBigBlock({
-        elementBlocksId: "",
-        stretchSquares: 1,
-        anchorSquare: id,
-        rowCol: 2,
-        colours: 2,
-        squaresColor1: 0,
-        squaresColor2: 0,
-        squaresColor3: 0,
-        trianglesColor1: 0,
-        trianglesColor2: 0,
-        trianglesColor3: 0,
-      });
+      setSelectedBigBlockId(null);
     }
   };
+
+  // colour palette only pops up when Big Block is selected
+  // amount of subpalettes depending on selected Big Block
+  const bigBlockColourType =
+    selectedBigBlockColours !== 0
+      ? selectedBigBlockColours === 2
+        ? "bigBlockCol2"
+        : "bigBlockCol3"
+      : "";
 
   const preselectedBlocks = elementBlocks
     .filter((block) => selectedBigBlocks.includes(block.id))
     .map((block) => (
       <div
         className={`premade 
-    ${selectedBigBlock.id === block.id ? "active" : ""}`}
+      ${selectedBigBlockId === block.id ? "active" : ""}`}
         key={block.id}
-        onClick={() => {
-          setSelectedBigBlock({
-            ...selectedBigBlock,
-            elementBlocksId: block.id,
-            anchorSquare: id,
-            rowCol: block.rowCol,
-            colours: block.colours,
-            squaresColor1: block.squaresColor1,
-            squaresColor2: block.squaresColor2,
-            squaresColor3: block.squaresColor3,
-            trianglesColor1: block.trianglesColor1,
-            trianglesColor2: block.trianglesColor2,
-            trianglesColor3: block.trianglesColor3,
-            stretchSquares:
-              sashingCrossed === true
-                ? sashingWidth
-                : selectedBigBlock.stretchSquares > 1
-                ? selectedBigBlock.stretchSquares
-                : 1,
-          });
-        }}
+        onClick={(event) => selectBigBlock(block.id)}
       >
         <img src={`svgs/${block.file}.svg`} alt={`${block.name}`} />
       </div>
     ));
-
-  // colour palette only pops up when Big Block is selected
-  // amount of subpalettes depending on selected Big Block
-  const bigBlockColourType =
-    selectedBigBlock.colours !== ""
-      ? selectedBigBlock.colours === 2
-        ? "bigBlockCol2"
-        : "bigBlockCol3"
-      : "";
 
   const selectedBorder =
     preselectedBlocks.length === 0
@@ -388,58 +381,6 @@ const BigBlockStyler = ({
 
   const closeMessage = (event) => {
     setMessageIsActive(false);
-  };
-
-  // measurements height
-  const stylerInitialHeight = 327; // measured w/o blocks applied + w/o colour bars
-  const stylerAppliedBlock2ColorsHeight = 371; // measured w/o colour bars
-  const stylerAppliedBlock3ColorsHeight = 387; // measured w/o colour bars (TODO: confirm colour block height)
-
-  let blockRows = Math.ceil(selectedBigBlocks.length / 5);
-  let paletteRows = Math.ceil(paletteColors.length / 5);
-
-  let stylerHeight1 = covered === false ? stylerInitialHeight : null;
-  let stylerHeight2 =
-    covered === true && selectedBigBlock.colours === 2
-      ? stylerAppliedBlock2ColorsHeight
-      : null;
-  let stylerHeight3 =
-    covered === true && selectedBigBlock.colours === 3
-      ? stylerAppliedBlock3ColorsHeight
-      : null;
-
-  // measurements width
-  const stylerWidth = 258;
-
-  const setDistanceValues = () => {
-    let stylBottomDistance = bottomDistance(
-      id,
-      null,
-      stylerHeight1,
-      stylerHeight2,
-      stylerHeight3,
-      squareWidth,
-      paletteRows,
-      blockRows,
-      sashingHeights,
-      selectedBigBlock.stretchSquares,
-      borders,
-      borderBaseWidth
-    );
-    setStylerBottomDistance(stylBottomDistance[1]);
-
-    let stylRightDistance = rightDistance(
-      id,
-      null,
-      stylerWidth,
-      squareWidth,
-      sashingWidths,
-      selectedBigBlock.stretchSquares,
-      borders,
-      borderBaseWidth
-    );
-    setStylerRightDistance(stylRightDistance[1]);
-    setStylerLeftDistance(stylRightDistance[0]);
   };
 
   const sashingWidthStretch = sashingWidths[Number(id.split("-")[1])];
@@ -452,13 +393,13 @@ const BigBlockStyler = ({
         style={{
           left:
             covered === true
-              ? squareWidth * selectedBigBlock.stretchSquares - 18 + `px`
+              ? squareWidth * selectedBigBlockStretchSquares - 18 + `px`
               : sashingWidths[Number(id.split("-")[1])] * squareWidth -
                 18 +
                 `px`,
           top:
             covered === true
-              ? squareWidth * selectedBigBlock.stretchSquares - 18 + `px`
+              ? squareWidth * selectedBigBlockStretchSquares - 18 + `px`
               : sashingHeights[Number(id.split("-")[0])] * squareWidth -
                 18 +
                 `px`,
@@ -466,7 +407,7 @@ const BigBlockStyler = ({
             stylerRightDistance,
             stylerLeftDistance,
             stylerWidth,
-            selectedBigBlock.stretchSquares,
+            selectedBigBlockStretchSquares,
             null,
             sashingWidthStretch,
             squareWidth
@@ -474,7 +415,7 @@ const BigBlockStyler = ({
             stylerBottomDistance,
             null,
             null,
-            selectedBigBlock.stretchSquares,
+            selectedBigBlockStretchSquares,
             null,
             sashingHeightStretch,
             squareWidth
@@ -519,7 +460,7 @@ const BigBlockStyler = ({
                     min="1"
                     step="1"
                     name="stretchSquares"
-                    value={selectedBigBlock.stretchSquares}
+                    value={selectedBigBlockStretchSquares}
                     onChange={handleBigBlockStretch}
                   />
                   <span className="explanation">columns / rows</span>

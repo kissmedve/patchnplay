@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import Palette from "./Palette";
 import { StylersContext } from "./StylersContext";
 import { SquaresContext } from "./SquaresContext";
@@ -10,34 +10,15 @@ const BorderStyler = () => {
   const { closeBorderStyler } = useContext(StylersContext);
 
   // local states
-  const [selectedBorder, setSelectedBorder] = useState("");
-  const [borderData, setBorderData] = useState({
-    pos: "",
-    widthTop: 1,
-    widthRight: 1,
-    widthBottom: 1,
-    widthLeft: 1,
-    background: "purple",
-  });
+  const [selectedBorder, setSelectedBorder] = useState(0);
 
-  useEffect(() => {
-    if (borders.length === 1) {
-      setBorderData({
-        pos: borders[0].pos,
-        widthTop: borders[0].widthTop,
-        widthRight: borders[0].widthRight,
-        widthBottom: borders[0].widthBottom,
-        widthLeft: borders[0].widthLeft,
-        background: borders[0].background,
-      });
-    }
-  }, [selectedBorder]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  useEffect(() => {
-    if (borders.length === 1) {
-      setSelectedBorder(borders[0].pos);
-    }
-  }, [borders]);
+  const handleInputBorderWidth = (event) => {
+    let newBorderData = {
+      ...borders[selectedBorder],
+      [event.target.name]: parseInt(event.target.value),
+    };
+    editBorderWidths(newBorderData);
+  };
 
   const addBorder = (pos) => {
     let newBorders = [];
@@ -75,27 +56,7 @@ const BorderStyler = () => {
 
   const selectBorder = (pos) => {
     setSelectedBorder(pos);
-    let activeBorder = borders.find((border) => border.pos === pos);
-    setBorderData({
-      pos: activeBorder.pos,
-      widthTop: activeBorder.widthTop,
-      widthRight: activeBorder.widthRight,
-      widthBottom: activeBorder.widthBottom,
-      widthLeft: activeBorder.widthLeft,
-      background: activeBorder.background,
-    });
   };
-
-  const handleInputBorderWidth = (event) => {
-    setBorderData({
-      ...borderData,
-      [event.target.name]: parseInt(event.target.value),
-    });
-  };
-
-  useEffect(() => {
-    editBorderWidths(borderData);
-  }, [borderData]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const borderHandlingDisplay = () => {
     const widthCore = 40;
@@ -180,7 +141,6 @@ const BorderStyler = () => {
             aria-label="Close"
             onClick={closeBorderStyler}
           ></button>
-
           <div className="card-body">
             <div className="card-title h5">Border</div>
 
@@ -203,7 +163,7 @@ const BorderStyler = () => {
                       min="1"
                       step="1"
                       name="widthTop"
-                      value={borderData.widthTop}
+                      value={borders[selectedBorder].widthTop}
                       onChange={handleInputBorderWidth}
                     />
                   </div>
@@ -215,7 +175,7 @@ const BorderStyler = () => {
                       min="1"
                       step="1"
                       name="widthRight"
-                      value={borderData.widthRight}
+                      value={borders[selectedBorder].widthRight}
                       onChange={handleInputBorderWidth}
                     />
                   </div>
@@ -227,7 +187,7 @@ const BorderStyler = () => {
                       min="1"
                       step="1"
                       name="widthBottom"
-                      value={borderData.widthBottom}
+                      value={borders[selectedBorder].widthBottom}
                       onChange={handleInputBorderWidth}
                     />
                   </div>
@@ -239,7 +199,7 @@ const BorderStyler = () => {
                       min="1"
                       step="1"
                       name="widthLeft"
-                      value={borderData.widthLeft}
+                      value={borders[selectedBorder].widthLeft}
                       onChange={handleInputBorderWidth}
                     />
                   </div>

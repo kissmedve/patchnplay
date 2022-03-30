@@ -131,7 +131,9 @@ const PrintableSquaresGrid = () => {
     return pathData.join(" ");
   };
 
-  const writeSquare = (i, k, sashWidth, sashHeight, fillColor) => {
+  // square and HST functions
+
+  const SquarePaths = ({ row, col, sashWidth, sashHeight, fillColor }) => {
     let width = squareWidth * sashWidth;
     let height = squareWidth * sashHeight;
     let vertices = [
@@ -143,14 +145,14 @@ const PrintableSquaresGrid = () => {
     let pathDataSqu = pathDataSquare(
       vertices,
       1,
-      calcOffsets(k, i)[0],
-      calcOffsets(k, i)[1]
+      calcOffsets(col, row)[0],
+      calcOffsets(col, row)[1]
     );
 
-    return <path d={pathDataSqu} fill={fillColor} />;
+    return <path key="squ" d={pathDataSqu} fill={fillColor} />;
   };
 
-  const writeHSTUp = (i, k, fillColorLeft, fillColorRight) => {
+  const HSTUpPaths = ({ row, col, fillColorLeft, fillColorRight }) => {
     let width = squareWidth;
     let height = squareWidth;
     let verticesLeft = [
@@ -167,25 +169,25 @@ const PrintableSquaresGrid = () => {
     let pathDataLeft = pathDataTriangle(
       verticesLeft,
       1,
-      calcOffsets(k, i)[0],
-      calcOffsets(k, i)[1]
+      calcOffsets(col, row)[0],
+      calcOffsets(col, row)[1]
     );
     let pathDataRight = pathDataTriangle(
       verticesRight,
       1,
-      calcOffsets(k, i)[0],
-      calcOffsets(k, i)[1]
+      calcOffsets(col, row)[0],
+      calcOffsets(col, row)[1]
     );
 
     return (
       <>
-        <path d={pathDataLeft} fill={fillColorLeft} />
-        <path d={pathDataRight} fill={fillColorRight} />
+        <path key="left" d={pathDataLeft} fill={fillColorLeft} />
+        <path key="right" d={pathDataRight} fill={fillColorRight} />
       </>
     );
   };
 
-  const writeHSTDown = (i, k, fillColorLeft, fillColorRight) => {
+  const HSTDownPaths = ({ row, col, fillColorLeft, fillColorRight }) => {
     let width = squareWidth;
     let height = squareWidth;
     let verticesLeft = [
@@ -202,46 +204,60 @@ const PrintableSquaresGrid = () => {
     let pathDataLeft = pathDataTriangle(
       verticesLeft,
       1,
-      calcOffsets(k, i)[0],
-      calcOffsets(k, i)[1]
+      calcOffsets(col, row)[0],
+      calcOffsets(col, row)[1]
     );
     let pathDataRight = pathDataTriangle(
       verticesRight,
       1,
-      calcOffsets(k, i)[0],
-      calcOffsets(k, i)[1]
+      calcOffsets(col, row)[0],
+      calcOffsets(col, row)[1]
     );
 
     return (
       <>
-        <path d={pathDataLeft} fill={fillColorLeft} />
-        <path d={pathDataRight} fill={fillColorRight} />
+        <path key="left" d={pathDataLeft} fill={fillColorLeft} />
+        <path key="right" d={pathDataRight} fill={fillColorRight} />
       </>
     );
   };
 
   // draw squares grid
   const squaresGrid = () => {
-    let grid = squares.map((squs) => {
-      return squs.map((squ) => {
+    let grid = squares.map((squs, rowIndex) => {
+      return squs.map((squ, colIndex) => {
         if (squ.squareType === "rect" || squ.sashing === true) {
           let fillColor =
             squ.sashing === true ? squ.fillSashing : squ.fillSquare;
-          return writeSquare(
-            squ.row,
-            squ.col,
-            squ.sashingWidth,
-            squ.sashingHeight,
-            fillColor
+          return (
+            <SquarePaths
+              row={squ.row}
+              col={squ.col}
+              sashWidth={squ.sashingWidth}
+              sashHeight={squ.sashingHeight}
+              fillColor={fillColor}
+              key={rowIndex + "-" + colIndex}
+            />
           );
         } else if (squ.squareType === "hstUp") {
-          return writeHSTUp(squ.row, squ.col, squ.fillHstLup, squ.fillHstRup);
+          return (
+            <HSTUpPaths
+              row={squ.row}
+              col={squ.col}
+              fillColorLeft={squ.fillHstLup}
+              fillColorRight={squ.fillHstRup}
+              key={rowIndex + "-" + colIndex}
+            />
+          );
         } else if (squ.squareType === "hstDown") {
-          return writeHSTDown(
-            squ.row,
-            squ.col,
-            squ.fillHstLdown,
-            squ.fillHstRdown
+          return (
+            <HSTDownPaths
+              row={squ.row}
+              col={squ.col}
+              fillColorLeft={squ.fillHstLup}
+              fillColorRight={squ.fillHstRup}
+              key={rowIndex + "-" + colIndex}
+            />
           );
         } else {
           return null;
@@ -270,7 +286,7 @@ const PrintableSquaresGrid = () => {
         "Z",
       ].join(" ");
       let bg = border.background;
-      return <path key={border.index} d={path} fill={bg}></path>;
+      return <path key={border.i} d={path} fill={bg}></path>;
     });
     return pathData;
   };
@@ -294,7 +310,7 @@ const PrintableSquaresGrid = () => {
       );
 
       if (eleBlock) {
-        return eleBlock.paths.map((path) => {
+        return eleBlock.paths.map((path, index) => {
           let fillColor =
             path.fillColor === "color1"
               ? insBlock.color1
@@ -311,7 +327,7 @@ const PrintableSquaresGrid = () => {
             );
             return (
               <path
-                key={path.index}
+                key={index}
                 d={pathDataSqu}
                 fill={fillColor}
                 stroke={fillColor}
@@ -326,7 +342,7 @@ const PrintableSquaresGrid = () => {
             );
             return (
               <path
-                key={path.index}
+                key={index}
                 d={pathDataTr}
                 fill={fillColor}
                 stroke={fillColor}

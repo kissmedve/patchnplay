@@ -2,13 +2,16 @@ import React, { useContext, useState } from "react";
 import { ColorsContext } from "./ColorsContext";
 import { ChromePicker } from "react-color";
 import { FabricsContext } from "./FabricsContext";
-import CollectPieces from "./CollectPieces";
+import { SquaresContext } from "./SquaresContext";
+//import collectPieces from "../utils/collectPieces";
+import checkColors from "../utils/checkColors";
 import Message from "./Message";
 
 const ColorSettingsPalette = () => {
   // global states
   const { paletteColors, addColor, deleteColor } = useContext(ColorsContext);
   const { addFabricWidth, deleteFabricWidth } = useContext(FabricsContext);
+  const { squares, insertedBigBlocks, borders } = useContext(SquaresContext);
 
   // local states
   const [currentColor, setCurrentColor] = useState("transparent");
@@ -17,9 +20,12 @@ const ColorSettingsPalette = () => {
   const [messageText, setMessageText] = useState("");
 
   // extract colors in use to check against later
-  const objects = CollectPieces();
-  const allColors = objects.map((obj) => obj.color);
-  const distinctColorsInUse = [...new Set(allColors)];
+
+  // const objects = collectPieces(  );
+  // const allColors = objects.map((obj) => obj.color);
+  // const distinctColorsInUse = [...new Set(allColors)];
+
+  const distinctColorsInUse = checkColors(squares, insertedBigBlocks, borders);
 
   const swatchesList = paletteColors.map((pcolor, index) => (
     <button
