@@ -13,7 +13,9 @@ const BigBlockGallery = () => {
     colours: "",
     elements: "",
   });
+  const [page, setPage] = useState(1);
 
+  // filters
   const filtered1 =
     filters.rowCol !== ""
       ? elementBlocks.filter((el) => el.rowCol === Number(filters.rowCol))
@@ -40,12 +42,37 @@ const BigBlockGallery = () => {
         })
       : filtered2;
 
-  const bigBlocksList = filtered3.map((el) => (
+  const blocksPerView = 27;
+  let currentPageList = filtered3.slice(
+    blocksPerView * (page - 1),
+    blocksPerView * page
+  );
+
+  // gallery blocks
+  const bigBlocksList = currentPageList.map((el) => (
     <div className="premade" key={el.id} onClick={() => addBigBlock(el.id)}>
       <img src={`svgs/${el.file}.svg`} alt={`${el.name}`} />
     </div>
   ));
 
+  // pagination
+  let pagesNum = Math.ceil(filtered3.length / blocksPerView);
+  console.log("filtered3.length", filtered3.length);
+  console.log("pagesNum", pagesNum);
+
+  const pageLinks = () => {
+    let pageNums = [];
+    for (let i = 1; i < pagesNum + 1; i++) {
+      pageNums.push(
+        <li>
+          <button onClick={() => setPage(i)}>{i}</button>
+        </li>
+      );
+    }
+    return pageNums;
+  };
+
+  // selected blocks
   const bigBlocksSelection = elementBlocks
     .filter((block) => selectedBigBlocks.includes(block.id))
     .map((block) => (
@@ -133,28 +160,28 @@ const BigBlockGallery = () => {
                 <option value="special">Specials</option>
               </select>
             </div>
-
-            {/* <div className="form-group column col-3">
-              <div className="form-select-title">Pattern</div>
-              <select
-                className="form-select"
-                onChange={(event) =>
-                  setFilters({ ...filters, pattern: event.target.value })
-                }
-              >
-                <option value="">All</option>
-                <option value="diagonal">Diagonal</option>
-                <option value="cross">Cross</option>
-                <option value="centered">Centered</option>
-                <option value="stripes">Stripes</option>
-              </select>
-            </div>*/}
           </div>
           {/* columns */}
         </div>
         {/* filters */}
         <div className="big-blocks">{bigBlocksList}</div>
       </div>
+
+      <ul className="pagination">
+        <li>
+          <button onClick={() => setPage(1)}>&lt;&lt;</button>
+        </li>
+        <li>
+          <button onClick={() => setPage(page - 1)}>&lt;</button>
+        </li>
+        {pageLinks()}
+        <li>
+          <button onClick={() => setPage(page + 1)}>&gt;</button>
+        </li>
+        <li>
+          <button onClick={() => setPage(pagesNum)}>&gt;&gt;</button>
+        </li>
+      </ul>
     </>
   );
 };

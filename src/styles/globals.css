@@ -758,3 +758,17 @@ button.border-add {
   font-weight: 700;
   text-align: center;
 }
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+.pagination li {
+  margin: 0 0.2rem;
+}
+.pagination button:hover,
+.pagination button:focus {
+  cursor: pointer;
+}
